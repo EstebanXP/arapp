@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 
+
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
   return (
