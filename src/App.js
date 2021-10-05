@@ -2,13 +2,15 @@ import './App.css';
 import Home from './views/Home';
 import AddBands from './views/AddBands';
 import AddSetlist from './views/AddSetlist';
-import AddSongs from './views/AddSongs'; 
+import AddSongs from './views/AddSongs';
+import USongs from './views/USongs';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
 
 
 
@@ -31,6 +33,9 @@ function App() {
             <li>
               <Link to="/addSetlist">Add Setlist</Link>
             </li>
+            <li>
+              <Link to="/updateSongs">Update Songs</Link>
+            </li>
           </ul>
         </nav>
 
@@ -43,6 +48,9 @@ function App() {
           </Route>
           <Route path="/addSongs">
             <AddSongs /> 
+          </Route>
+          <Route path="/updateSongs">
+            <USongs />
           </Route>
           <Route path="/">
             <Home />
