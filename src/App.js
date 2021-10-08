@@ -28,6 +28,9 @@ function App() {
               <Link to="/addSongs">Add Songs</Link>
             </li>
             <li>
+              <Link to="/addMembers">Add Members</Link>
+            </li>
+            <li>
               <Link to="/addBands">Add Bands</Link>
             </li>
             <li>
@@ -40,7 +43,7 @@ function App() {
         </nav>
 
         <Switch>
-        <Route path="/addSetlist">
+          <Route path="/addSetlist">
             <AddSetlist />
           </Route>
           <Route path="/addBands">
@@ -48,6 +51,9 @@ function App() {
           </Route>
           <Route path="/addSongs">
             <AddSongs /> 
+          </Route>
+          <Route path="/addMembers">
+            <AddMembers /> 
           </Route>
           <Route path="/updateSongs">
             <USongs />
