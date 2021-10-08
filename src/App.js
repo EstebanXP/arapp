@@ -3,6 +3,7 @@ import Home from './views/Home';
 import AddBands from './views/AddBands';
 import AddSetlist from './views/AddSetlist';
 import AddSongs from './views/AddSongs';
+import AddMembers from './views/AddMembers';
 import USongs from './views/USongs';
 import {
   BrowserRouter as Router,
