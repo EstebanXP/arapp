@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 //import {projectFirestore as db} from '../firebase';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc,doc,deleteDoc } from "firebase/firestore";
 import db from '../firebase';
 
 
@@ -12,6 +12,7 @@ const AddSongs = () => {
       const [localLyrics, setlocalLyrics] = useState("");
       const [status,setStatus]=useState(false);
 
+       
       function getData(e) {
         e.preventDefault();
         setDatos({

@@ -1,11 +1,15 @@
 import React,{useEffect, useState} from 'react';
-import { collection, getDocs,query,onSnapshot} from "firebase/firestore";
+import { collection, query,onSnapshot,deleteDoc,doc} from "firebase/firestore";
 import db from '../firebase';
+import ShowSongs from './ShowSongs';
 
 const USongs = () => {
 
     const [lista,setLista]=useState([]);
 
+    async function deleteSong(songId){
+        await deleteDoc(doc(db, "songs", songId));
+    }
     
     useEffect(()=>{
 
@@ -21,12 +25,14 @@ const USongs = () => {
     },[])
 
     return (
-        <div className="container">
+        <div className="col-md-8">
             {lista.map((link)=>(
-                <div>
-                    <div>
-                        <h4>{link.id}</h4>
-                    </div>
+                <div className="card mb-1">
+                    {/*<ShowSongs title={link.title} artist={link.artist} lyrics={link.lyrics}/>*/}
+                    <ShowSongs title={link.title} artist={link.artist} lyrics={link.lyrics}/>
+                    <button className="editar" >Editar</button>
+                    <button className="borrar" onClick={()=>deleteSong(link.id)}>Borrar</button>
+                
                 </div>
             ))}
         </div>
