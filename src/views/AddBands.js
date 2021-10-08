@@ -8,18 +8,17 @@ const AddBands = () => {
     const [newLogo, setNewLogo] = useState(null);
     const [newDescription, setNewDescription] = useState("");
     const [newMusicGenre, setNewMusicGenre] = useState("");
-    
 
     const [bands, setBands] = useState([]);
     const bandsCollectionRef = collection(db, "bands");
 
     //get bands
     useEffect( () => {
-        const getMembers = async () => {
+        const getBand = async () => {
             const data = await getDocs(bandsCollectionRef)
             setBands(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
         };
-        getMembers();
+        getBand();
     }, []);
 
     //create Bands
