@@ -7,7 +7,11 @@ import ShowSongs from './ShowSongs';
 const AddSongs = () => {
     const [datos, setDatos] = useState({
         artista:"",
-        cancion:""
+        cancion:"",
+        chords:"",
+        tab:"",
+        tempo:"",
+        Tags:[],
       });
       const [localLyrics, setlocalLyrics] = useState("");
       const [status,setStatus]=useState(false);
@@ -25,7 +29,6 @@ const AddSongs = () => {
 
       async function buscarCancion() {
         const response = await fetchAPI();
-        console.log(response);
         if(response.status===200){
             setStatus(true);
             const myJson = await response.json(); //extract JSON from the http response
@@ -40,12 +43,17 @@ const AddSongs = () => {
         await deleteDoc(doc(db, "songs", songId));
     }
 
-      async function addSongToDB(){
+      async function addSongToDB(e){
+          e.preventDefault();
          await addDoc(collection(db, "songs"), {
             artist: datos.artista,
-            chords: "Null",
+            chords: datos.chords,
             title: datos.cancion,
-            lyrics: localLyrics
+            lyrics: localLyrics,
+            tab:datos.tab,
+            tempo:datos.tempo,
+            Tags:[]
+
           })
           .then(()=>{
               console.log("Success")
@@ -105,12 +113,16 @@ const AddSongs = () => {
                 <br/>
                 {status===true?
                     <div className="foundSong">
-                        <h1>Song found</h1>
-                        <textarea defaultValue={localLyrics}></textarea>
-                        <h2>Do you want to save?</h2>  
-                        <button onClick={addSongToDB}>Yes</button>
-                        <button>No</button>
-
+                        <form onSubmit={addSongToDB}> 
+                            <h1>Song found</h1>
+                            Lyrics: <textarea defaultValue={localLyrics}></textarea><br />
+                            Chords: <input type="text" className="songChords" name="chords" onChange={getData}  ></input><br />
+                            Tempo: <input type="text" className="songTempo" name="tempo" onChange={getData}  ></input><br />
+                            Tab: <textarea type="text" className="songTab" name="tab" onChange={getData}  ></textarea><br />
+                            <h2>Do you want to save?</h2>  
+                            <button type="submit">Yes</button>
+                            <button>No</button>
+                        </form>
                     </div>
                     :
                     <div>
