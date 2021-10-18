@@ -5,6 +5,7 @@ import AddSetlist from './views/AddSetlist';
 import AddSongs from './views/AddSongs';
 import AddMembers from './views/AddMembers';
 import USongs from './views/USongs';
+import UMembers from './views/UMembers';
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,6 +41,9 @@ function App() {
             <li>
               <Link to="/updateSongs">Update Songs</Link>
             </li>
+            <li>
+              <Link to="/updateMembers">Update Members</Link>
+            </li>
           </ul>
         </nav>
 
@@ -58,6 +62,9 @@ function App() {
           </Route>
           <Route path="/updateSongs">
             <USongs />
+          </Route>
+          <Route path="/updateMembers">
+            <UMembers />
           </Route>
           <Route path="/">
             <Home />
