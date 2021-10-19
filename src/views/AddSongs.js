@@ -5,6 +5,7 @@ import ShowSongs from './ShowSongs';
 
 
 const AddSongs = () => {
+
     const [datos, setDatos] = useState({
         artista:"",
         cancion:"",
@@ -12,13 +13,14 @@ const AddSongs = () => {
         tab:"",
         tempo:"",
         Tags:[],
-      });
+    });
+
       const [localLyrics, setlocalLyrics] = useState("");
       const [status,setStatus]=useState(false);
+
       const [editStatus,setEditStatus]=useState(false);
       const [lista,setLista]=useState([]);
 
-       
       function getData(e) {
         e.preventDefault();
         setDatos({
@@ -81,7 +83,6 @@ const AddSongs = () => {
             let data=[];
             querySnapshot.forEach((doc)=>{
                 data.push({...doc.data(),id:doc.id});
-                console.log(doc.data());
             })
             setLista(data);//Se guardan todos los datos en el arreglo lista para poder usarlos aqui
         });

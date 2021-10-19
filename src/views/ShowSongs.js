@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 const ShowSongs = (props) => {
 
     
     return (
-        <div className="container">
-            
+        <div className="container"> 
             <div className="card-body">
                     
                     <p>El titulo es: {props.title}</p>

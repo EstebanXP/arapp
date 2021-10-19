@@ -14,6 +14,7 @@ import ShowSongs from "./ShowSongs";
 const USongs = () => {
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("title");
+  const [searchParam,setSearchParam] = useState("");
   const [currentSong, setCurrentSong] = useState({
     artist: "",
     lyrics: "",
@@ -77,10 +78,14 @@ const USongs = () => {
 
   return (
     <div className="col-md-8">
-      {sortings}
+
+      <div className="SearchBar">
+        <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
+      </div>
+
       <form >
         <label>
-          Pick your favorite flavor:
+          Pick your sorting parameter:
           <select value={sortings} onChange={handleChange}>
             <option value="artist">Artist</option>
             <option value="title">Title</option>
@@ -111,7 +116,15 @@ const USongs = () => {
           Guardar: <button type="submit">Guardar </button>
         </div>
       </form>
-      {lista.map((link) => (
+      {lista.filter((val)=>{
+        if(searchParam===""){
+          return val
+        }else if(val.title.toLowerCase().includes(searchParam.toLowerCase())){
+          return val;
+        }else if(val.artist.toLowerCase().includes(searchParam.toLowerCase())){
+          return val;
+        }
+      }).map((link) => (
         <div className="card mb-1">
           <ShowSongs
             title={link.title}
