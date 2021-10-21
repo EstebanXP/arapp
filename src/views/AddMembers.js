@@ -1,7 +1,13 @@
 import React,{useEffect,useState} from 'react'
 
 import db from '../firebase';
-import {collection, getDocs, addDoc, deleteDoc, doc} from 'firebase/firestore';
+import {
+    collection, 
+    getDocs, 
+    addDoc, 
+    deleteDoc, 
+    doc,
+} from 'firebase/firestore';
 
 const AddMembers = () => {
 

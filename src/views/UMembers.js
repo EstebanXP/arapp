@@ -24,9 +24,11 @@ const ShowMembers = (props) => {
 const UMembers = () => {
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("name");
+  const [searchParam,setSearchParam] = useState("");
   const [currentMember, setCurrentMember] = useState({
     name: "",
     role: "",
+    id: "",
   });
 
   async function deleteMember(memberId) {
@@ -71,6 +73,11 @@ const UMembers = () => {
   
   return (
     <div className="col-md-8">
+
+      <div className="SearchBar">
+        <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
+      </div>
+
       <form >
         <label>
           Order by:
@@ -93,7 +100,15 @@ const UMembers = () => {
           Save: <button type="submit">Save </button>
         </div>
       </form>
-      {lista.map((link) => (
+      {lista.filter((val)=>{
+        if(searchParam===""){
+          return val
+        }else if(val.name.toLowerCase().includes(searchParam.toLowerCase())){
+          return val;
+        }else if(val.role.toLowerCase().includes(searchParam.toLowerCase())){
+          return val;
+        }
+      }).map((link) => (
         <div className="card mb-1">
           <ShowMembers
             name={link.name}
