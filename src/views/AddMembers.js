@@ -2,9 +2,10 @@ import React,{useEffect,useState} from 'react'
 
 import db from '../firebase';
 import {
-    collection, 
-    getDocs, 
-    addDoc, 
+    collection,
+    addDoc,
+    query,
+    onSnapshot, 
     deleteDoc, 
     doc,
 } from 'firebase/firestore';
@@ -20,12 +21,16 @@ const AddMembers = () => {
     //getMembers
     useEffect(() =>{
 
-        const getMembers = async () => {
-        const data = await getDocs(membersCollectionRef)
-        setMembers(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
-        }
-        getMembers()
-    // eslint-disable-next-line 
+        const membersObject= query(collection(db,'members'));
+        const membersSnapshot=onSnapshot(membersObject,(querySnapshot)=>{
+            let data=[];
+            querySnapshot.forEach((doc)=>{
+                data.push({...doc.data(),id:doc.id});
+            })
+            setMembers(data);
+        });
+        return ()=> membersSnapshot(); 
+
     }, []);
 
     //createMembers
@@ -38,8 +43,7 @@ const AddMembers = () => {
         const memberDoc = doc(db, "members", id);
         await deleteDoc(memberDoc);
     }
-
-
+    
 
     return (
 
@@ -58,9 +62,9 @@ const AddMembers = () => {
         {members.map((member) => {
             return (
             <div>
-            <h3>Name: {member.name}</h3>
-            <h3>Role: {member.role}</h3>
-            <button onClick ={() => {deleteMember(member.id)}}>Delete Member</button>
+                <h3>Name: {member.name}</h3>
+                <h3>Role: {member.role}</h3>
+                <button onClick ={() => {deleteMember(member.id)}}>Delete Member</button>
             </div>
             );
         })}
