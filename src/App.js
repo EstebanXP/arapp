@@ -5,11 +5,13 @@ import AddSetlist from './views/AddSetlist';
 import AddSets from './views/AddSets';
 import AddSongs from './views/AddSongs';
 import AddMembers from './views/AddMembers';
+import AddTags from './views/AddTags';
 import USongs from './views/USongs';
 import UMembers from './views/UMembers';
 import UBands from './views/UBands';
 import USetlists from './views/USetlists';
 import USets from './views/USets';
+import UTags from './views/UTags';
 import {
   BrowserRouter as Router,
   Switch,
@@ -58,6 +60,9 @@ function App() {
               <Link to="/addSets">Add Set</Link>
             </li>
             <li>
+              <Link to="/addTags">Add Tag</Link>
+            </li>
+            <li>
               <Link to="/updateSongs">Update Songs</Link>
             </li>
             <li>
@@ -71,6 +76,9 @@ function App() {
             </li>
             <li>
               <Link to="/updateSets">Update Set</Link>
+            </li>
+            <li>
+              <Link to="/updateTags">Update Tag</Link>
             </li>
           </ul>
         </nav>
@@ -91,6 +99,9 @@ function App() {
           <Route path="/addSets">
             <AddSets /> 
           </Route>
+          <Route path="/addTags">
+            <AddTags /> 
+          </Route>
           <Route path="/updateSongs">
             <USongs />
           </Route>
@@ -105,6 +116,12 @@ function App() {
           </Route>
           <Route path="/updateSets">
             <USets />
+          </Route>
+          <Route path="/updateSets">
+            <USets />
+          </Route>
+          <Route path="/updateTags">
+            <UTags />
           </Route>
           <Route path="/">
             <Home />
