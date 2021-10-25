@@ -14,10 +14,10 @@ const ShowBands = (props) => {
     return (
         <div className="container">
             <div className="card-body">
-                    <p>Band's name: {props.bandName}</p>
-                    <p>Band's logo: {props.bandLogo}</p>
-                    <p>Band's description: {props.bandDescription}</p>
-                    <p>Band's logo: {props.bandGenres}</p>
+                    <p>Band's name: {props.name}</p>
+                    <p>Band's logo: {props.logo}</p>
+                    <p>Band's description: {props.description}</p>
+                    <p>Band's logo: {props.genre}</p>
             </div>
         </div>
     )
@@ -25,16 +25,18 @@ const ShowBands = (props) => {
 
 const UBands = () => {
     const [list, setList] = useState([]);
-    const [sortings, setSortings] = useState("bandName");
+    const [sortings, setSortings] = useState("name");
+    const [searchParam,setSearchParam] = useState("");
     const [currentBand, setCurrentBand] = useState({
-        bandName: "",
-        bandLogo: null,
-        bandDescription: "",
-        bandGenres: ""
+        id: "",
+        name: "",
+        logo: null,
+        description: "",
+        genre: ""
     });
 
     async function deleteBand(bandId) {
-        await deleteDoc(doc(db, "Bands", bandId));
+        await deleteDoc(doc(db, "bands", bandId));
     }
 
     function handleChange(e) {
@@ -46,30 +48,30 @@ const UBands = () => {
     function editBand(band) {
         setCurrentBand({
             id: band.id,
-            bandName: band.bandName,
-            bandLogo: band.bandLogo,
-            bandDescription: band.bandDescription,
-            bandGenres: band.bandGenres,
+            name: band.name,
+            logo: band.logo,
+            description: band.description,
+            genre: band.genre,
         });
     }
 
     async function saveOnSubmit(e) {
         e.preventDefault();
-        const newName = e.target.bandName.value;
-        const newLogo = e.target.bandLogo.value;
-        const newDescription = e.target.bandDescription.value;
-        const newMusicGenre = e.target.bandGenres.value;
+        const newName = e.target.name.value;
+        const newLogo = e.target.logo.value;
+        const newDescription = e.target.description.value;
+        const newMusicGenre = e.target.genre.value;
 
-        await updateDoc(doc(db, "Bands", currentBand.id), {
-            bandName: newName,
-            bandLogo: newLogo,
-            bandDescription : newDescription,
-            bandGenres: newMusicGenre
+        await updateDoc(doc(db, "bands", currentBand.id), {
+            name: newName,
+            logo: newLogo,
+            description : newDescription,
+            genre: newMusicGenre
         });
     }
 
     useEffect(() => {
-        const bandObject = query(collection(db, "Bands"), orderBy(sortings));
+        const bandObject = query(collection(db, "bands"), orderBy(sortings));
         const bandsSnapshot = onSnapshot(bandObject, (querySnapshot) => {
         let data = [];
         querySnapshot.forEach((doc) => {
@@ -84,14 +86,19 @@ const UBands = () => {
   
     return (
         <div className="col-md-8">
+            
+            <div className="SearchBar">
+                <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
+            </div>
+
             <form >
                 <label>
                     Order by:
                     <select value={sortings} onChange={handleChange}>
-                        <option value="bandName">name</option>
-                        <option value="bandLogo">logo</option>
-                        <option value="bandDescription">description</option>
-                        <option value="bandGenres">genre</option>
+                        <option value="name">name</option>
+                        <option value="logo">logo</option>
+                        <option value="description">description</option>
+                        <option value="genre">genre</option>
                     </select>
                 </label>
             </form>
@@ -99,28 +106,40 @@ const UBands = () => {
             <form onSubmit={saveOnSubmit}>
                 <div>
                     Name: 
-                    <input name="bandName" defaultValue={currentBand.bandName}></input>{" "}
+                    <input name="name" defaultValue={currentBand.name}></input>{" "}
                     <br></br>
                     Logo:{" "}
-                    <input name="bandLogo" defaultValue={currentBand.bandLogo}></input>{" "}
+                    <input name="logo" defaultValue={currentBand.logo}></input>{" "}
                     <br></br>
                     Description: 
-                    <input name="bandDescription" defaultValue={currentBand.bandDescription}></input>{" "}
+                    <input name="description" defaultValue={currentBand.description}></input>{" "}
                     <br></br>
                     Music Genre:{" "}
-                    <input name="bandGenres" defaultValue={currentBand.bandGenres}></input>{" "}
+                    <input name="logo" defaultValue={currentBand.genre}></input>{" "}
                     <br></br>
                     Save: <button type="submit">Save </button>
                 </div>
             </form>
             
-            {list.map((link) => (
+            {list.filter((val) => {
+                if(searchParam === "") {
+                    return val
+                } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.logo.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.description.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.genre.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                }
+            }).map((link) => (
                 <div className="card mb-1">
                     <ShowBands
-                        bandName={link.bandName}
-                        bandLogo={link.bandLogo}
-                        bandDescription={link.bandDescription}
-                        bandGenres={link.bandGenres}
+                        name={link.name}
+                        logo={link.logo}
+                        description={link.description}
+                        genre={link.genre}
                     />
                     <button className="editar" onClick={() => editBand(link)}>
                         Edit

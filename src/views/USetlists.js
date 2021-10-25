@@ -27,7 +27,9 @@ const ShowSetlists = (props) => {
 const USetlists = () => {
     const [list, setList] = useState([]);
     const [sortings, setSortings] = useState("name");
+    const [searchParam,setSearchParam] = useState("");
     const [currentSetlist, setCurrentSetlist] = useState({
+        id: "",
         name: "",
         set: null,
         show: "",
@@ -89,6 +91,11 @@ const USetlists = () => {
   
     return (
         <div className="col-md-8">
+            
+            <div className="SearchBar">
+                <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
+            </div>
+            
             <form >
                 <label>
                     Order by:
@@ -122,15 +129,29 @@ const USetlists = () => {
                     Save: <button type="submit">Save </button>
                 </div>
             </form>
-            
-            {list.map((link) => (
+
+            {list.filter((val) => {
+                if(searchParam === "") {
+                    return val
+                } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.set.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.show.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.band.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                } else if(val.tag.toLowerCase().includes(searchParam.toLowerCase())) {
+                    return val;
+                }
+            }).map((link) => (
                 <div className="card mb-1">
                     <ShowSetlists
                         name={link.name}
                         set={link.set}
                         show={link.show}
                         band={link.band}
-                        tag={link.tag}
+                        tag={link.band}
                     />
                     <button className="editar" onClick={() => editSetlist(link)}>
                         Edit
