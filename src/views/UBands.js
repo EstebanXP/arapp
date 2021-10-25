@@ -14,10 +14,10 @@ const ShowBands = (props) => {
     return (
         <div className="container">
             <div className="card-body">
-                    <p>Band's name: {props.name}</p>
-                    <p>Band's logo: {props.logo}</p>
-                    <p>Band's description: {props.description}</p>
-                    <p>Band's logo: {props.genre}</p>
+                    <p>Band's name: {props.bandName}</p>
+                    <p>Band's logo: {props.bandLogo}</p>
+                    <p>Band's description: {props.bandDescription}</p>
+                    <p>Band's logo: {props.bandGenres}</p>
             </div>
         </div>
     )
@@ -25,12 +25,12 @@ const ShowBands = (props) => {
 
 const UBands = () => {
     const [list, setList] = useState([]);
-    const [sortings, setSortings] = useState("name");
+    const [sortings, setSortings] = useState("bandName");
     const [currentBand, setCurrentBand] = useState({
-        name: "",
-        logo: null,
-        description: "",
-        genre: ""
+        bandName: "",
+        bandLogo: null,
+        bandDescription: "",
+        bandGenres: ""
     });
 
     async function deleteBand(bandId) {
@@ -46,25 +46,25 @@ const UBands = () => {
     function editBand(band) {
         setCurrentBand({
             id: band.id,
-            name: band.name,
-            logo: band.logo,
-            description: band.description,
-            genre: band.genre,
+            bandName: band.bandName,
+            bandLogo: band.bandLogo,
+            bandDescription: band.bandDescription,
+            bandGenres: band.bandGenres,
         });
     }
 
     async function saveOnSubmit(e) {
         e.preventDefault();
-        const newName = e.target.name.value;
-        const newLogo = e.target.logo.value;
-        const newDescription = e.target.description.value;
-        const newMusicGenre = e.target.genre.value;
+        const newName = e.target.bandName.value;
+        const newLogo = e.target.bandLogo.value;
+        const newDescription = e.target.bandDescription.value;
+        const newMusicGenre = e.target.bandGenres.value;
 
         await updateDoc(doc(db, "Bands", currentBand.id), {
-            name: newName,
-            logo: newLogo,
-            description : newDescription,
-            genre: newMusicGenre
+            bandName: newName,
+            bandLogo: newLogo,
+            bandDescription : newDescription,
+            bandGenres: newMusicGenre
         });
     }
 
@@ -88,10 +88,10 @@ const UBands = () => {
                 <label>
                     Order by:
                     <select value={sortings} onChange={handleChange}>
-                        <option value="name">name</option>
-                        <option value="logo">logo</option>
-                        <option value="description">description</option>
-                        <option value="genre">genre</option>
+                        <option value="bandName">name</option>
+                        <option value="bandLogo">logo</option>
+                        <option value="bandDescription">description</option>
+                        <option value="bandGenres">genre</option>
                     </select>
                 </label>
             </form>
@@ -99,16 +99,16 @@ const UBands = () => {
             <form onSubmit={saveOnSubmit}>
                 <div>
                     Name: 
-                    <input name="name" defaultValue={currentBand.name}></input>{" "}
+                    <input name="bandName" defaultValue={currentBand.bandName}></input>{" "}
                     <br></br>
                     Logo:{" "}
-                    <input name="logo" defaultValue={currentBand.logo}></input>{" "}
+                    <input name="bandLogo" defaultValue={currentBand.bandLogo}></input>{" "}
                     <br></br>
                     Description: 
-                    <input name="description" defaultValue={currentBand.description}></input>{" "}
+                    <input name="bandDescription" defaultValue={currentBand.bandDescription}></input>{" "}
                     <br></br>
                     Music Genre:{" "}
-                    <input name="logo" defaultValue={currentBand.genre}></input>{" "}
+                    <input name="bandGenres" defaultValue={currentBand.bandGenres}></input>{" "}
                     <br></br>
                     Save: <button type="submit">Save </button>
                 </div>
@@ -117,10 +117,10 @@ const UBands = () => {
             {list.map((link) => (
                 <div className="card mb-1">
                     <ShowBands
-                        name={link.name}
-                        logo={link.logo}
-                        description={link.description}
-                        genre={link.genre}
+                        bandName={link.bandName}
+                        bandLogo={link.bandLogo}
+                        bandDescription={link.bandDescription}
+                        bandGenres={link.bandGenres}
                     />
                     <button className="editar" onClick={() => editBand(link)}>
                         Edit

@@ -16,12 +16,12 @@ const AddMembers = () => {
     const [newRole, setNewRole] = useState("");
 
     const [members, setMembers] = useState([]);
-    const membersCollectionRef = collection(db, "members");
+    const membersCollectionRef = collection(db, "bandMembers");
 
     //getMembers
     useEffect(() =>{
 
-        const membersObject= query(collection(db,'members'));
+        const membersObject= query(collection(db,'bandMembers'));
         const membersSnapshot=onSnapshot(membersObject,(querySnapshot)=>{
             let data=[];
             querySnapshot.forEach((doc)=>{
@@ -35,12 +35,12 @@ const AddMembers = () => {
 
     //createMembers
     const createMember = async () => {
-        await addDoc(membersCollectionRef, {name: newName, role: newRole});
+        await addDoc(membersCollectionRef, {memberName: newName, rol: newRole});
     }
 
     //deleteMembers
     const deleteMember = async (id) => {
-        const memberDoc = doc(db, "members", id);
+        const memberDoc = doc(db, "bandMembers", id);
         await deleteDoc(memberDoc);
     }
     
@@ -62,8 +62,8 @@ const AddMembers = () => {
         {members.map((member) => {
             return (
             <div>
-                <h3>Name: {member.name}</h3>
-                <h3>Role: {member.role}</h3>
+                <h3>Name: {member.memberName}</h3>
+                <h3>Role: {member.rol}</h3>
                 <button onClick ={() => {deleteMember(member.id)}}>Delete Member</button>
             </div>
             );

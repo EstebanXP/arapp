@@ -23,7 +23,7 @@ const AddBands = () => {
 
     //create Bands
     const createBand = async () => {
-        await addDoc(bandsCollectionRef, { name: newName, logo: newLogo, description: newDescription, genre: newMusicGenre });
+        await addDoc(bandsCollectionRef, { bandName: newName, bandLogo: newLogo, bandDescription: newDescription, bandGenres: newMusicGenre });
     };
 
     //delete Bands
@@ -58,10 +58,10 @@ const AddBands = () => {
             {bands.map((band) => {
                 return (
                     <div>
-                        <h3>Name: {band.name}</h3>
-                        <h3>Logo: {band.logo}</h3>
-                        <h3>Description: {band.description}</h3>
-                        <h3>Music Genre: {band.genre}</h3>
+                        <h3>Name: {band.bandName}</h3>
+                        <h3>Logo: {band.bandLogo}</h3>
+                        <h3>Description: {band.bandDescription}</h3>
+                        <h3>Music Genre: {band.bandGenres}</h3>
                         <button onClick ={() => {deleteBand(band.id)}}>Delete Band</button>
                     </div>
                 );

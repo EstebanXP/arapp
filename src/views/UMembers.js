@@ -14,8 +14,8 @@ const ShowMembers = (props) => {
     return (
         <div className="container">
             <div className="card-body">
-                    <p>Member's name: {props.name}</p>
-                    <p>Member's role: {props.role}</p>
+                    <p>Member's name: {props.memberName}</p>
+                    <p>Member's role: {props.rol}</p>
             </div>
         </div>
     )
@@ -23,16 +23,16 @@ const ShowMembers = (props) => {
 
 const UMembers = () => {
   const [lista, setLista] = useState([]);
-  const [sortings, setSortings] = useState("name");
+  const [sortings, setSortings] = useState("memberName");
   const [searchParam,setSearchParam] = useState("");
   const [currentMember, setCurrentMember] = useState({
-    name: "",
-    role: "",
+    memberName: "",
+    rol: "",
     id: "",
   });
 
   async function deleteMember(memberId) {
-    await deleteDoc(doc(db, "members", memberId));
+    await deleteDoc(doc(db, "bandMembers", memberId));
   }
 
   function handleChange(e) {
@@ -44,23 +44,23 @@ const UMembers = () => {
   function editMember(member) {
     setCurrentMember({
       id: member.id,
-      name: member.name,
-      role: member.role,
+      memberName: member.memberName,
+      rol: member.rol,
     });
   }
 
   async function saveOnSubmit(e) {
     e.preventDefault();
-    const newName = e.target.name.value;
-    const newRole = e.target.role.value;
-    await updateDoc(doc(db, "members", currentMember.id), {
-      name: newName,
-      role: newRole,
+    const newName = e.target.memberName.value;
+    const newRole = e.target.rol.value;
+    await updateDoc(doc(db, "bandMembers", currentMember.id), {
+      memberName: newName,
+      rol: newRole,
     });
   }
 
   useEffect(() => {
-    const memberObject = query(collection(db, "members"), orderBy(sortings));
+    const memberObject = query(collection(db, "bandMembers"), orderBy(sortings));
     const membersSnapshot = onSnapshot(memberObject, (querySnapshot) => {
       let data = [];
       querySnapshot.forEach((doc) => {
@@ -82,8 +82,8 @@ const UMembers = () => {
         <label>
           Order by:
           <select value={sortings} onChange={handleChange}>
-            <option value="name">name</option>
-            <option value="role">role</option>
+            <option value="memberName">name</option>
+            <option value="rol">role</option>
           </select>
         </label>
       </form>
@@ -92,10 +92,10 @@ const UMembers = () => {
       <form onSubmit={saveOnSubmit}>
         <div>
           Name: 
-          <input name="name" defaultValue={currentMember.name}></input>{" "}
+          <input name="memberName" defaultValue={currentMember.memberName}></input>{" "}
           <br></br>
           Role:{" "}
-          <input name="role" defaultValue={currentMember.role}></input>{" "}
+          <input name="rol" defaultValue={currentMember.rol}></input>{" "}
           <br></br>
           Save: <button type="submit">Save </button>
         </div>
@@ -103,16 +103,16 @@ const UMembers = () => {
       {lista.filter((val)=>{
         if(searchParam===""){
           return val
-        }else if(val.name.toLowerCase().includes(searchParam.toLowerCase())){
+        }else if(val.memberName.toLowerCase().includes(searchParam.toLowerCase())){
           return val;
-        }else if(val.role.toLowerCase().includes(searchParam.toLowerCase())){
+        }else if(val.rol.toLowerCase().includes(searchParam.toLowerCase())){
           return val;
         }
       }).map((link) => (
         <div className="card mb-1">
           <ShowMembers
-            name={link.name}
-            role={link.role}
+            memberName={link.memberName}
+            rol={link.rol}
           />
           <button className="editar" onClick={() => editMember(link)}>
             Edit
