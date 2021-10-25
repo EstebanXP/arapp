@@ -16,13 +16,25 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import { useState } from 'react';
+import Logeo from './views/Logeo';
 
 
 
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
+  const [user,setUser]=useState(null);
+
+  if(user===null){
+    return(
+      <div>
+        <Logeo setUser={setUser} ></Logeo>
+      </div>
+    );
+  }
+
   return (
+
     <Router>
       <div>
         <nav>

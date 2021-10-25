@@ -34,7 +34,7 @@ const UBands = () => {
     });
 
     async function deleteBand(bandId) {
-        await deleteDoc(doc(db, "bands", bandId));
+        await deleteDoc(doc(db, "Bands", bandId));
     }
 
     function handleChange(e) {
@@ -60,7 +60,7 @@ const UBands = () => {
         const newDescription = e.target.description.value;
         const newMusicGenre = e.target.genre.value;
 
-        await updateDoc(doc(db, "bands", currentBand.id), {
+        await updateDoc(doc(db, "Bands", currentBand.id), {
             name: newName,
             logo: newLogo,
             description : newDescription,
@@ -69,7 +69,7 @@ const UBands = () => {
     }
 
     useEffect(() => {
-        const bandObject = query(collection(db, "bands"), orderBy(sortings));
+        const bandObject = query(collection(db, "Bands"), orderBy(sortings));
         const bandsSnapshot = onSnapshot(bandObject, (querySnapshot) => {
         let data = [];
         querySnapshot.forEach((doc) => {

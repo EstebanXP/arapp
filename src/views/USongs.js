@@ -14,7 +14,7 @@ import ShowSongs from "./ShowSongs";
 const USongs = () => {
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("title");
-  const [searchParam,setSearchParam] = useState("");
+  const [searchParam, setSearchParam] = useState("");
   const [currentSong, setCurrentSong] = useState({
     artist: "",
     lyrics: "",
@@ -33,7 +33,6 @@ const USongs = () => {
     setSortings(e.target.value);
   }
 
-
   function editSong(song) {
     setCurrentSong({
       title: song.title,
@@ -44,6 +43,17 @@ const USongs = () => {
       tempo: song.tempo,
       tab: song.tab,
     });
+  }
+
+  function checkTags(arre,arre2){
+    console.log(arre2);
+    arre.filter((ele)=>{
+      if(ele.toLowerCase().includes(searchParam.toLowerCase())){
+        return true;
+      }
+      console.log(false);
+      return false;
+    })
   }
 
   async function saveOnSubmit(e) {
@@ -78,12 +88,18 @@ const USongs = () => {
 
   return (
     <div className="col-md-8">
-
       <div className="SearchBar">
-        <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
+        <input
+          type="text"
+          name="title"
+          placeholder="Search..."
+          onChange={(event) => {
+            setSearchParam(event.target.value);
+          }}
+        ></input>
       </div>
 
-      <form >
+      <form>
         <label>
           Pick your sorting parameter:
           <select value={sortings} onChange={handleChange}>
@@ -116,29 +132,40 @@ const USongs = () => {
           Guardar: <button type="submit">Guardar </button>
         </div>
       </form>
-      {lista.filter((val)=>{
-        if(searchParam===""){
-          return val
-        }else if(val.title.toLowerCase().includes(searchParam.toLowerCase())){
-          return val;
-        }else if(val.artist.toLowerCase().includes(searchParam.toLowerCase())){
-          return val;
+      {lista.filter((val) => {
+          if (searchParam === "") {
+            return val;
+          } else if (
+            val.title.toLowerCase().includes(searchParam.toLowerCase())
+          ) {
+            return val;
+          } else if (val.artist.toLowerCase().includes(searchParam.toLowerCase())) {
+            return val;
+          }
+          console.log(val.Tags.filter((value)=>{
+            value.toLowerCase().includes(searchParam.toLowerCase())
+          }))
+          
+          /* else if(val.Tags.filter(ele=>)*/
+        })
+        .map((link) => (
+          <div className="card mb-1">
+            <ShowSongs
+              title={link.title}
+              artist={link.artist}
+              lyrics={link.lyrics}
+            />
+            <button className="editar" onClick={() => editSong(link)}>
+              Editar
+            </button>
+            <button className="borrar" onClick={() => deleteSong(link.id)}>
+              Borrar
+            </button>
+          </div>
+          
+        ))
+        
         }
-      }).map((link) => (
-        <div className="card mb-1">
-          <ShowSongs
-            title={link.title}
-            artist={link.artist}
-            lyrics={link.lyrics}
-          />
-          <button className="editar" onClick={() => editSong(link)}>
-            Editar
-          </button>
-          <button className="borrar" onClick={() => deleteSong(link.id)}>
-            Borrar
-          </button>
-        </div>
-      ))}
     </div>
   );
 };

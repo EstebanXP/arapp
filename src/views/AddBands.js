@@ -10,7 +10,7 @@ const AddBands = () => {
     const [newMusicGenre, setNewMusicGenre] = useState("");
 
     const [bands, setBands] = useState([]);
-    const bandsCollectionRef = collection(db, "bands");
+    const bandsCollectionRef = collection(db, "Bands");
 
     //get bands
     useEffect( () => {
@@ -28,7 +28,7 @@ const AddBands = () => {
 
     //delete Bands
     const deleteBand = async (id) => {
-        const bandDoc = doc(db, "bands", id);
+        const bandDoc = doc(db, "Bands", id);
         await deleteDoc(bandDoc);
     };
 
