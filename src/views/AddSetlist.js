@@ -1,6 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect, useState} from 'react';
+
 import db from '../firebase';
-import {collection, getDocs, addDoc, deleteDoc, doc} from 'firebase/firestore';
+import {
+    collection,
+    addDoc,
+    query,
+    onSnapshot, 
+    deleteDoc, 
+    doc,
+} from 'firebase/firestore';
 
 const AddSetlist = () => {
 
@@ -14,12 +22,17 @@ const AddSetlist = () => {
     const setlistsCollectionRef = collection(db, "setlists");
 
     //get setlist
-    useEffect( () => {
-        const getSetlists = async () => {
-            const data = await getDocs(setlistsCollectionRef)
-            setSetlists(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
-        };
-        getSetlists();
+    useEffect(() => {
+        const setlistsObject = query(collection(db,'setlists'));
+        const setlistsSnapshot = onSnapshot(setlistsObject,(querySnapshot) => {
+            let data = [];
+            querySnapshot.forEach((doc)=> {
+                data.push({...doc.data(),id:doc.id});
+            })
+            setSetlists(data);
+        });
+        return ()=> setlistsSnapshot(); 
+
     }, []);
 
     //create Setlist

@@ -1,6 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect, useState} from 'react';
+
 import db from '../firebase';
-import {collection, getDocs, addDoc, deleteDoc, doc} from 'firebase/firestore';
+import {
+    collection,
+    addDoc,
+    query,
+    onSnapshot, 
+    deleteDoc, 
+    doc,
+} from 'firebase/firestore';
 
 const AddSets = () => {
 
@@ -11,12 +19,17 @@ const AddSets = () => {
     const setsCollectionRef = collection(db, "sets");
 
     //get Sets
-    useEffect( () => {
-        const getSets = async () => {
-        const data = await getDocs(setsCollectionRef)
-            setSets(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
-        };
-        getSets(); 
+    useEffect(() => {
+        const setsObject = query(collection(db,'sets'));
+        const setsSnapshot = onSnapshot(setsObject,(querySnapshot) => {
+            let data = [];
+            querySnapshot.forEach((doc)=> {
+                data.push({...doc.data(),id:doc.id});
+            })
+            setSets(data);
+        });
+        return ()=> setsSnapshot(); 
+
     }, []);
 
     //create Sets

@@ -1,6 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect, useState} from 'react';
+
 import db from '../firebase';
-import {collection, getDocs, addDoc, deleteDoc, doc} from 'firebase/firestore';
+import {
+    collection,
+    addDoc,
+    query,
+    onSnapshot, 
+    deleteDoc, 
+    doc,
+} from 'firebase/firestore';
 
 const AddBands = () => {
 
@@ -13,12 +21,17 @@ const AddBands = () => {
     const bandsCollectionRef = collection(db, "Bands");
 
     //get bands
-    useEffect( () => {
-        const getBand = async () => {
-            const data = await getDocs(bandsCollectionRef)
-            setBands(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
-        };
-        getBand();
+    useEffect(() => {
+        const bandsObject = query(collection(db,'Bands'));
+        const bandsSnapshot = onSnapshot(bandsObject,(querySnapshot) => {
+            let data = [];
+            querySnapshot.forEach((doc)=> {
+                data.push({...doc.data(),id:doc.id});
+            })
+            setBands(data);
+        });
+        return ()=> bandsSnapshot(); 
+
     }, []);
 
     //create Bands

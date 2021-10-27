@@ -58,16 +58,14 @@ const UTags = () => {
     useEffect(() => {
         const tagObject = query(collection(db, "tags"), orderBy(sortings));
         const tagsSnapshot = onSnapshot(tagObject, (querySnapshot) => {
-        let data = [];
-        querySnapshot.forEach((doc) => {
+          let data = [];
+          querySnapshot.forEach((doc) => {
             data.push({ ...doc.data(), id: doc.id });
+          });
+          setList(data);
         });
-      
-        setList(data);
-        });
-        
         return () => tagsSnapshot();
-    }, [sortings]);
+      }, [sortings]);
   
     return (
         <div className="col-md-8">

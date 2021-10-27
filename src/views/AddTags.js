@@ -1,6 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect, useState} from 'react';
+
 import db from '../firebase';
-import {collection, getDocs, addDoc, deleteDoc, doc} from 'firebase/firestore';
+import {
+    collection,
+    addDoc,
+    query,
+    onSnapshot, 
+    deleteDoc, 
+    doc,
+} from 'firebase/firestore';
 
 const AddTags = () => {
 
@@ -10,12 +18,17 @@ const AddTags = () => {
     const tagsCollectionRef = collection(db, "tags");
 
     //get Tags
-    useEffect( () => {
-        const getTags = async () => {
-        const data = await getDocs(tagsCollectionRef)
-            setTags(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
-        };
-        getTags(); 
+    useEffect(() => {
+        const tagsObject = query(collection(db,'tags'));
+        const tagsSnapshot = onSnapshot(tagsObject,(querySnapshot) => {
+            let data = [];
+            querySnapshot.forEach((doc)=> {
+                data.push({...doc.data(),id:doc.id});
+            })
+            setTags(data);
+        });
+        return ()=> tagsSnapshot(); 
+
     }, []);
 
     //create Tags
@@ -25,8 +38,8 @@ const AddTags = () => {
 
     //delete Tag
     const deleteTag = async (id) => {
-        const setDoc = doc(db, "tags", id);
-        await deleteDoc(setDoc);
+        const tagDoc = doc(db, 'tags', id);
+        await deleteDoc(tagDoc);
     };
 
     return (

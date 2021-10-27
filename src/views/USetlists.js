@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
     collection,
     query,
@@ -31,7 +32,7 @@ const USetlists = () => {
     const [currentSetlist, setCurrentSetlist] = useState({
         id: "",
         name: "",
-        set: null,
+        set: [],
         show: "",
         band: "",
         tag: ""
