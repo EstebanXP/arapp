@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const Home = () => {
+const Home = (props) => {
+
+    useEffect(()=>{
+
+    })
+
     return (
         <div>
             <h1>Hola mundo 1</h1>

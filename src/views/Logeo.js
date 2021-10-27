@@ -33,8 +33,10 @@ const Logeo = (props) => {
         const uname=e.target.username.value;
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+            
             // Signed in 
             const user = userCredential.user;
+            props.setUser(user);
             setDoc(doc(db, "Users", user.uid), {
                 userName:name,
                 userEmail:email,
@@ -54,6 +56,7 @@ const Logeo = (props) => {
             })
             .catch((error) => {
             const errorCode = error.code;
+            console.log(errorCode);
             const errorMessage = error.message;
             console.log(errorMessage)
             // ..
@@ -84,7 +87,7 @@ const Logeo = (props) => {
                     <select id="role">
                         <option value="Band Member">Band Member</option>
                         <option value="Band Manager">Band Manager</option>
-                        <option value="Live Experience Manager">Live Experience Manager</option>
+                        <option value="Live Experience Designer">Live Experience Manager</option>
                     </select> 
                     <br></br>
                     <button >Sign up</button>
