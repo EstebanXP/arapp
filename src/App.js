@@ -12,6 +12,8 @@ import UBands from "./views/UBands";
 import USetlists from "./views/USetlists";
 import USets from "./views/USets";
 import UTags from "./views/UTags";
+import AddLiveShows from './views/AddLiveShows';
+import ULiveShows from "./views/ULiveShows";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Logeo from "./views/Logeo";
@@ -134,10 +136,19 @@ function App() {
                       <Link to="/updateTags">Update Tag</Link>
                     </li>
                     <li>
+                      <Link to="/updateSets">Update Set</Link>
+                    </li>
+                    <li>
                       <Link to="/addTags">Add Tag</Link>
                     </li>
                     <li>
                       <Link to="/addSetlist">Add Setlist</Link>
+                    </li>
+                    <li>
+                      <Link to="/addLiveShows">Add Live Shows</Link>
+                    </li>
+                    <li>
+                      <Link to="/updateLiveShows">Update Live Shows</Link>
                     </li>
                   </ul>
                   <Switch>
@@ -161,6 +172,15 @@ function App() {
                     </Route>
                     <Route path="/addSongs">
                       <AddSongs />
+                    </Route>
+                    <Route path="/updateSets">
+                      <USets />
+                    </Route>
+                    <Route path="/updateLiveShows">
+                      <ULiveShows />
+                    </Route>
+                    <Route path="/addLiveShows">
+                      <AddLiveShows />
                     </Route>
                     <Route path="/">
                       <Home />
