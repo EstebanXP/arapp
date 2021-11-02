@@ -25,7 +25,9 @@ const AddChords = () => {
   });
 
   async function deleteChord(songId) {
-    
+    await updateDoc(doc(db, "songs", currentSong.id), {
+      chords: "",
+    });
   }
 
   function handleChange(e) {
