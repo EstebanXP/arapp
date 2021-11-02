@@ -5,6 +5,7 @@ import AddSetlist from "./views/AddSetlist";
 import AddSets from "./views/AddSets";
 import AddSongs from "./views/AddSongs";
 import AddMembers from "./views/AddMembers";
+import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
 import USongs from "./views/USongs";
 import UMembers from "./views/UMembers";
@@ -77,6 +78,9 @@ function App() {
                     <Link to="/addMembers">Add Members</Link>
                   </li>
                   <li>
+                    <Link to="/uMembers">Update Members</Link>
+                  </li>
+                  <li>
                     <Link to="/addBands">Add Bands</Link>
                   </li>
                   <li>
@@ -92,6 +96,9 @@ function App() {
                   <Switch>
                     <Route path="/addMembers">
                       <AddMembers />
+                    </Route>
+                    <Route path="/uMembers">
+                      <UMembers />
                     </Route>
                     <Route path="/addBands">
                       <AddBands />
@@ -125,6 +132,9 @@ function App() {
                     </li>
                     <li>
                       <Link to="/addSongs">Add Songs</Link>
+                    </li>
+                    <li>
+                      <Link to="/addChords">Add Chords</Link>
                     </li>
                     <li>
                       <Link to="/updateSetlists">Update Setlist</Link>
@@ -172,6 +182,9 @@ function App() {
                     </Route>
                     <Route path="/addSongs">
                       <AddSongs />
+                    </Route>
+                    <Route path="/addChords">
+                      <AddChords />
                     </Route>
                     <Route path="/updateSets">
                       <USets />
