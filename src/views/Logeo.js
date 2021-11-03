@@ -87,7 +87,7 @@ const Logeo = (props) => {
                     <select id="role">
                         <option value="Band Member">Band Member</option>
                         <option value="Band Manager">Band Manager</option>
-                        <option value="Live Experience Designer">Live Experience Manager</option>
+                        <option value="Live Experience Designer">Live Experience Designer</option>
                     </select> 
                     <br></br>
                     <button >Sign up</button>

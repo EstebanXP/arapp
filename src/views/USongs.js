@@ -141,11 +141,10 @@ const USongs = () => {
             return val;
           } else if (val.artist.toLowerCase().includes(searchParam.toLowerCase())) {
             return val;
+          }else if(val.Tags.includes(searchParam)){
+            console.log(val);
+            return val;
           }
-          console.log(val.Tags.filter((value)=>{
-            value.toLowerCase().includes(searchParam.toLowerCase())
-          }))
-          
           /* else if(val.Tags.filter(ele=>)*/
         })
         .map((link) => (
