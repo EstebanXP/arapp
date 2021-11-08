@@ -17,8 +17,8 @@ const AddSongs = () => {
 
       const [localLyrics, setlocalLyrics] = useState("");
       const [status,setStatus]=useState(false);
-
       const [editStatus,setEditStatus]=useState(false);
+      const [songAlreadyExist,setSongAlreadyExist]=useState(false);
       const [lista,setLista]=useState([]);
 
       function getData(e) {
@@ -29,16 +29,35 @@ const AddSongs = () => {
         })
       }
 
-      async function buscarCancion() {
-        const response = await fetchAPI();
-        if(response.status===200){
-            setStatus(true);
-            const myJson = await response.json(); //extract JSON from the http response
-            setlocalLyrics(JSON.stringify(myJson));
-        }else{
-            setStatus(false);
-        }
 
+      async function cancionAPI(){
+        const response = await fetchAPI();
+        if(songAlreadyExist===true){
+            if(response.status===200){
+                setStatus(true);
+                const myJson = await response.json(); //extract JSON from the http response
+                setlocalLyrics(JSON.stringify(myJson));
+            }else{
+                setStatus(false);
+            }
+        }else{
+        
+        }
+        
+      }
+
+      function buscarCancion() {
+          console.log(datos.artista+datos.cancion);
+            lista.forEach((cancion)=>{
+                if(cancion.artist==datos.artista&& cancion.title==datos.cancion){
+                    setSongAlreadyExist(true);
+                }
+            })
+            if(songAlreadyExist===true){
+                alert("La cancion ya existe");
+            }else{
+                cancionAPI();
+            }
       }
 
       async function deleteSong(songId){
@@ -106,7 +125,7 @@ const AddSongs = () => {
             
                 {
                     editStatus===false?
-                    <button onClick={buscarCancion} >Buscar</button>
+                    <button onClick={()=>buscarCancion()} >Buscar</button>
                     :
                     <p></p>
                 }
