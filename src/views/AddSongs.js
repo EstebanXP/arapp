@@ -18,7 +18,6 @@ const AddSongs = () => {
       const [localLyrics, setlocalLyrics] = useState("");
       const [status,setStatus]=useState(false);
       const [editStatus,setEditStatus]=useState(false);
-      const [songAlreadyExist,setSongAlreadyExist]=useState(false);
       const [lista,setLista]=useState([]);
 
       function getData(e) {
@@ -29,10 +28,12 @@ const AddSongs = () => {
         })
       }
 
-
-      async function cancionAPI(){
-        const response = await fetchAPI();
-        if(songAlreadyExist===true){
+      async function buscarCancion() {
+        var proob=lista.find((cancion)=>cancion.title===datos.cancion&&cancion.artist===datos.artista)
+        if(proob!=null){
+            alert("This song already exists!");
+        }else{
+            const response = await fetchAPI();
             if(response.status===200){
                 setStatus(true);
                 const myJson = await response.json(); //extract JSON from the http response
@@ -40,24 +41,8 @@ const AddSongs = () => {
             }else{
                 setStatus(false);
             }
-        }else{
-        
         }
-        
-      }
 
-      function buscarCancion() {
-          console.log(datos.artista+datos.cancion);
-            lista.forEach((cancion)=>{
-                if(cancion.artist==datos.artista&& cancion.title==datos.cancion){
-                    setSongAlreadyExist(true);
-                }
-            })
-            if(songAlreadyExist===true){
-                alert("La cancion ya existe");
-            }else{
-                cancionAPI();
-            }
       }
 
       async function deleteSong(songId){
