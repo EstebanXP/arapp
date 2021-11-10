@@ -15,11 +15,11 @@ const AddTags = () => {
     const [newName, setNewName] = useState("");
 
     const [tags, setTags] = useState([]);
-    const tagsCollectionRef = collection(db, "tags");
+    const tagsCollectionRef = collection(db, "Tag");
 
     //get Tags
     useEffect(() => {
-        const tagsObject = query(collection(db,'tags'));
+        const tagsObject = query(collection(db,'Tag'));
         const tagsSnapshot = onSnapshot(tagsObject,(querySnapshot) => {
             let data = [];
             querySnapshot.forEach((doc)=> {
@@ -33,12 +33,12 @@ const AddTags = () => {
 
     //create Tags
     const createTag = async () => {
-        await addDoc(tagsCollectionRef, { name: newName });
+        await addDoc(tagsCollectionRef, { tagName: newName });
     };
 
     //delete Tag
     const deleteTag = async (id) => {
-        const tagDoc = doc(db, 'tags', id);
+        const tagDoc = doc(db, 'Tag', id);
         await deleteDoc(tagDoc);
     };
 
@@ -53,7 +53,7 @@ const AddTags = () => {
             {tags.map((tag) => {
                 return (
                     <div>
-                        <h3>Name: {tag.name}</h3>
+                        <h3>Name: {tag.tagName}</h3>
                         <button onClick ={() => {deleteTag(tag.id)}}>Delete Tag</button>
                     </div>
                 );

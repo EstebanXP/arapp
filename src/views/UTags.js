@@ -14,7 +14,7 @@ const ShowTags = (props) => {
     return (
         <div className="container">
             <div className="card-body">
-                    <p>Tag name: {props.name}</p>
+                    <p>Tag name: {props.tagName}</p>
             </div>
         </div>
     )
@@ -22,15 +22,15 @@ const ShowTags = (props) => {
 
 const UTags = () => {
     const [list, setList] = useState([]);
-    const [sortings, setSortings] = useState("name");
+    const [sortings, setSortings] = useState("tagName");
     const [searchParam,setSearchParam] = useState("");
     const [currentTag, setCurrentTag] = useState({
         id: "",
-        name: ""
+        tagName: ""
     });
 
     async function deleteTag(tagId) {
-        await deleteDoc(doc(db, "tags", tagId));
+        await deleteDoc(doc(db, "Tag", tagId));
     }
 
     function handleChange(e) {
@@ -42,7 +42,7 @@ const UTags = () => {
     function editTag(tag) {
         setCurrentTag({
             id: tag.id,
-            name: tag.name
+            tagName: tag.tagName
         });
     }
 
@@ -50,13 +50,13 @@ const UTags = () => {
         e.preventDefault();
         const newName = e.target.name.value;
         
-        await updateDoc(doc(db, "tags", currentTag.id), {
-            name: newName
+        await updateDoc(doc(db, "Tag", currentTag.id), {
+            tagName: newName
         });
     }
 
     useEffect(() => {
-        const tagObject = query(collection(db, "tags"), orderBy(sortings));
+        const tagObject = query(collection(db, "Tag"), orderBy(sortings));
         const tagsSnapshot = onSnapshot(tagObject, (querySnapshot) => {
           let data = [];
           querySnapshot.forEach((doc) => {
@@ -78,7 +78,7 @@ const UTags = () => {
                 <label>
                     Order by:
                     <select value={sortings} onChange={handleChange}>
-                        <option value="name">name</option>
+                        <option value="tagName">name</option>
                     </select>
                 </label>
             </form>
@@ -86,7 +86,7 @@ const UTags = () => {
             <form onSubmit={saveOnSubmit}>
                 <div>
                     Name: 
-                    <input name="name" defaultValue={currentTag.name}></input>{" "}
+                    <input name="name" defaultValue={currentTag.tagName}></input>{" "}
                     <br></br>
                     Save: <button type="submit">Save </button>
                 </div>
@@ -95,13 +95,13 @@ const UTags = () => {
             {list.filter((val) => {
                 if(searchParam === "") {
                     return val
-                } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
+                } else if(val.tagName.toLowerCase().includes(searchParam.toLowerCase())) {
                     return val;
                 }
             }).map((link) => (
                 <div className="card mb-1">
                     <ShowTags
-                        name={link.name}
+                        tagName={link.tagName}
                     />
                     <button className="editar" onClick={() => editTag(link)}>
                         Edit
