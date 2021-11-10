@@ -13,7 +13,7 @@ import UBands from "./views/UBands";
 import USetlists from "./views/USetlists";
 import USets from "./views/USets";
 import UTags from "./views/UTags";
-import AddLiveShows from './views/AddLiveShows';
+import AddLiveShows from "./views/AddLiveShows";
 import ULiveShows from "./views/ULiveShows";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -127,6 +127,7 @@ function App() {
                     <li>
                       <Link to="/">Home</Link>
                     </li>
+                    
                     <li>
                       <Link to="/addSets">Add Set</Link>
                     </li>
@@ -179,6 +180,9 @@ function App() {
                     </Route>
                     <Route path="/updateSongs">
                       <USongs />
+                    </Route>
+                    <Route path="/addSets">
+                      <AddSets />
                     </Route>
                     <Route path="/addSongs">
                       <AddSongs />
