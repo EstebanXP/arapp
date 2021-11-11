@@ -14,15 +14,15 @@ const ShowSets = (props) => {
     return (
         <div className="container">
             <div className="card-body">
-                    <p>Set's name: {props.name}</p>
-                    <p>Set's list of songs: {props.songs}</p>
+                    <h3>Name: {props.name}</h3>
+                    <h3>Nongs: {props.songs}</h3>
             </div>
         </div>
     )
 };
 
 const USets = () => {
-    const [list, setList] = useState([]);
+    const [sets, setSets] = useState([]);
     const [sortings, setSortings] = useState("name");
     const [searchParam,setSearchParam] = useState("");
     const [currentSet, setCurrentSet] = useState({
@@ -68,7 +68,7 @@ const USets = () => {
             data.push({ ...doc.data(), id: doc.id });
         });
       
-        setList(data);
+        setSets(data);
         });
         
         return () => setsSnapshot();
@@ -103,12 +103,10 @@ const USets = () => {
                 </div>
             </form>   
 
-            {list.filter((val) => {
+            {sets.filter((val) => {
                 if(searchParam === "") {
                     return val
                 } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                } else if(val.songs.toLowerCase().includes(searchParam.toLowerCase())) {
                     return val;
                 }
             }).map((link) => (

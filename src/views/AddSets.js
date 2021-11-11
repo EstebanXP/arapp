@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
-
-import db from "../firebase";
 import {
   collection,
-  addDoc,
   query,
   onSnapshot,
   deleteDoc,
   doc,
+  addDoc,
+  pdateDoc,
+  orderBy,
 } from "firebase/firestore";
+import db from "../firebase";
+
 
 const AddSets = () => {
+
+  const userID = "1qIYWrBsFhbccNIXylFXfOKAIgm1" //temporal pruebas
+
   const [newName, setNewName] = useState("");
   const [newListOfSongs, setNewListOfSOngs] = useState([]);
-  const [lista, setLista] = useState([]);
+  const [list, setList] = useState([]); //songs
   const [sets, setSets] = useState([]);
   const setsCollectionRef = collection(db, "sets");
 
@@ -30,6 +35,7 @@ const AddSets = () => {
     return () => setsSnapshot();
   }, []);
 
+  //get songs?
   useEffect(() => {
     const songsObject = query(collection(db, "songs")); //Guardar referencia de la coleccion
     const songsSnapshot = onSnapshot(songsObject, (querySnapshot) => {
@@ -38,14 +44,14 @@ const AddSets = () => {
         data1.push({ ...doc.data(), id: doc.id });
         console.log(data1);
       });
-      setLista(data1); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
+      setList(data1); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
     });
     return () => songsSnapshot();
   }, []);
 
   //create Sets
   const createSet = async () => {
-    await addDoc(setsCollectionRef, { name: newName, songs: newListOfSongs });
+    await addDoc(setsCollectionRef, { name: newName, songs: newListOfSongs, createdBy: userID });
   };
 
   //delete Set
@@ -54,15 +60,21 @@ const AddSets = () => {
     await deleteDoc(setDoc);
   };
 
+
+
+
+
+
+
   return (
     <div>
-      <h3>Name AAAA:</h3>
+      <h3>Name:</h3>
       <input
         onChange={(event) => {
           setNewName(event.target.value);
         }}
       />
-      <h3>List of songs:</h3>
+      <h3>Songs:</h3>
       <input
         onChange={(event) => {
           setNewListOfSOngs(event.target.value);
@@ -70,20 +82,25 @@ const AddSets = () => {
       />
       <button onClick={createSet}>Create Set</button>
 
+      <hr/>
+      
       {sets.map((set) => {
-        return (
-          <div>
-            <h3>Name: {set.name}</h3>
-            <h3>List of songs: {set.role}</h3>
-            <button
-              onClick={() => {
-                deleteSet(set.id);
-              }}
-            >
-              Delete Set
-            </button>
-          </div>
-        );
+        if(userID == set.createdBy){
+          return (
+            <div>
+              <h3>Name: {set.name}</h3>
+              <h3>List of songs: {set.songs}</h3>
+              <h3>(TEMPORAL)Created by: {set.createdBy}</h3>
+              <button
+                onClick={() => {
+                  deleteSet(set.id);
+                }}
+              >
+                Delete Set
+              </button>
+            </div>
+          );
+        }
       })}
     </div>
   );
