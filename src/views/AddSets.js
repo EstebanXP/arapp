@@ -3,18 +3,17 @@ import {
   collection,
   query,
   onSnapshot,
-  deleteDoc,
   doc,
   addDoc,
   orderBy,
 } from "firebase/firestore";
 import db from "../firebase";
-import USets from './USets';
+import ShowSets from './ShowSets';
 
 
 const AddSets = () => {
 
-  const userID = "1qIYWrBsFhbccNIXylFXfOKAIgm1" //temporal pruebas
+  const userID = "1qIYWrBsFhbccNIXylFXfOKAIgm1" //temporal para pruebas
 
   const [newName, setNewName] = useState("");
   const [newListOfSongs, setNewListOfSOngs] = useState([]);
@@ -23,6 +22,7 @@ const AddSets = () => {
   const [list, setList] = useState([]); //songs
   const [sets, setSets] = useState([]);
   const setsCollectionRef = collection(db, "sets");
+  const [popStatus, setPopStatus] = useState(false);
 
   //setsets
   useEffect(() => {
@@ -54,12 +54,6 @@ const AddSets = () => {
   //create Sets
   const createSet = async () => {
     await addDoc(setsCollectionRef, { name: newName, songs: newListOfSongs, createdBy: userID });
-  };
-
-  //delete Set
-  const deleteSet = async (id) => {
-    const setDoc = doc(db, "sets", id);
-    await deleteDoc(setDoc);
   };
 
   //sort
@@ -108,26 +102,13 @@ const AddSets = () => {
           return val;
         }
       }).map((set) => {
-        //if(userID == set.createdBy){
+        if(userID == set.createdBy){
           return (
             <div>
-              <h3>Name: {set.name}</h3>
-              <h3>List of songs: {set.songs}</h3>
-              {/*<h3>(TEMPORAL)Created by: {set.createdBy}</h3>*/}
-              <button
-                onClick={() => {
-                  deleteSet(set.id);
-                }}
-              >
-                Delete Set
-              </button>
-
-              <button>Edit Set</button>
-
-              <USets id = {set.id} name = {set.name} songs = {set.songs}/>
+              <ShowSets tset={set}/>
             </div>
           );
-        //}
+        }
       })}
     </div>
   );

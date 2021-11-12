@@ -11,7 +11,6 @@ import USongs from "./views/USongs";
 import UMembers from "./views/UMembers";
 import UBands from "./views/UBands";
 import USetlists from "./views/USetlists";
-import USets from "./views/USets";
 import UTags from "./views/UTags";
 import AddLiveShows from "./views/AddLiveShows";
 import ULiveShows from "./views/ULiveShows";
@@ -148,9 +147,6 @@ function App() {
                       <Link to="/updateTags">Update Tag</Link>
                     </li>
                     <li>
-                      <Link to="/updateSets">Update Set</Link>
-                    </li>
-                    <li>
                       <Link to="/addTags">Add Tag</Link>
                     </li>
                     <li>
@@ -169,9 +165,6 @@ function App() {
                     </Route>
                     <Route path="/updateTags">
                       <UTags />
-                    </Route>
-                    <Route path="/updateSetlist/updateSet">
-                      <USets></USets>
                     </Route>
                     <Route path="/addSetlist">
                       <AddSetlist />
@@ -193,9 +186,6 @@ function App() {
                     </Route>
                     <Route path="/addChords">
                       <AddChords />
-                    </Route>
-                    <Route path="/updateSets">
-                      <USets />
                     </Route>
                     <Route path="/updateLiveShows">
                       <ULiveShows />
