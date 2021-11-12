@@ -6,7 +6,6 @@ import {
   deleteDoc,
   doc,
   addDoc,
-  pdateDoc,
   orderBy,
 } from "firebase/firestore";
 import db from "../firebase";
@@ -18,13 +17,15 @@ const AddSets = () => {
 
   const [newName, setNewName] = useState("");
   const [newListOfSongs, setNewListOfSOngs] = useState([]);
+  const [searchParam,setSearchParam] = useState("");
+  const [sortings, setSortings] = useState("name");
   const [list, setList] = useState([]); //songs
   const [sets, setSets] = useState([]);
   const setsCollectionRef = collection(db, "sets");
 
-  //get Sets
+  //setsets
   useEffect(() => {
-    const setsObject = query(collection(db, "sets"));
+    const setsObject = query(collection(db, "sets"), orderBy(sortings));
     const setsSnapshot = onSnapshot(setsObject, (querySnapshot) => {
       let data = [];
       querySnapshot.forEach((doc) => {
@@ -33,7 +34,7 @@ const AddSets = () => {
       setSets(data);
     });
     return () => setsSnapshot();
-  }, []);
+  }, [sortings]);
 
   //get songs?
   useEffect(() => {
@@ -60,6 +61,11 @@ const AddSets = () => {
     await deleteDoc(setDoc);
   };
 
+  //sort
+  function handleChange(e) {
+    e.preventDefault();
+    setSortings(e.target.value);
+  }
 
 
 
@@ -83,8 +89,30 @@ const AddSets = () => {
       <button onClick={createSet}>Create Set</button>
 
       <hr/>
+
       
-      {sets.map((set) => {
+      <form >
+        <label>
+          Order by:
+          <select value={sortings} onChange={handleChange}>
+            <option value="name">name</option>
+            <option value="songs">songs</option>
+          </select>
+        </label>
+      </form>
+
+
+      <div className="SearchBar">
+          <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
+      </div>
+      
+      {sets.filter((val) => {
+        if(searchParam === "") {
+          return val
+        } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
+          return val;
+        }
+      }).map((set) => {
         if(userID == set.createdBy){
           return (
             <div>

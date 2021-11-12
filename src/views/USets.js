@@ -3,44 +3,20 @@ import {
     collection,
     query,
     onSnapshot,
-    deleteDoc,
     doc,
     updateDoc,
-    orderBy,
 } from "firebase/firestore";
 import db from "../firebase";
 
-const ShowSets = (props) => {
-    return (
-        <div className="container">
-            <div className="card-body">
-                    <h3>Name: {props.name}</h3>
-                    <h3>Nongs: {props.songs}</h3>
-            </div>
-        </div>
-    )
-};
-
 const USets = () => {
     const [sets, setSets] = useState([]);
-    const [sortings, setSortings] = useState("name");
-    const [searchParam,setSearchParam] = useState("");
     const [currentSet, setCurrentSet] = useState({
         id: "",
         name: "",
         songs: null
     });
 
-    async function deleteSet(setId) {
-        await deleteDoc(doc(db, "sets", setId));
-    }
-
-    function handleChange(e) {
-        e.preventDefault();
-        setSortings(e.target.value);
-    }
-
-
+    //get set to edit
     function editSet(set) {
         setCurrentSet({
             id: set.id,
@@ -49,6 +25,7 @@ const USets = () => {
         });
     }
 
+    //save changes
     async function saveOnSubmit(e) {
         e.preventDefault();
         const newName = e.target.name.value;
@@ -60,8 +37,9 @@ const USets = () => {
         });
     }
 
+    //setsets
     useEffect(() => {
-        const setObject = query(collection(db, "sets"), orderBy(sortings));
+        const setObject = query(collection(db, "sets"));
         const setsSnapshot = onSnapshot(setObject, (querySnapshot) => {
         let data = [];
         querySnapshot.forEach((doc) => {
@@ -72,24 +50,10 @@ const USets = () => {
         });
         
         return () => setsSnapshot();
-    }, [sortings]);
+    }, []);
   
     return (
         <div className="col-md-8">
-            
-            <div className="SearchBar">
-                <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
-            </div>
-
-            <form >
-                <label>
-                    Order by:
-                    <select value={sortings} onChange={handleChange}>
-                        <option value="name">name</option>
-                        <option value="songs">songs</option>
-                    </select>
-                </label>
-            </form>
 
             <form onSubmit={saveOnSubmit}>
                 <div>
@@ -103,23 +67,11 @@ const USets = () => {
                 </div>
             </form>   
 
-            {sets.filter((val) => {
-                if(searchParam === "") {
-                    return val
-                } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                }
-            }).map((link) => (
+            {sets.map((link) => (
                 <div className="card mb-1">
-                    <ShowSets
-                        name={link.name}
-                        songs={link.songs}
-                    />
+                    <h3>name: {link.name}</h3>
                     <button className="editar" onClick={() => editSet(link)}>
                         Edit
-                    </button>
-                    <button className="borrar" onClick={() => deleteSet(link.id)}>
-                        Delete
                     </button>
                 </div>
             ))}
