@@ -3,15 +3,13 @@ import {
   collection,
   query,
   onSnapshot,
-  doc,
   addDoc,
   orderBy,
 } from "firebase/firestore";
 import db from "../firebase";
 import ShowSets from './ShowSets';
 
-
-const AddSets = () => {
+const ManageSets = () => {
 
   const userID = "1qIYWrBsFhbccNIXylFXfOKAIgm1" //temporal para pruebas
 
@@ -22,7 +20,6 @@ const AddSets = () => {
   const [list, setList] = useState([]); //songs
   const [sets, setSets] = useState([]);
   const setsCollectionRef = collection(db, "sets");
-  const [popStatus, setPopStatus] = useState(false);
 
   //setsets
   useEffect(() => {
@@ -114,4 +111,4 @@ const AddSets = () => {
   );
 };
 
-export default AddSets;
+export default ManageSets;

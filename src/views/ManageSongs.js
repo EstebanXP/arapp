@@ -13,7 +13,7 @@ import db from "../firebase";
 import ShowSongs from "./ShowSongs";
 import PopupSongs from "./PopupSongs";
 
-const USongs = () => {
+const ManageSongs = () => {
   const [editStatus, setEditStatus] = useState(false);
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("title");
@@ -231,4 +231,4 @@ const USongs = () => {
   );
 };
 
-export default USongs;
+export default ManageSongs;

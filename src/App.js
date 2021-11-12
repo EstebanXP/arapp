@@ -2,12 +2,12 @@ import "./App.css";
 import Home from "./views/Home";
 import AddBands from "./views/AddBands";
 import AddSetlist from "./views/AddSetlist";
-import AddSets from "./views/AddSets";
+import ManageSets from "./views/ManageSets";
 import AddSongs from "./views/AddSongs";
 import AddMembers from "./views/AddMembers";
 import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
-import USongs from "./views/USongs";
+import ManageSongs from "./views/ManageSongs";
 import UMembers from "./views/UMembers";
 import UBands from "./views/UBands";
 import USetlists from "./views/USetlists";
@@ -128,7 +128,7 @@ function App() {
                     </li>
                     
                     <li>
-                      <Link to="/addSets">Add Set</Link>
+                      <Link to="/manageSets">Manage Sets</Link>
                     </li>
                     {/*<li>
                       <Link to="/addSongs">Add Songs</Link>
@@ -138,10 +138,10 @@ function App() {
                     </li>
                     */}
                     <li>
-                      <Link to="/updateSetlists">Update Setlist</Link>
+                      <Link to="/manageSongs">Manage Songs</Link>
                     </li>
                     <li>
-                      <Link to="/updateSongs">Songs</Link>
+                      <Link to="/updateSetlists">Update Setlist</Link>
                     </li>
                     <li>
                       <Link to="/updateTags">Update Tag</Link>
@@ -160,8 +160,8 @@ function App() {
                     </li>
                   </ul>
                   <Switch>
-                    <Route path="/addSets">
-                      <AddSets />
+                    <Route path="/manageSets">
+                      <ManageSets />
                     </Route>
                     <Route path="/updateTags">
                       <UTags />
@@ -175,11 +175,11 @@ function App() {
                     <Route path="/addTags">
                       <AddTags />
                     </Route>
-                    <Route path="/updateSongs">
-                      <USongs />
+                    <Route path="/manageSongs">
+                      <ManageSongs />
                     </Route>
-                    <Route path="/addSets">
-                      <AddSets />
+                    <Route path="/manageSets">
+                      <ManageSets />
                     </Route>
                     <Route path="/addSongs">
                       <AddSongs />
