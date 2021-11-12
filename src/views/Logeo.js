@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } fr
 import { setDoc,collection, addDoc,doc,updateDoc,deleteDoc,query,onSnapshot } from "firebase/firestore";
 
 const Logeo = (props) => {
-    const [registered, setIsRegistered] = useState(false);
+    const [registered, setIsRegistered] = useState(true);
 
     const getDataLogIn = (e)=>{
         e.preventDefault();

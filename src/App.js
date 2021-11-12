@@ -169,6 +169,9 @@ function App() {
                     <Route path="/updateTags">
                       <UTags />
                     </Route>
+                    <Route path="/updateSetlist/updateSet">
+                      <USets></USets>
+                    </Route>
                     <Route path="/addSetlist">
                       <AddSetlist />
                     </Route>

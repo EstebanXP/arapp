@@ -31,7 +31,7 @@ const AddSongs = () => {
       async function buscarCancion() {
         var proob=lista.find((cancion)=>cancion.title===datos.cancion&&cancion.artist===datos.artista)
         if(proob!=null){
-            alert("This song already exists!");
+            alert("Oooops... This song already exists!");
         }else{
             const response = await fetchAPI();
             if(response.status===200){
@@ -98,14 +98,14 @@ const AddSongs = () => {
             <div className="searchDiv">
                 <h1>Hola mundo desde add Songs</h1>
                 <form className="Formulario">
+                    Nombre de la cancion:
+                    <input type="text" className="nombreCancion" name="cancion" onChange={getData} required ></input>
+                    {datos.cancion}
                     <br />
                     Artista:
                     <input type="text" className="nombreArtista" name="artista" onChange={getData} required ></input>
                     {datos.artista}
                     <br />
-                    Nombre de la cancion:
-                    <input type="text" className="nombreCancion" name="cancion" onChange={getData} required ></input>
-                    {datos.cancion}
                 </form>
             
                 {

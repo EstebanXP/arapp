@@ -10,8 +10,10 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import ShowSongs from "./ShowSongs";
+import PopupSongs from "./PopupSongs";
 
 const USongs = () => {
+  const [editStatus, setEditStatus] = useState(false);
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("title");
   const [searchParam, setSearchParam] = useState("");
@@ -23,9 +25,25 @@ const USongs = () => {
     chords: "",
     tempo: "",
   });
+  const [datos, setDatos] = useState({
+    artista: "",
+    cancion: "",
+    chords: "",
+    tab: "",
+    tempo: "",
+    Tags: [],
+  });
 
   async function deleteSong(songId) {
     await deleteDoc(doc(db, "songs", songId));
+  }
+
+  function getData(e) {
+    e.preventDefault();
+    setDatos({
+      ...datos,
+      [e.target.name]: e.target.value,
+    });
   }
 
   function handleChange(e) {
@@ -34,6 +52,7 @@ const USongs = () => {
   }
 
   function editSong(song) {
+    setEditStatus(!editStatus);
     setCurrentSong({
       title: song.title,
       lyrics: song.lyrics,
@@ -43,17 +62,6 @@ const USongs = () => {
       tempo: song.tempo,
       tab: song.tab,
     });
-  }
-
-  function checkTags(arre,arre2){
-    console.log(arre2);
-    arre.filter((ele)=>{
-      if(ele.toLowerCase().includes(searchParam.toLowerCase())){
-        return true;
-      }
-      console.log(false);
-      return false;
-    })
   }
 
   async function saveOnSubmit(e) {
@@ -75,6 +83,7 @@ const USongs = () => {
   }
 
   useEffect(() => {
+    console.log(editStatus);
     const songsObject = query(collection(db, "songs"), orderBy(sortings)); //Guardar referencia de la coleccion
     const songsSnapshot = onSnapshot(songsObject, (querySnapshot) => {
       let data = [];
@@ -84,21 +93,89 @@ const USongs = () => {
       setLista(data); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
     });
     return () => songsSnapshot();
-  }, [sortings]);
+  }, [sortings, editStatus]);
 
   return (
     <div className="col-md-8">
+      <button onClick={() => setEditStatus(!editStatus)}>HOLA</button>
       <div className="SearchBar">
-        <input
-          type="text"
-          name="title"
-          placeholder="Search..."
-          onChange={(event) => {
-            setSearchParam(event.target.value);
-          }}
-        ></input>
+        {editStatus ? (
+          <div className="editDiv">
+            <form onSubmit={saveOnSubmit}>
+              <div>
+                Titulo:{" "}
+                <input name="title" defaultValue={currentSong.title}></input>{" "}
+                <br></br>
+                Artista:{" "}
+                <input
+                  name="artist"
+                  defaultValue={currentSong.artist}
+                ></input>{" "}
+                <br></br>
+                Cancion:{" "}
+                <textarea
+                  name="lyrics"
+                  defaultValue={currentSong.lyrics}
+                ></textarea>
+                <br></br>
+                Acordes:{" "}
+                <textarea
+                  name="chords"
+                  defaultValue={currentSong.chords}
+                ></textarea>
+                <br></br>
+                Tempo:{" "}
+                <input
+                  name="tempo"
+                  defaultValue={currentSong.tempo}
+                ></input>{" "}
+                <br></br>
+                Tab: <input
+                  name="tab"
+                  defaultValue={currentSong.tab}
+                ></input>{" "}
+                <br></br>
+                Guardar: <button type="submit">Guardar </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div className="searchDiv">
+            <input
+              type="text"
+              name="title"
+              placeholder="Search..."
+              onChange={(event) => {
+                setSearchParam(event.target.value);
+              }}
+            ></input>
+            <h1>Hola mundo desde add Songs</h1>
+            <form className="Formulario">
+              Nombre de la cancion:
+              <input
+                type="text"
+                className="nombreCancion"
+                name="cancion"
+                onChange={getData}
+                required
+              ></input>
+              {datos.cancion}
+              <br />
+              Artista:
+              <input
+                type="text"
+                className="nombreArtista"
+                name="artista"
+                onChange={getData}
+                required
+              ></input>
+              {datos.artista}
+              <br />
+            </form>
+          </div>
+        )}
       </div>
-
+      <h1>HOLA</h1>
       <form>
         <label>
           Pick your sorting parameter:
@@ -109,62 +186,37 @@ const USongs = () => {
         </label>
       </form>
 
-      <form onSubmit={saveOnSubmit}>
-        <div>
-          Titulo: <input name="title" defaultValue={currentSong.title}></input>{" "}
-          <br></br>
-          Artista:{" "}
-          <input name="artist" defaultValue={currentSong.artist}></input>{" "}
-          <br></br>
-          Cancion:{" "}
-          <textarea name="lyrics" defaultValue={currentSong.lyrics}></textarea>
-          <br></br>
-          Acordes:{" "}
-          <textarea name="chords" defaultValue={currentSong.chords}></textarea>
-          <br></br>
-          Tempo: <input
-            name="tempo"
-            defaultValue={currentSong.tempo}
-          ></input>{" "}
-          <br></br>
-          Tab: <input name="tab" defaultValue={currentSong.tab}></input>{" "}
-          <br></br>
-          Guardar: <button type="submit">Guardar </button>
-        </div>
-      </form>
-      {lista.filter((val) => {
+      {lista
+        .filter((val) => {
           if (searchParam === "") {
             return val;
           } else if (
             val.title.toLowerCase().includes(searchParam.toLowerCase())
           ) {
             return val;
-          } else if (val.artist.toLowerCase().includes(searchParam.toLowerCase())) {
+          } else if (
+            val.artist.toLowerCase().includes(searchParam.toLowerCase())
+          ) {
             return val;
-          }else if(val.Tags.includes(searchParam)){
+          } /*else if(val.Tags.includes(searchParam)){
             console.log(val);
             return val;
-          }
+          }*/
           /* else if(val.Tags.filter(ele=>)*/
         })
         .map((link) => (
           <div className="card mb-1">
+            {/*AQUI SE MANDA EL OBJETO PARA QUE SE RENDEREE INDIVIDUALMENTE */}
             <ShowSongs
+              song={link}
               title={link.title}
               artist={link.artist}
               lyrics={link.lyrics}
-            />
-            <button className="editar" onClick={() => editSong(link)}>
-              Editar
-            </button>
-            <button className="borrar" onClick={() => deleteSong(link.id)}>
-              Borrar
-            </button>
+              chords={link.chords}
+            ></ShowSongs>
+            
           </div>
-          
-        ))
-        
-        }
+        ))}
     </div>
   );
 };
