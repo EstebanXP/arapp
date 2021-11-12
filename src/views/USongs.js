@@ -5,6 +5,7 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
+  addDoc,
   updateDoc,
   orderBy,
 } from "firebase/firestore";
@@ -17,14 +18,8 @@ const USongs = () => {
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("title");
   const [searchParam, setSearchParam] = useState("");
-  const [currentSong, setCurrentSong] = useState({
-    artist: "",
-    lyrics: "",
-    title: "",
-    id: "",
-    chords: "",
-    tempo: "",
-  });
+  const [localLyrics, setlocalLyrics] = useState("");
+  const [status, setStatus] = useState(false);
   const [datos, setDatos] = useState({
     artista: "",
     cancion: "",
@@ -33,10 +28,6 @@ const USongs = () => {
     tempo: "",
     Tags: [],
   });
-
-  async function deleteSong(songId) {
-    await deleteDoc(doc(db, "songs", songId));
-  }
 
   function getData(e) {
     e.preventDefault();
@@ -51,36 +42,50 @@ const USongs = () => {
     setSortings(e.target.value);
   }
 
-  function editSong(song) {
-    setEditStatus(!editStatus);
-    setCurrentSong({
-      title: song.title,
-      lyrics: song.lyrics,
-      artist: song.artist,
-      id: song.id,
-      chords: song.chords,
-      tempo: song.tempo,
-      tab: song.tab,
-    });
+  async function addSongToDB(e) {
+    e.preventDefault();
+    alert("Song saved!");
+    await addDoc(collection(db, "songs"), {
+      artist: datos.artista,
+      chords: datos.chords,
+      title: datos.cancion,
+      lyrics: localLyrics,
+      tab: datos.tab,
+      tempo: datos.tempo,
+      Tags: [],
+    })
+      .then(() => {
+        console.log("Success");
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+      });
   }
 
-  async function saveOnSubmit(e) {
-    e.preventDefault();
-    const newtitle = e.target.title.value;
-    const newArtist = e.target.artist.value;
-    const newLyrics = e.target.lyrics.value;
-    const newChords = e.target.chords.value;
-    const newTempo = e.target.tempo.value;
-    const newTab = e.target.tab.value;
-    await updateDoc(doc(db, "songs", currentSong.id), {
-      title: newtitle,
-      artist: newArtist,
-      lyrics: newLyrics,
-      chords: newChords,
-      tempo: newTempo,
-      tab: newTab,
-    });
+  function fetchAPI() {
+    // param is a highlighted word from the user before it clicked the button
+    return fetch(`https://api.lyrics.ovh/v1/${datos.artista}/${datos.cancion}`);
   }
+
+  async function buscarCancion() {
+    var proob = lista.find(
+      (cancion) =>
+        cancion.title === datos.cancion && cancion.artist === datos.artista
+    );
+    if (proob != null) {
+      alert("Oooops... This song already exists!");
+    } else {
+      const response = await fetchAPI();
+      if (response.status === 200) {
+        setStatus(true);
+        const myJson = await response.json(); //extract JSON from the http response
+        setlocalLyrics(JSON.stringify(myJson));
+      } else {
+        setStatus(false);
+      }
+    }
+  }
+
 
   useEffect(() => {
     console.log(editStatus);
@@ -99,83 +104,89 @@ const USongs = () => {
     <div className="col-md-8">
       <button onClick={() => setEditStatus(!editStatus)}>HOLA</button>
       <div className="SearchBar">
-        {editStatus ? (
-          <div className="editDiv">
-            <form onSubmit={saveOnSubmit}>
-              <div>
-                Titulo:{" "}
-                <input name="title" defaultValue={currentSong.title}></input>{" "}
-                <br></br>
-                Artista:{" "}
-                <input
-                  name="artist"
-                  defaultValue={currentSong.artist}
-                ></input>{" "}
-                <br></br>
-                Cancion:{" "}
-                <textarea
-                  name="lyrics"
-                  defaultValue={currentSong.lyrics}
-                ></textarea>
-                <br></br>
-                Acordes:{" "}
-                <textarea
-                  name="chords"
-                  defaultValue={currentSong.chords}
-                ></textarea>
-                <br></br>
-                Tempo:{" "}
-                <input
-                  name="tempo"
-                  defaultValue={currentSong.tempo}
-                ></input>{" "}
-                <br></br>
-                Tab: <input
-                  name="tab"
-                  defaultValue={currentSong.tab}
-                ></input>{" "}
-                <br></br>
-                Guardar: <button type="submit">Guardar </button>
-              </div>
-            </form>
-          </div>
-        ) : (
-          <div className="searchDiv">
+        <div className="searchDiv">
+          <h1>Hola mundo desde el componente Songs</h1>
+          <form className="FormularioSearchSong">
+            Nombre de la cancion:
             <input
               type="text"
-              name="title"
-              placeholder="Search..."
-              onChange={(event) => {
-                setSearchParam(event.target.value);
-              }}
+              className="nombreCancion"
+              name="cancion"
+              onChange={getData}
+              required
             ></input>
-            <h1>Hola mundo desde add Songs</h1>
-            <form className="Formulario">
-              Nombre de la cancion:
-              <input
-                type="text"
-                className="nombreCancion"
-                name="cancion"
-                onChange={getData}
-                required
-              ></input>
-              {datos.cancion}
-              <br />
-              Artista:
-              <input
-                type="text"
-                className="nombreArtista"
-                name="artista"
-                onChange={getData}
-                required
-              ></input>
-              {datos.artista}
-              <br />
-            </form>
-          </div>
-        )}
+            {datos.cancion}
+            <br />
+            Artista:
+            <input
+              type="text"
+              className="nombreArtista"
+              name="artista"
+              onChange={getData}
+              required
+            ></input>
+            {datos.artista}
+            <br />
+          </form>
+          <button onClick={() => buscarCancion()}>Buscar</button>
+          {status === true ? (
+            <div className="foundSong">
+              <form onSubmit={addSongToDB}>
+                <h1>Song found</h1>
+                Lyrics: <textarea defaultValue={localLyrics}></textarea>
+                <br />
+                Chords:{" "}
+                <input
+                  type="text"
+                  className="songChords"
+                  name="chords"
+                  onChange={getData}
+                ></input>
+                <br />
+                Tempo:{" "}
+                <input
+                  type="text"
+                  className="songTempo"
+                  name="tempo"
+                  onChange={getData}
+                ></input>
+                <br />
+                Tab:{" "}
+                <textarea
+                  type="text"
+                  className="songTab"
+                  name="tab"
+                  onChange={getData}
+                ></textarea>
+                <br />
+                <h2>Do you want to save?</h2>
+                <button type="submit">Yes</button>
+                <button>No</button>
+              </form>
+            </div>
+          ) : (
+            <div>
+              <h1 className="songNotFound">
+                Song not found, you can write it down
+              </h1>
+              <input type="text"></input>
+              <h2>Do you want to save?</h2>
+              <button onClick={addSongToDB}>Yes</button>
+              <button>No</button>
+            </div>
+          )}
+        </div>
+        
       </div>
-      <h1>HOLA</h1>
+      <h1>Lista de Canciones</h1>
+      <input
+            type="text"
+            name="title"
+            placeholder="Search..."
+            onChange={(event) => {
+              setSearchParam(event.target.value);
+            }}
+          ></input>
       <form>
         <label>
           Pick your sorting parameter:
@@ -214,7 +225,6 @@ const USongs = () => {
               lyrics={link.lyrics}
               chords={link.chords}
             ></ShowSongs>
-            
           </div>
         ))}
     </div>

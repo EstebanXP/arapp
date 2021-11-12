@@ -131,17 +131,18 @@ function App() {
                     <li>
                       <Link to="/addSets">Add Set</Link>
                     </li>
-                    <li>
+                    {/*<li>
                       <Link to="/addSongs">Add Songs</Link>
                     </li>
                     <li>
                       <Link to="/addChords">Add Chords</Link>
                     </li>
+                    */}
                     <li>
                       <Link to="/updateSetlists">Update Setlist</Link>
                     </li>
                     <li>
-                      <Link to="/updateSongs">Update Songs</Link>
+                      <Link to="/updateSongs">Songs</Link>
                     </li>
                     <li>
                       <Link to="/updateTags">Update Tag</Link>
