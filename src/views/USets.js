@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-    collection,
-    query,
-    onSnapshot,
     doc,
     updateDoc,
 } from "firebase/firestore";
 import db from "../firebase";
 
-const USets = () => {
-    const [sets, setSets] = useState([]);
+const USets = (prop) => {
     const [currentSet, setCurrentSet] = useState({
-        id: "",
-        name: "",
-        songs: null
+        id: prop.id,
+        name: prop.name,
+        songs: prop.songs
     });
 
-    //get set to edit
-    function editSet(set) {
-        setCurrentSet({
-            id: set.id,
-            name: set.name,
-            songs: set.songs
-        });
-    }
+    console.log(prop.name);
 
     //save changes
     async function saveOnSubmit(e) {
@@ -37,24 +26,9 @@ const USets = () => {
         });
     }
 
-    //setsets
-    useEffect(() => {
-        const setObject = query(collection(db, "sets"));
-        const setsSnapshot = onSnapshot(setObject, (querySnapshot) => {
-        let data = [];
-        querySnapshot.forEach((doc) => {
-            data.push({ ...doc.data(), id: doc.id });
-        });
-      
-        setSets(data);
-        });
-        
-        return () => setsSnapshot();
-    }, []);
-  
     return (
         <div className="col-md-8">
-
+            <h3>Edit</h3>
             <form onSubmit={saveOnSubmit}>
                 <div>
                     Name: 
@@ -66,15 +40,6 @@ const USets = () => {
                     Save: <button type="submit">Save </button>
                 </div>
             </form>   
-
-            {sets.map((link) => (
-                <div className="card mb-1">
-                    <h3>name: {link.name}</h3>
-                    <button className="editar" onClick={() => editSet(link)}>
-                        Edit
-                    </button>
-                </div>
-            ))}
         </div>
     );
 };

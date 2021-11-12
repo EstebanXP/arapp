@@ -9,6 +9,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import db from "../firebase";
+import USets from './USets';
 
 
 const AddSets = () => {
@@ -67,13 +68,9 @@ const AddSets = () => {
     setSortings(e.target.value);
   }
 
-
-
-
-
-
   return (
     <div>
+      <h3>Add new set</h3>
       <h3>Name:</h3>
       <input
         onChange={(event) => {
@@ -90,7 +87,6 @@ const AddSets = () => {
 
       <hr/>
 
-      
       <form >
         <label>
           Order by:
@@ -100,7 +96,6 @@ const AddSets = () => {
           </select>
         </label>
       </form>
-
 
       <div className="SearchBar">
           <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
@@ -113,12 +108,12 @@ const AddSets = () => {
           return val;
         }
       }).map((set) => {
-        if(userID == set.createdBy){
+        //if(userID == set.createdBy){
           return (
             <div>
               <h3>Name: {set.name}</h3>
               <h3>List of songs: {set.songs}</h3>
-              <h3>(TEMPORAL)Created by: {set.createdBy}</h3>
+              {/*<h3>(TEMPORAL)Created by: {set.createdBy}</h3>*/}
               <button
                 onClick={() => {
                   deleteSet(set.id);
@@ -126,9 +121,13 @@ const AddSets = () => {
               >
                 Delete Set
               </button>
+
+              <button>Edit Set</button>
+
+              <USets id = {set.id} name = {set.name} songs = {set.songs}/>
             </div>
           );
-        }
+        //}
       })}
     </div>
   );
