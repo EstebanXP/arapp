@@ -8,11 +8,6 @@ import {
 import db from "../firebase";
 
 const PopupSets = (props) => {
-    const [currentSet, setCurrentSet] = useState({
-        id: props.thisSet.id,
-        name: props.thisSet.name,
-        songs: props.thisSet.songs
-    });
 
     //delete Set
     const deleteSet = async (setId) => {

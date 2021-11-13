@@ -9,7 +9,14 @@ const ShowSets = (props) => {
     <div className="container">
       <div className="card-body">
         <p>Name: {props.tset.name}</p>
-        <p>List of songs: {props.tset.songs}</p>
+        <p>List of songs:</p>
+        {props.tset.songs.map((song) => {
+          return (
+            <div>
+              <p>Songs: {song}</p>
+            </div>
+          );
+        })}
         <PopupSets
           trigger={popStatus}
           setPopStatus={setPopStatus}
