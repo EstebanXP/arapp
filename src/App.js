@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./views/Home";
 import AddBands from "./views/AddBands";
-import AddSetlist from "./views/AddSetlist";
+import ManageSetlists from "./views/ManageSetlists";
 import ManageSets from "./views/ManageSets";
 import AddSongs from "./views/AddSongs";
 import AddMembers from "./views/AddMembers";
@@ -128,6 +128,9 @@ function App() {
                     </li>
                     
                     <li>
+                      <Link to="/manageSetlists">Manage Setlist</Link>
+                    </li>
+                    <li>
                       <Link to="/manageSets">Manage Sets</Link>
                     </li>
                     {/*<li>
@@ -140,17 +143,15 @@ function App() {
                     <li>
                       <Link to="/manageSongs">Manage Songs</Link>
                     </li>
-                    <li>
+                    {/*<li>
                       <Link to="/updateSetlists">Update Setlist</Link>
                     </li>
+                    */}
                     <li>
                       <Link to="/updateTags">Update Tag</Link>
                     </li>
                     <li>
                       <Link to="/addTags">Add Tag</Link>
-                    </li>
-                    <li>
-                      <Link to="/addSetlist">Add Setlist</Link>
                     </li>
                     <li>
                       <Link to="/addLiveShows">Add Live Shows</Link>
@@ -166,12 +167,13 @@ function App() {
                     <Route path="/updateTags">
                       <UTags />
                     </Route>
-                    <Route path="/addSetlist">
-                      <AddSetlist />
+                    <Route path="/manageSetlists">
+                      <ManageSetlists />
                     </Route>
-                    <Route path="/updateSetlists">
+                    {/*<Route path="/updateSetlists">
                       <USetlists />
                     </Route>
+                    */}
                     <Route path="/addTags">
                       <AddTags />
                     </Route>
