@@ -41,7 +41,6 @@ const ManageSets = () => {
       let data1 = [];
       querySnapshot.forEach((doc) => {
         data1.push({ ...doc.data(), id: doc.id });
-        console.log(data1);
       });
       setList(data1); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
     });
@@ -99,13 +98,13 @@ const ManageSets = () => {
           return val;
         }
       }).map((set) => {
-        if(userID == set.createdBy){
+        //if(userID == set.createdBy){
           return (
             <div>
               <ShowSets tset={set}/>
             </div>
           );
-        }
+        //}
       })}
     </div>
   );
