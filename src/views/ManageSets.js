@@ -9,15 +9,12 @@ import {
 import db from "../firebase";
 import ShowSets from './ShowSets';
 
-const ManageSets = () => {
-
-  const userID = "1qIYWrBsFhbccNIXylFXfOKAIgm1" //temporal para pruebas
+const ManageSets = (props) => {
 
   const [newName, setNewName] = useState("");
   const [newListOfSongs, setNewListOfSOngs] = useState([]);
   const [searchParam,setSearchParam] = useState("");
   const [sortings, setSortings] = useState("name");
-  const [list, setList] = useState([]); //songs
   const [sets, setSets] = useState([]);
   const setsCollectionRef = collection(db, "sets");
 
@@ -34,22 +31,9 @@ const ManageSets = () => {
     return () => setsSnapshot();
   }, [sortings]);
 
-  //get songs?
-  useEffect(() => {
-    const songsObject = query(collection(db, "songs")); //Guardar referencia de la coleccion
-    const songsSnapshot = onSnapshot(songsObject, (querySnapshot) => {
-      let data1 = [];
-      querySnapshot.forEach((doc) => {
-        data1.push({ ...doc.data(), id: doc.id });
-      });
-      setList(data1); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
-    });
-    return () => songsSnapshot();
-  }, []);
-
   //create Sets
   const createSet = async () => {
-    await addDoc(setsCollectionRef, { name: newName, songs: newListOfSongs, createdBy: userID });
+    await addDoc(setsCollectionRef, { name: newName, songs: newListOfSongs, createdBy: props.userID });
   };
 
   //sort
@@ -90,7 +74,6 @@ const ManageSets = () => {
       <div className="SearchBar">
           <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
       </div>
-      
       {sets.filter((val) => {
         if(searchParam === "") {
           return val
@@ -98,13 +81,13 @@ const ManageSets = () => {
           return val;
         }
       }).map((set) => {
-        //if(userID == set.createdBy){
+        if(props.userID == set.createdBy){
           return (
             <div>
               <ShowSets tset={set}/>
             </div>
           );
-        //}
+        }
       })}
     </div>
   );

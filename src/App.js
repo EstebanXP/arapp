@@ -162,7 +162,7 @@ function App() {
                   </ul>
                   <Switch>
                     <Route path="/manageSets">
-                      <ManageSets />
+                      <ManageSets userID = {user.uid}/>
                     </Route>
                     <Route path="/updateTags">
                       <UTags />
