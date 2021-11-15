@@ -11,9 +11,8 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import ShowSongs from "./ShowSongs";
-import PopupSongs from "./PopupSongs";
 
-const ManageSongs = () => {
+const ManageSongs = (props) => {
   const [editStatus, setEditStatus] = useState(false);
   const [lista, setLista] = useState([]);
   const [sortings, setSortings] = useState("title");
@@ -85,7 +84,6 @@ const ManageSongs = () => {
       }
     }
   }
-
 
   useEffect(() => {
     console.log(editStatus);
@@ -176,17 +174,16 @@ const ManageSongs = () => {
             </div>
           )}
         </div>
-        
       </div>
       <h1>Lista de Canciones</h1>
       <input
-            type="text"
-            name="title"
-            placeholder="Search..."
-            onChange={(event) => {
-              setSearchParam(event.target.value);
-            }}
-          ></input>
+        type="text"
+        name="title"
+        placeholder="Search..."
+        onChange={(event) => {
+          setSearchParam(event.target.value);
+        }}
+      ></input>
       <form>
         <label>
           Pick your sorting parameter:
@@ -196,7 +193,6 @@ const ManageSongs = () => {
           </select>
         </label>
       </form>
-
       {lista
         .filter((val) => {
           if (searchParam === "") {
@@ -218,13 +214,15 @@ const ManageSongs = () => {
         .map((link) => (
           <div className="card mb-1">
             {/*AQUI SE MANDA EL OBJETO PARA QUE SE RENDEREE INDIVIDUALMENTE */}
-            <ShowSongs
-              song={link}
-              title={link.title}
-              artist={link.artist}
-              lyrics={link.lyrics}
-              chords={link.chords}
-            ></ShowSongs>
+            <div key={link.id}>
+              <ShowSongs
+                song={link}
+                title={link.title}
+                artist={link.artist}
+                lyrics={link.lyrics}
+                chords={link.chords}
+              ></ShowSongs>
+            </div>
           </div>
         ))}
     </div>

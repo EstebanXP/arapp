@@ -62,8 +62,8 @@ function PopupSongs(props) {
           <p>Nuevo tab: </p>
           <input name="tab" defaultValue={props.song.tab}></input>
           <br></br>
-          <button type="submit">guardar</button>
-          <button onClick={() => deleteSong(props.song.id)}>Borrar</button>
+          <button type="submit">Guardar cambios</button>
+          <button onClick={() => deleteSong(props.song.id)}>Borrar cancion</button>
         </form>
       </div>
     </div>
