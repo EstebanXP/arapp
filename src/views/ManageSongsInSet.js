@@ -71,9 +71,9 @@ const ManageSongs = (props) => {
                 <ShowSongs
                   song={link}
                   title={link.title}
-                  artist={link.artist}
-                  lyrics={link.lyrics}
-                  chords={link.chords}
+                  //artist={link.artist}
+                  //lyrics={link.lyrics}
+                 // chords={link.chords}
                 ></ShowSongs>
               </div>
             )
