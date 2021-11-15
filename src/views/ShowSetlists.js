@@ -8,7 +8,7 @@ const ShowSetlists = (props) => {
         <div className="container">
             <div className="card-body">
                 <p>Name: {props.tsetlist.name}</p>
-                <p>List of sets: {props.tsetlist.set}</p>
+                <p>List of sets: {props.tsetlist.sets}</p>
                 <p>Show: {props.tsetlist.show}</p>
                 <p>Band: {props.tsetlist.band}</p>
                 <p>Tag: {props.tsetlist.tag}</p>

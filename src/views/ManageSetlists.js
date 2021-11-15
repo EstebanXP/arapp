@@ -6,15 +6,11 @@ import {
     addDoc,
     query,
     onSnapshot, 
-    deleteDoc, 
-    doc,
     orderBy,
 } from 'firebase/firestore';
 import ShowSetlists from './ShowSetlists';
 
-const ManageSetlists = () => {
-
-    const userID = "B8O61nHoaISqndbCLTZhvUc3wt12 " //temporal pruebas
+const ManageSetlists = (props) => {
 
     const [newName, setNewName] = useState("");
     const [newSet, setNewSet] = useState([]);
@@ -57,7 +53,7 @@ const ManageSetlists = () => {
 
     //create Setlist
     const createSetlist = async () => {
-        await addDoc(setlistsCollectionRef, { name: newName, sets: newSet, show: newShow, band: newBand, tag: newTag, createdBy: userID  });
+        await addDoc(setlistsCollectionRef, { name: newName, sets: newSet, show: newShow, band: newBand, tag: newTag, createdBy: props.userID  });
     };
 
     //sort
@@ -120,7 +116,7 @@ const ManageSetlists = () => {
                     return val
                 } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
                     return val;
-                } else if(val.set.toLowerCase().includes(searchParam.toLowerCase())) {
+                } else if(val.sets.toLowerCase().includes(searchParam.toLowerCase())) {
                     return val;
                 } else if(val.show.toLowerCase().includes(searchParam.toLowerCase())) {
                     return val;
@@ -129,13 +125,13 @@ const ManageSetlists = () => {
                 } else if(val.tag.toLowerCase().includes(searchParam.toLowerCase())) {
                     return val;
                 }}).map((setlist) => {
-                    if(userID == setlist.createdBy) {
+                    //if(props.userID == setlist.createdBy) {
                         return (
                             <div>
                                 <ShowSetlists tsetlist={setlist}/>
                             </div>
                         );
-                    }
+                    //}
                 })
             }
         </div>

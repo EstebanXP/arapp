@@ -168,7 +168,7 @@ function App() {
                       <UTags />
                     </Route>
                     <Route path="/manageSetlists">
-                      <ManageSetlists />
+                      <ManageSetlists userID = {user.uid}/>
                     </Route>
                     {/*<Route path="/updateSetlists">
                       <USetlists />

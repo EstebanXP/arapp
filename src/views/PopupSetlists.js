@@ -20,14 +20,14 @@ const PopupSetlists = (props) => {
     async function saveOnSubmit(e) {
         e.preventDefault();
         const newName = e.target.name.value;
-        const newSet = e.target.set.value;
+        const newSets = e.target.sets.value;
         const newShow = e.target.show.value;
         const newBand = e.target.band.value;
         const newTag = e.target.tag.value;
 
         await updateDoc(doc(db, "setlists", props.thisSetlist.id), {
             name: newName,
-            set: newSet,
+            sets: newSets,
             show: newShow,
             band: newBand,
             tag: newTag
@@ -46,7 +46,7 @@ const PopupSetlists = (props) => {
                         <input name="name" defaultValue={props.thisSetlist.name}></input>{" "}
                         <br></br>
                         Sets:{" "}
-                        <input name="sets" defaultValue={props.thisSetlist.songs}></input>{" "}
+                        <input name="sets" defaultValue={props.thisSetlist.sets}></input>{" "}
                         <br></br>
                         Show:
                         <input name="show" defaultValue={props.thisSetlist.show}></input>
