@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import "../css/Popup.css";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import db from "../firebase";

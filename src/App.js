@@ -1,15 +1,15 @@
 import "./App.css";
 import Home from "./views/Home";
-import AddBands from "./views/AddBands";
+import ManageBands from "./views/ManageBands";
 import ManageSetlists from "./views/ManageSetlists";
 import ManageSets from "./views/ManageSets";
 import AddSongs from "./views/AddSongs";
-import AddMembers from "./views/AddMembers";
+import ManageMembers from "./views/ManageMembers";
 import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
 import ManageSongs from "./views/ManageSongs";
-import UMembers from "./views/UMembers";
-import UBands from "./views/UBands";
+//import UMembers from "./views/UMembers";
+//import UBands from "./views/UBands";
 import USetlists from "./views/USetlists";
 import UTags from "./views/UTags";
 import AddLiveShows from "./views/AddLiveShows";
@@ -74,17 +74,17 @@ function App() {
                     <Link to="/">Home</Link>
                   </li>
                   <li>
-                    <Link to="/addMembers">Add Members</Link>
+                    <Link to="/manageMembers">Manage Members</Link>
                   </li>
-                  <li>
+                  {/*<li>
                     <Link to="/uMembers">Update Members</Link>
-                  </li>
+                  </li>*/}
                   <li>
-                    <Link to="/addBands">Add Bands</Link>
+                    <Link to="/manageBands">Manage Bands</Link>
                   </li>
-                  <li>
+                  {/*<li>
                     <Link to="/updateBands">Update Bands</Link>
-                  </li>
+                  </li>*/}
                   <li>
                     <Link to="/addTags">Add Tag</Link>
                   </li>
@@ -93,14 +93,14 @@ function App() {
                   </li>
 
                   <Switch>
-                    <Route path="/addMembers">
-                      <AddMembers />
+                    <Route path="/manageMembers">
+                      <ManageMembers userID = {user.uid}/>
                     </Route>
-                    <Route path="/uMembers">
+                    {/*<Route path="/uMembers">
                       <UMembers />
-                    </Route>
-                    <Route path="/addBands">
-                      <AddBands />
+                    </Route>*/}
+                    <Route path="/manageBands">
+                      <ManageBands userID = {user.uid}/>
                     </Route>
                     <Route path="/addTags">
                       <AddTags />
@@ -108,9 +108,9 @@ function App() {
                     <Route path="/updateTags">
                       <UTags />
                     </Route>
-                    <Route path="/updateBands">
+                    {/*<Route path="/updateBands">
                       <UBands />
-                    </Route>
+                    </Route>*/}
                     <Route path="/">
                       <Home />
                     </Route>
