@@ -79,7 +79,10 @@ const ManageSets = (props) => {
       {
         setSongs.map((song)=>{
           return(
-            <p>{song}</p>
+            <p>{song}
+            <br></br>
+            </p>
+            
           );
         })
       }

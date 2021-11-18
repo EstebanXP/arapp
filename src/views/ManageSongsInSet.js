@@ -64,17 +64,18 @@ const ManageSongs = (props) => {
         ) {
           return val;
         } 
-      }).map((link) => {
+      }).map((link,index) => {
           if(props.tsongs.includes(link.id)){
             return(
               <div className="card mb-1">
                 <ShowSongs
                   song={link}
                   title={link.title}
-                  //artist={link.artist}
+                  artist={link.artist}
                   //lyrics={link.lyrics}
                  // chords={link.chords}
                 ></ShowSongs>
+                <button onClick={()=>console.log("Hola mundi" + link.id)}>HOLA</button>
               </div>
             )
           }

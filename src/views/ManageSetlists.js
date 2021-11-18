@@ -1,141 +1,294 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 
-import db from '../firebase';
+import db from "../firebase";
 import {
-    collection,
-    addDoc,
-    query,
-    onSnapshot, 
-    orderBy,
-} from 'firebase/firestore';
-import ShowSetlists from './ShowSetlists';
+  collection,
+  addDoc,
+  query,
+  onSnapshot,
+  orderBy,
+  updateDoc,
+} from "firebase/firestore";
+import ShowSetlists from "./ShowSetlists";
+import ShowSongs from "./ShowSongs";
 
 const ManageSetlists = (props) => {
+  const [newName, setNewName] = useState("");
+  const [newNameSet, setNewNameSet] = useState("");
+  const [newSet, setNewSet] = useState([]);
+  const [lista, setLista] = useState([]);
+  const [setsArray, setSetsArray] = useState({});
+  //const [newNameSet, setNewNameSet] = useState("");
+  const [newShow, setNewShow] = useState("");
+  const [newBand, setNewBand] = useState("");
+  const [newTag, setNewTag] = useState("");
+  const [searchParam, setSearchParam] = useState("");
+  const [songSearchParam, setSongSearchParam] = useState("");
+  const [sortings, setSortings] = useState("name");
+  const [setStatus, setSetStatus] = useState(false);
+  const [list, setList] = useState([]); //sets
+  const [setSongs, setSetSongs] = useState([]);
+  const [setlists, setSetlists] = useState([]);
+  const [aux, setAux] = useState([]);
+  const setlistsCollectionRef = collection(db, "setlists");
+  const setsObject = query(collection(db, "sets"));
 
-    const [newName, setNewName] = useState("");
-    const [newSet, setNewSet] = useState([]);
-    const [newShow, setNewShow] = useState("");
-    const [newBand, setNewBand] = useState("");
-    const [newTag, setNewTag] = useState("");
-    const [searchParam, setSearchParam] = useState("");
-    const [sortings, setSortings] = useState("name");
+  //get setlist
+  useEffect(() => {
+    const setlistsObject = query(collection(db, "setlists"), orderBy(sortings));
+    const setlistsSnapshot = onSnapshot(setlistsObject, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      setSetlists(data);
+    });
+    return () => setlistsSnapshot();
+  }, [sortings]);
 
-    const [list, setList] = useState([]); //sets
-    const [setlists, setSetlists] = useState([]);
-    const setlistsCollectionRef = collection(db, "setlists");
+  //get set
+  useEffect(() => {
+    //Guardar referencia de la coleccion
+    const setsSnapshot = onSnapshot(setsObject, (querySnapshot) => {
+      let data1 = [];
+      querySnapshot.forEach((doc) => {
+        data1.push({ ...doc.data(), id: doc.id });
+      });
+      setList(data1); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
+    });
+    return () => setsSnapshot();
+  }, []);
 
-    //get setlist
-    useEffect(() => {
-        const setlistsObject = query(collection(db,'setlists'), orderBy(sortings));
-        const setlistsSnapshot = onSnapshot(setlistsObject,(querySnapshot) => {
-            let data = [];
-            querySnapshot.forEach((doc)=> {
-                data.push({...doc.data(),id:doc.id});
-            });
-            setSetlists(data);
+  useEffect(() => {
+    const songsObject = query(collection(db, "songs")); //Guardar referencia de la coleccion
+    const songsSnapshot = onSnapshot(songsObject, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      setLista(data); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
+    });
+    return () => songsSnapshot();
+  }, []);
+
+  //create Setlist
+  const createSetlist = async () => {
+    await addDoc(setlistsCollectionRef, {
+      name: newName,
+      show: newShow,
+      band: newBand,
+      tag: newTag,
+      createdBy: props.userID,
+    })
+      .then((doc) => {
+        aux.map((obj) => {
+          console.log(obj.set);
+          addDoc(setsObject, {
+            name: obj.name,
+            songs: obj.set,
+            setListID: doc.id,
+            createdBy: props.userID,
+          });
         });
-        return ()=> setlistsSnapshot(); 
-    }, [sortings]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    //get set
-    useEffect(() => {
-        const setsObject = query(collection(db, "sets")); //Guardar referencia de la coleccion
-        const setsSnapshot = onSnapshot(setsObject, (querySnapshot) => {
-            let data1 = [];
-            querySnapshot.forEach((doc) => {
-                data1.push({ ...doc.data(), id: doc.id });
-                console.log(data1);
-            });
-            setList(data1); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
-        });
-        return () => setsSnapshot();
-    }, []);
+  //sort
+  function handleChange(e) {
+    e.preventDefault();
+    setSortings(e.target.value);
+  }
 
-    //create Setlist
-    const createSetlist = async () => {
-        await addDoc(setlistsCollectionRef, { name: newName, sets: newSet, show: newShow, band: newBand, tag: newTag, createdBy: props.userID  });
-    };
+  return (
+    <div>
+      <h3>Name:</h3>
+      <input
+        onChange={(event) => {
+          setNewName(event.target.value);
+        }}
+      />
+      <h3>Sets:</h3>
+      {console.log(aux)}
+      <button onClick={() => setSetStatus(!setStatus)}>Add Set</button>
+      {setStatus ? (
+        <div className="addSet">
+          <h3>Add new set</h3>
+          <h3>Name:</h3>
+          <input
+            onChange={(event) => {
+              setNewNameSet(event.target.value);
+            }}
+          />
+          <p>{newNameSet}</p>
+          <h3>Songs:</h3>
+          {setSongs.map((cancion) => {
+            return <p>{cancion + "  AAA"}</p>;
+          })}
+          <input
+            type="text"
+            name="title"
+            placeholder="Search..."
+            onChange={(event) => {
+              setSongSearchParam(event.target.value);
+            }}
+          ></input>
+          {lista
+            .filter((val) => {
+              if (songSearchParam === "") {
+                return null;
+              } else if (
+                val.title.toLowerCase().includes(songSearchParam.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val.artist.toLowerCase().includes(songSearchParam.toLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((cancion) => {
+              return (
+                <p>
+                  {cancion.title + " by " + cancion.artist}{" "}
+                  <button
+                    onClick={() => setSetSongs([...setSongs, cancion.id])}
+                  >
+                    Añadir
+                  </button>{" "}
+                </p>
+              );
+            })}
 
-    //sort
-    function handleChange(e) {
-        e.preventDefault();
-        setSortings(e.target.value);
-    }
-    
-    return (
-        <div>    
-            <h3>Name:</h3>
-            <input onChange={(event) => {
-                setNewName(event.target.value)
-            }}/>
-            <h3>Sets:</h3> 
-            <input onChange={(event) => {
-                setNewSet(event.target.value)
-            }}/>
-            <h3>Show:</h3>
-            <input onChange={(event) => {
-                setNewShow(event.target.value)
-            }}/>
-            <h3>Band:</h3>
-            <input onChange={(event) => {
-                setNewBand(event.target.value)
-            }}/>
-            <h3>Tag:</h3>
-            <input onChange={(event) => {
-                setNewTag(event.target.value)
-            }}/>
-            
-            <br></br>
-            <br></br>
-            
-            <button onClick = {createSetlist}>Create Setlist</button>
-            
-            <br></br>
-            <br></br>
-            <hr></hr>
-
-            <br></br>
-
-            <form >
-                <label>
-                    Order by:
-                    <select value={sortings} onChange={handleChange}>
-                        <option value="name">name</option>
-                    </select>
-                </label>
-            </form>
-            
-            <div className="SearchBar">
-                <input type="text" name="title" placeholder="Search..." onChange={(event)=>{setSearchParam(event.target.value);}}></input>
-            </div>
-
-            <br></br>
-
-            {setlists.filter((val) => {
-                if(searchParam === "") {
-                    return val
-                } else if(val.name.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                } else if(val.sets.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                } else if(val.show.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                } else if(val.band.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                } else if(val.tag.toLowerCase().includes(searchParam.toLowerCase())) {
-                    return val;
-                }}).map((setlist) => {
-                    //if(props.userID == setlist.createdBy) {
-                        return (
-                            <div>
-                                <ShowSetlists tsetlist={setlist}/>
-                            </div>
-                        );
-                    //}
-                })
-            }
+          <br></br>
+          <button
+            onClick={() => {
+              setAux([...aux, { name: newNameSet, set: setSongs }]);
+              console.log(aux);
+            }}
+          >
+            Añadir set al setlist
+          </button>
         </div>
-    );
+      ) : (
+        <div>
+          <h3>Show:</h3>
+          <input
+            onChange={(event) => {
+              setNewShow(event.target.value);
+            }}
+          />
+          <h3>Band:</h3>
+          <input
+            onChange={(event) => {
+              setNewBand(event.target.value);
+            }}
+          />
+          <h3>Tag:</h3>
+          <input
+            onChange={(event) => {
+              setNewTag(event.target.value);
+            }}
+          />
+
+          <br></br>
+          <br></br>
+
+          <button onClick={createSetlist}>Create Setlist</button>
+
+          <br></br>
+          <br></br>
+          <hr></hr>
+
+          <br></br>
+
+          <form>
+            <label>
+              Order by:
+              <select value={sortings} onChange={handleChange}>
+                <option value="name">name</option>
+              </select>
+            </label>
+          </form>
+
+          <div className="SearchBar">
+            <input
+              type="text"
+              name="title"
+              placeholder="Search..."
+              onChange={(event) => {
+                setSearchParam(event.target.value);
+              }}
+            ></input>
+          </div>
+
+          <br></br>
+
+          {setlists
+            .filter((val) => {
+              if (searchParam === "") {
+                return val;
+              } else if (
+                val.name.toLowerCase().includes(searchParam.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val.sets.toLowerCase().includes(searchParam.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val.show.toLowerCase().includes(searchParam.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val.band.toLowerCase().includes(searchParam.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val.tag.toLowerCase().includes(searchParam.toLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((setlist) => {
+              //if(props.userID == setlist.createdBy) {
+              return (
+                <div>
+                  <ShowSetlists tsetlist={setlist} />
+                </div>
+              );
+              //}
+            })}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ManageSetlists;
+
+/*
+
+const addSongToSet = (id) => {
+    setSetSongs([...setSongs, id]);
+  };
+
+  function addSetToSetlist(name, set) {
+    ///setSetsArray([name,set])
+    //var objetoAux=[];
+    //objetoAux.push({name:name,set:set});
+    //console.log("Sub array");
+    setAux([...aux,{name:newNameSet,set:set}])
+    //console.log(aux);
+    
+    setSetsArray([name,set])
+  }
+
+  function handleChangeOnSet(e) {
+    e.preventDefault();
+    setSongSearchParam(e.target.value);
+  }
+
+*/
