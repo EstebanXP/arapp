@@ -47,6 +47,7 @@ const PopupSetlists = (props) => {
                         <br></br>
                         Sets:{" "}
                         <input name="sets" defaultValue={props.thisSetlist.sets}></input>{" "}
+                        {console.log(props.thisSetlist)}
                         <br></br>
                         Show:
                         <input name="show" defaultValue={props.thisSetlist.show}></input>

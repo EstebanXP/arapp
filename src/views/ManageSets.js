@@ -82,7 +82,6 @@ const ManageSets = (props) => {
             <p>{song}
             <br></br>
             </p>
-            
           );
         })
       }

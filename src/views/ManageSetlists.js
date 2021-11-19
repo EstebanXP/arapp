@@ -8,17 +8,15 @@ import {
   onSnapshot,
   orderBy,
   updateDoc,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 import ShowSetlists from "./ShowSetlists";
-import ShowSongs from "./ShowSongs";
 
 const ManageSetlists = (props) => {
   const [newName, setNewName] = useState("");
   const [newNameSet, setNewNameSet] = useState("");
-  const [newSet, setNewSet] = useState([]);
   const [lista, setLista] = useState([]);
-  const [setsArray, setSetsArray] = useState({});
-  //const [newNameSet, setNewNameSet] = useState("");
   const [newShow, setNewShow] = useState("");
   const [newBand, setNewBand] = useState("");
   const [newTag, setNewTag] = useState("");
@@ -28,8 +26,10 @@ const ManageSetlists = (props) => {
   const [setStatus, setSetStatus] = useState(false);
   const [list, setList] = useState([]); //sets
   const [setSongs, setSetSongs] = useState([]);
+  const [setOfIds, setSetOfIds] = useState([]);
   const [setlists, setSetlists] = useState([]);
   const [aux, setAux] = useState([]);
+  const [idDocumento, setIdDocumento] = useState("");
   const setlistsCollectionRef = collection(db, "setlists");
   const setsObject = query(collection(db, "sets"));
 
@@ -44,7 +44,7 @@ const ManageSetlists = (props) => {
       setSetlists(data);
     });
     return () => setlistsSnapshot();
-  }, [sortings]);
+  }, [sortings, idDocumento, setOfIds]);
 
   //get set
   useEffect(() => {
@@ -71,25 +71,40 @@ const ManageSetlists = (props) => {
     return () => songsSnapshot();
   }, []);
 
+  function prueba(dato1, dato2) {
+    console.log(dato1);
+    console.log(dato2);
+  }
+
   //create Setlist
   const createSetlist = async () => {
     await addDoc(setlistsCollectionRef, {
       name: newName,
       show: newShow,
       band: newBand,
+      set: [],
       tag: newTag,
       createdBy: props.userID,
     })
-      .then((doc) => {
+      .then((docu) => {
+        //docu.id es el id del setlist
+        
+        setIdDocumento(docu.id);
         aux.map((obj) => {
-          console.log(obj.set);
+          //Aqui se añaden los sets a la colecion set
           addDoc(setsObject, {
             name: obj.name,
             songs: obj.set,
-            setListID: doc.id,
+            setListID: docu.id,
             createdBy: props.userID,
-          });
+          }).then(() => {});
         });
+
+        /*updateDoc(doc(db, "setlists", docu.id), {
+          set: arregloSets
+        }).then(() => {
+          console.log("ETNTRO");
+        });*/
       })
       .catch((error) => {
         console.log(error);
@@ -111,7 +126,6 @@ const ManageSetlists = (props) => {
         }}
       />
       <h3>Sets:</h3>
-      {console.log(aux)}
       <button onClick={() => setSetStatus(!setStatus)}>Add Set</button>
       {setStatus ? (
         <div className="addSet">
@@ -122,10 +136,9 @@ const ManageSetlists = (props) => {
               setNewNameSet(event.target.value);
             }}
           />
-          <p>{newNameSet}</p>
           <h3>Songs:</h3>
           {setSongs.map((cancion) => {
-            return <p>{cancion + "  AAA"}</p>;
+            return <p>{cancion}</p>;
           })}
           <input
             type="text"
@@ -166,7 +179,6 @@ const ManageSetlists = (props) => {
           <button
             onClick={() => {
               setAux([...aux, { name: newNameSet, set: setSongs }]);
-              console.log(aux);
             }}
           >
             Añadir set al setlist
@@ -235,10 +247,6 @@ const ManageSetlists = (props) => {
               ) {
                 return val;
               } else if (
-                val.sets.toLowerCase().includes(searchParam.toLowerCase())
-              ) {
-                return val;
-              } else if (
                 val.show.toLowerCase().includes(searchParam.toLowerCase())
               ) {
                 return val;
@@ -246,11 +254,7 @@ const ManageSetlists = (props) => {
                 val.band.toLowerCase().includes(searchParam.toLowerCase())
               ) {
                 return val;
-              } else if (
-                val.tag.toLowerCase().includes(searchParam.toLowerCase())
-              ) {
-                return val;
-              }
+              } 
             })
             .map((setlist) => {
               //if(props.userID == setlist.createdBy) {

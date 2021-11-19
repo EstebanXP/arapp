@@ -86,7 +86,6 @@ const ManageSongs = (props) => {
   }
 
   useEffect(() => {
-    console.log(editStatus);
     const songsObject = query(collection(db, "songs"), orderBy(sortings)); //Guardar referencia de la coleccion
     const songsSnapshot = onSnapshot(songsObject, (querySnapshot) => {
       let data = [];
