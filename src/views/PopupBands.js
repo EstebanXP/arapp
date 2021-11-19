@@ -16,12 +16,12 @@ const PopupBands = (props) => {
         const newName = e.target.bandName.value;
         const newLogo = e.target.bandLogo.value;
         const newDescription = e.target.bandDescription.value;
-        const newMusicGenre = e.target.bandGenres.value;
+        const newMusicGenre = e.target.bandGenre.value;
         await updateDoc(doc(db, "Bands", props.thisBand.id), {
             bandName: newName,
             bandLogo: newLogo,
             bandDescription : newDescription,
-            bandGenres: newMusicGenre
+            bandGenre: newMusicGenre
         });
         props.setPopStatus(false);
     }
@@ -43,7 +43,7 @@ const PopupBands = (props) => {
                         <input name="bandDescription" defaultValue={props.thisBand.bandDescription}></input>{" "}
                         <br></br>
                         Music Genre:{" "}
-                        <input name="bandGenres" defaultValue={props.thisBand.bandGenres}></input>{" "}
+                        <input name="bandGenre" defaultValue={props.thisBand.bandGenre}></input>{" "}
                         <br></br>
                         <button type="submit">Save </button>
                         <button

@@ -10,7 +10,7 @@ import AddTags from "./views/AddTags";
 import ManageSongs from "./views/ManageSongs";
 //import UMembers from "./views/UMembers";
 //import UBands from "./views/UBands";
-import USetlists from "./views/USetlists";
+//import USetlists from "./views/USetlists";
 import UTags from "./views/UTags";
 import AddLiveShows from "./views/AddLiveShows";
 import ULiveShows from "./views/ULiveShows";
@@ -100,7 +100,7 @@ function App() {
                       <UMembers />
                     </Route>*/}
                     <Route path="/manageBands">
-                      <ManageBands userID = {user.uid}/>
+                      <ManageBands userID = {user.uid} manager = {user.userName}/>
                     </Route>
                     <Route path="/addTags">
                       <AddTags />
