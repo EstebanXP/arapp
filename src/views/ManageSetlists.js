@@ -71,11 +71,6 @@ const ManageSetlists = (props) => {
     return () => songsSnapshot();
   }, []);
 
-  function prueba(dato1, dato2) {
-    console.log(dato1);
-    console.log(dato2);
-  }
-
   //create Setlist
   const createSetlist = async () => {
     await addDoc(setlistsCollectionRef, {
@@ -88,7 +83,7 @@ const ManageSetlists = (props) => {
     })
       .then((docu) => {
         //docu.id es el id del setlist
-        
+
         setIdDocumento(docu.id);
         aux.map((obj) => {
           //Aqui se añaden los sets a la colecion set
@@ -254,14 +249,14 @@ const ManageSetlists = (props) => {
                 val.band.toLowerCase().includes(searchParam.toLowerCase())
               ) {
                 return val;
-              } 
+              }
             })
             .map((setlist) => {
               //if(props.userID == setlist.createdBy) {
               return (
-                <div>
+                <li>
                   <ShowSetlists tsetlist={setlist} />
-                </div>
+                </li>
               );
               //}
             })}

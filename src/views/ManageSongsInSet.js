@@ -75,7 +75,6 @@ const ManageSongs = (props) => {
                   //lyrics={link.lyrics}
                  // chords={link.chords}
                 ></ShowSongs>
-                <button onClick={()=>console.log("Hola mundi" + link.id)}>HOLA</button>
               </div>
             )
           }

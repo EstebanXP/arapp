@@ -8,6 +8,7 @@ import ManageMembers from "./views/ManageMembers";
 import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
 import ManageSongs from "./views/ManageSongs";
+import Prueba1 from "./views/Prueba1";
 //import UMembers from "./views/UMembers";
 //import UBands from "./views/UBands";
 //import USetlists from "./views/USetlists";
@@ -143,10 +144,10 @@ function App() {
                     <li>
                       <Link to="/manageSongs">Manage Songs</Link>
                     </li>
-                    {/*<li>
-                      <Link to="/updateSetlists">Update Setlist</Link>
+                    <li>
+                      <Link to="/prueba1">Prueba</Link>
                     </li>
-                    */}
+                    
                     <li>
                       <Link to="/updateTags">Update Tag</Link>
                     </li>
@@ -170,10 +171,11 @@ function App() {
                     <Route path="/manageSetlists">
                       <ManageSetlists userID = {user.uid}/>
                     </Route>
-                    {/*<Route path="/updateSetlists">
-                      <USetlists />
+                    <Route path="/prueba1">
+                      
+                      <Prueba1></Prueba1>
                     </Route>
-                    */}
+                  
                     <Route path="/addTags">
                       <AddTags />
                     </Route>

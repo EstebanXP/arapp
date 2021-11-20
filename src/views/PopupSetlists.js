@@ -13,7 +13,7 @@ const PopupSetlists = (props) => {
     //delete Setlist
     const deleteSetlist = async (setlistId) => {
         await deleteDoc(doc(db, "setlists", setlistId));
-        props.setPopStatus(false);
+        //props.setPopStatus(false);
     };
 
     //save changes
@@ -32,7 +32,7 @@ const PopupSetlists = (props) => {
             band: newBand,
             tag: newTag
         });
-        props.setPopStatus(false);
+        //props.setPopStatus(false);
     }
 
     return props.trigger ? (
@@ -59,6 +59,7 @@ const PopupSetlists = (props) => {
                         <input name="tag" defaultValue={props.thisSetlist.tag}></input>
                         <br></br>
                         Save: <button type="submit">Save </button>
+                        <button>HOla</button>
                         <button onClick={() => {deleteSetlist(props.thisSetlist.id);}}>Delete Set</button>
                     </div>
                 </form>
