@@ -18,10 +18,9 @@ const ManageBandss = (props) => {
   const [bandUsers,setBandUsers]=useState([]);
   const [searchUserParam, setSearchUserParam] = useState("");
 
-  const [email, setMailMail] = useState([]);
-  const [user_name, setMailName] = useState([]);
-  const [band_manager, setMailManager] = useState([props.manager]);
-  const [band_name, setMailBand] = useState([]);
+  const [emailEmail,setEmailEmail] = useState([]);
+  const [emailUsername,setEmailUsername] = useState([]);
+  const [emailBandname, setEmailBandname] = useState("");
 
   const bandsCollectionRef = collection(db, "Bands");
 
@@ -58,9 +57,12 @@ const ManageBandss = (props) => {
     return () => usersSnapshot();
   }, []);
 
-  //setBandUsers
-  const addUserToBand=(id)=>{
-    setBandUsers([...bandUsers,id]);
+  //setBandUsers//////////////////////////////////////////////////////////////////////////
+  const addUserToBand=(u)=>{
+    setBandUsers([...bandUsers,u.id]);
+    setEmailEmail([...emailEmail,u.userEmail]);
+    setEmailUsername([...emailUsername,u.userName]);
+    console.log(emailEmail, emailUsername, emailBandname);
   }
 
   //create Sets
@@ -75,15 +77,23 @@ const ManageBandss = (props) => {
     });
   };
 
-  const sendEmail = (mail) => {
-    mail.preventDefault();
+  //sendEmail
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-    emailjs.sendForm('service_skhdk1l', 'template_496eyfr', mail.target, 'user_nkbBijSuQAVkBp5UYWcgJ')
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
+    //for(var i = 0;emailEmail.length;i++){
+      emailjs.send('service_skhdk1l', 'template_496eyfr', {
+        e_mail: emailEmail,
+        user_name: emailUsername,
+        band_manager: props.bandManager,
+        band_name: emailBandname,
+      }, 'user_nkbBijSuQAVkBp5UYWcgJ')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    //}
   };
 
   //sort
@@ -101,7 +111,7 @@ const ManageBandss = (props) => {
       <input
         onChange={(event) => {
           setNewName(event.target.value);
-          setMailBand(event.target.value);
+          setEmailBandname(event.target.value);
         }}
       />
       <h3>Band genre:</h3>
@@ -148,24 +158,25 @@ const ManageBandss = (props) => {
           } else if (
             val.userName.toLowerCase().includes(searchUserParam.toLowerCase())
           ) {
-            console.log(val)
+            //console.log(val)
             return val;
           } else if (
             val.userUsername.toLowerCase().includes(searchUserParam.toLowerCase())
           ) {
-            console.log(val)
+            //console.log(val)
             return val;
           }
         }
       }).map((user) => {
         return (
           <div>
-            <p>{user.userName + " " + user.userUsername} <button onClick={()=>addUserToBand(user.id)}>Añadir</button>  </p>
+            <p>{user.userName + " " + user.userUsername} <button onClick={()=>addUserToBand(user)}>Añadir</button>  </p>
           </div>
         );
       })}
       <br></br>
       <button onClick={createBand}>Create Band</button>
+      <button onClick={sendEmail}>Send mail</button>
 
       <hr />
 

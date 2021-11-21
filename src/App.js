@@ -25,6 +25,7 @@ import { doc, getDoc } from "firebase/firestore";
 function App() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
+  const [userName, setUserName] = useState();
 
   async function getData() {
     const docRef = doc(db, "Users", user.uid);
@@ -32,6 +33,7 @@ function App() {
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
       setData(docSnap.data().userRole);
+      setUserName(docSnap.data().userName);
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
@@ -101,7 +103,7 @@ function App() {
                       <UMembers />
                     </Route>*/}
                     <Route path="/manageBands">
-                      <ManageBands userID = {user.uid} manager = {user.userName}/>
+                      <ManageBands userID = {user.uid} bandManager = {userName}/>
                     </Route>
                     <Route path="/addTags">
                       <AddTags />
