@@ -13,7 +13,7 @@ const ShowSets = (props) => {
         <p>Name: {props.tset.name}</p>
         <button onClick={() => setPopStatus(true)}>Edit this set</button>
         <button onClick={() => setShowSongs(!showSongs) }>Show songs</button>
-        <button>HOla</button>
+        
 
         { showSongs ? 
           //<p>List of songs: {props.tset.songs}</p>

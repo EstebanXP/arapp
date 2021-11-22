@@ -99,7 +99,7 @@ const ManageSongs = (props) => {
 
   return (
     <div className="col-md-8">
-      <button onClick={() => setEditStatus(!editStatus)}>HOLA</button>
+     
       <div className="SearchBar">
         <div className="searchDiv">
           <h1>Hola mundo desde el componente Songs</h1>

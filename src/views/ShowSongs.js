@@ -35,7 +35,6 @@ const ShowSongs = (props) => {
           setPopStatus={setPopStatus}
           song={props.song}
         ></PopupSongs>
-        <button onClick={()=>console.log(props.song.id)}>Hola</button>
         <button onClick={() => setPopStatus(true)}>Editar</button>
       </div>
     </div>
