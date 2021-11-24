@@ -15,7 +15,7 @@ import {
   query,
   onSnapshot,
 } from "firebase/firestore";
-import { NativeBaseProvider, Box, Input, Button, Alert,Text } from "native-base";
+import { NativeBaseProvider, Box, Input, Button, Alert,Text, Heading, Center} from "native-base";
 
 const Logeo = (props) => {
   const [registered, setIsRegistered] = useState(true);
@@ -86,24 +86,22 @@ const Logeo = (props) => {
 
   return (
     <NativeBaseProvider>
-      <div>
-        <Text fontSize="5xl">{registered ? "Log in!" : "Sign Up!"}</Text>
+      <Center flex={1}>
+        <Box width="xs">
+        <Heading size="xl" mb="10" mt="48" textAlign="center">{registered ? "We missed you!" : "Hello there :)"}</Heading>
         {registered ? (
           <div className="loginForm">
             <form onSubmit={getDataLogIn}>
-              <Text fontSize="2xl">Mail:</Text>
+             
               <Input
               value={email}
                 type="email"
                 name="email"
                 id="email"
-                mx="3"
-                placeholder="example@example.com"
+                
+                placeholder="Email"
                 onChange={handleEmailChange}
-                w={{
-                  base: "75%",
-                  md: "25%",
-                }}
+                w={"100%"}
               />
               {/*<input
                 type="email"
@@ -112,15 +110,12 @@ const Logeo = (props) => {
               />*/}
               <br></br>
 
-              <Text fontSize="2xl">Password:</Text><Input
+              <Text fontSize="2xl"></Text><Input
               value={password}
               onChange={handlePasswordChange}
                 type="password"
                 id="password"
-                w={{
-                  base: "75%",
-                  md: "25%",
-                }}
+                w={"100%"}
                 placeholder="Password"
               />
                {/*<input type="password" id="password" />*/}
@@ -160,7 +155,8 @@ const Logeo = (props) => {
             <button onClick={() => setIsRegistered(!registered)}>Click</button>
           </div>
         )}
-      </div>
+        </Box>
+      </Center>
     </NativeBaseProvider>
   );
 };
