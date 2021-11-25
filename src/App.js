@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import Logeo from "./views/Logeo";
 import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
+import ManageTags from "./views/ManageTags";
 
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
@@ -106,7 +107,7 @@ function App() {
                       <ManageBands userID = {user.uid} bandManager = {userName}/>
                     </Route>
                     <Route path="/addTags">
-                      <AddTags />
+                      <ManageTags></ManageTags>
                     </Route>
                     <Route path="/updateTags">
                       <UTags />
@@ -154,7 +155,7 @@ function App() {
                       <Link to="/updateTags">Update Tag</Link>
                     </li>
                     <li>
-                      <Link to="/addTags">Add Tag</Link>
+                      <Link to="/ManageTags">Manage Tag</Link>
                     </li>
                     <li>
                       <Link to="/addLiveShows">Add Live Shows</Link>
@@ -178,8 +179,8 @@ function App() {
                       <Prueba1></Prueba1>
                     </Route>
                   
-                    <Route path="/addTags">
-                      <AddTags />
+                    <Route path="/ManageTags">
+                      <ManageTags></ManageTags>
                     </Route>
                     <Route path="/manageSongs">
                       <ManageSongs />

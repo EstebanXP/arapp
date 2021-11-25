@@ -152,6 +152,7 @@ const Logeo = (props) => {
               <br></br>
               <button>Sign up</button>
             </form>
+            <Text>Don't you have an account? Sign Up</Text>
             <button onClick={() => setIsRegistered(!registered)}>Click</button>
           </div>
         )}

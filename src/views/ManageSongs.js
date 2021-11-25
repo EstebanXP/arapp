@@ -11,13 +11,18 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import ShowSongs from "./ShowSongs";
+import ShowTags from "./ShowTags";
+const tagsCollectionRef = collection(db, "Tag");
 
 const ManageSongs = (props) => {
+  const [tags, setTags] = useState([]);
   const [editStatus, setEditStatus] = useState(false);
   const [lista, setLista] = useState([]);
+  const [tagsArray, setTagsArray] = useState([]);
   const [sortings, setSortings] = useState("title");
   const [searchParam, setSearchParam] = useState("");
   const [localLyrics, setlocalLyrics] = useState("");
+  const [tagSearchParam, setTagSearchParam] = useState("");
   const [status, setStatus] = useState(false);
   const [datos, setDatos] = useState({
     artista: "",
@@ -51,7 +56,7 @@ const ManageSongs = (props) => {
       lyrics: localLyrics,
       tab: datos.tab,
       tempo: datos.tempo,
-      Tags: [],
+      Tags: tagsArray,
     })
       .then(() => {
         console.log("Success");
@@ -85,6 +90,20 @@ const ManageSongs = (props) => {
     }
   }
 
+  
+  //get Tags
+  useEffect(() => {
+    const tagsObject = query(collection(db, "Tag"));
+    const tagsSnapshot = onSnapshot(tagsObject, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      setTags(data);
+    });
+    return () => tagsSnapshot();
+  }, []);
+
   useEffect(() => {
     const songsObject = query(collection(db, "songs"), orderBy(sortings)); //Guardar referencia de la coleccion
     const songsSnapshot = onSnapshot(songsObject, (querySnapshot) => {
@@ -99,7 +118,6 @@ const ManageSongs = (props) => {
 
   return (
     <div className="col-md-8">
-     
       <div className="SearchBar">
         <div className="searchDiv">
           <h1>Hola mundo desde el componente Songs</h1>
@@ -156,6 +174,33 @@ const ManageSongs = (props) => {
                   onChange={getData}
                 ></textarea>
                 <br />
+                Tags:
+                <input
+                  type="text"
+                  name="tag"
+                  placeholder="Search..."
+                  onChange={(event) => {
+                    setTagSearchParam(event.target.value);
+                  }}
+                ></input>
+                {tags
+                  .filter((val) => {
+                    if (tagSearchParam === "") {
+                      return null;
+                    } else if (val.tagName.toLowerCase().includes(tagSearchParam.toLowerCase())) {
+                      return val;
+                    }
+                  })
+                  .map((tag) => {
+                    return (
+                      <div>
+                        <ShowTags tag={tag}></ShowTags>
+                        <button type="button" onClick={() => setTagsArray([...tagsArray,tag.tagName])}>
+                          Añadir Tag
+                        </button>
+                      </div>
+                    );
+                  })}
                 <h2>Do you want to save?</h2>
                 <button type="submit">Yes</button>
                 <button>No</button>

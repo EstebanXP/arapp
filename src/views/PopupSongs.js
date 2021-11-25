@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Popup.css";
 import {
   collection,
@@ -7,14 +7,25 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
   orderBy,
 } from "firebase/firestore";
 import db from "../firebase";
 
 function PopupSongs(props) {
+  const [tags, setTags] = useState([]);
+
   async function deleteSong(songId) {
     await deleteDoc(doc(db, "songs", songId));
     props.setPopStatus(false);
+  }
+
+  async function deleteTag(tagName) {
+    console.log("Entro" + tagName+props.song.id);
+    await updateDoc(doc(db, "songs", props.song.id), {
+      Tags: arrayRemove(tagName),
+    });
   }
 
   async function saveOnSubmit(e) {
@@ -35,6 +46,21 @@ function PopupSongs(props) {
     });
     props.setPopStatus(false);
   }
+
+  //get Tags
+  useEffect(() => {
+    const tagsObject = query(collection(db, "Tag"));
+    const tagsSnapshot = onSnapshot(tagsObject, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      setTags(data);
+    });
+    return () => tagsSnapshot();
+  }, []);
+
+
 
   return props.trigger ? (
     <div className="popup">
@@ -62,8 +88,17 @@ function PopupSongs(props) {
           <p>Nuevo tab: </p>
           <input name="tab" defaultValue={props.song.tab}></input>
           <br></br>
+          <p>Tags</p>
+          
+          {
+            props.song.Tags.map((tag)=>{
+              return(<p>{tag} <button type="button" onClick={()=>deleteTag(tag)}>Borrar</button></p>)
+            })
+          }
           <button type="submit">Guardar cambios</button>
-          <button onClick={() => deleteSong(props.song.id)}>Borrar cancion</button>
+          <button onClick={() => deleteSong(props.song.id)}>
+            Borrar cancion
+          </button>
         </form>
       </div>
     </div>

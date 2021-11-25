@@ -8,9 +8,7 @@ const Home = (props) => {
 
     return (
         <div>
-            <h1>Hola mundo 1</h1>
-            <h1>Prueba de componenetes</h1>
-            <button>asdas</button>
+            <h1>Hello! we missed you</h1>
         </div>
     )
 }
