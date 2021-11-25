@@ -23,6 +23,7 @@ import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
 import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge} from "native-base"
 import {AiOutlineHome } from "react-icons/ai";
+import {FaUser} from "react-icons/fa"
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
   const [user, setUser] = useState(null);
@@ -83,7 +84,7 @@ function App() {
         
       {(() => {
         switch (data) {
-          case "Band Member":
+          case "Band Manager":
             return (
                 <Router>
                 <Box w="100%" py="4" borderBottomRadius="10"   borderColor="indigo.500" shadow={2} flex={1}>
@@ -92,14 +93,25 @@ function App() {
                     <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">On-Stage Setlist Manager </Heading>
                     <Box mx="auto"></Box>
                     <HStack >
-                    
                     <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10" >
+                      <Badge colorScheme="indigo" borderRadius="10"mx="1">
+                          <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
+                          Profile
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1">
                           <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
                           Home
                       </Badge>
                     </Link>
-                    <Text bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
+                    <Link style={linkStyle} to="/">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1">
+                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
+                          Home
+                      </Badge>
+                    </Link>
+                   
                     
                     </HStack>
                   </HStack>
@@ -114,7 +126,7 @@ function App() {
               </Center>
               </Router>
             );
-          case "Band Manager":
+          case "Band Member":
             return (
               <div>
                 <Router>
