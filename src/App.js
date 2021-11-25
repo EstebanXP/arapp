@@ -24,6 +24,8 @@ import ManageTags from "./views/ManageTags";
 import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge} from "native-base"
 import {AiOutlineHome } from "react-icons/ai";
 import {FaUser} from "react-icons/fa"
+import {MdNotifications} from 'react-icons/md'
+
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
   const [user, setUser] = useState(null);
@@ -94,21 +96,21 @@ function App() {
                     <Box mx="auto"></Box>
                     <HStack >
                     <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10"mx="1">
+                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
                           <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
                           Profile
                       </Badge>
                     </Link>
                     <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10" mx="1">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
                           <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
                           Home
                       </Badge>
                     </Link>
                     <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10" mx="1">
-                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
-                          Home
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
+                          <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications>
+                          Notifications
                       </Badge>
                     </Link>
                    
