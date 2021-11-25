@@ -32,7 +32,7 @@ function App() {
   const linkStyle = {
     margin: "0",
     textDecoration: "none",
-    color: 'White',
+    color: 'black',
     marginHorizontal : "1"
   };
 
@@ -85,10 +85,10 @@ function App() {
           case "Band Member":
             return (
                 <Router>
-                <Box w="100%" py="4"  bg="indigo.600" flex={1}>
+                <Box w="100%" py="4"  borderBottomWidth="1" borderColor="indigo.200"flex={1}>
                   <Center>
                   <HStack maxW="1000" w="90%" >
-                    <Heading color="" size="md">On-Stage Setlist Manager </Heading>
+                    <Heading color="black" size="md">On-Stage Setlist Manager </Heading>
                     <HStack position="absolute" right="0" bottom="0">
                     
                     <Link style={linkStyle} to="/">
