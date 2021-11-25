@@ -21,13 +21,14 @@ import Logeo from "./views/Logeo";
 import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
-import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex} from "native-base"
-import { MdAndroid } from "react-icons/md";
+import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge} from "native-base"
+import {AiOutlineHome } from "react-icons/ai";
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
   const [userName, setUserName] = useState();
+  const [navState, setNavState] = useState(1);
 
   const linkStyle = {
     margin: "0",
@@ -85,18 +86,19 @@ function App() {
           case "Band Member":
             return (
                 <Router>
-                <Box w="100%" py="4"  borderBottomWidth="1" borderColor="indigo.200"flex={1}>
+                <Box w="100%" py="4" borderBottomRadius="10"   borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
                   <HStack maxW="1000" w="90%" >
-                    <Heading color="black" size="md">On-Stage Setlist Manager </Heading>
-                    <HStack position="absolute" right="0" bottom="0">
+                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">On-Stage Setlist Manager </Heading>
+                    <Box mx="auto"></Box>
+                    <HStack >
                     
                     <Link style={linkStyle} to="/">
-                      <MdAndroid></MdAndroid>
-                        
-                      
-                      
-                  </Link>
+                      <Badge colorScheme="indigo" borderRadius="10" >
+                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
+                          Home
+                      </Badge>
+                    </Link>
                     <Text bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
                     
                     </HStack>
