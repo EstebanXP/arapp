@@ -17,6 +17,7 @@ import {
 } from "firebase/firestore";
 import { NativeBaseProvider, Box, Input, Button, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
 
+
 const Logeo = (props) => {
   const [registered, setIsRegistered] = useState(true);
   const [email, setEmail] = useState("");
@@ -102,6 +103,14 @@ const Logeo = (props) => {
                 placeholder="Email"
                 onChange={handleEmailChange}
                 w={"100%"}
+                isRequired
+                
+                _hover = {{
+                  borderColor: '#4f46e5' 
+                }}
+                _invalid={{borderColor: '#4f46e5' }}
+                _focus ={{borderColor: '#4f46e5' }}
+                _disabled ={{borderColor: '#4f46e5' }}
               />
               {/*<input
                 type="email"
@@ -117,10 +126,14 @@ const Logeo = (props) => {
                 id="password"
                 w={"100%"}
                 placeholder="Password"
+                isRequired
+                _hover = {{
+                  borderColor: '#4f46e5' 
+                }}
               />
                {/*<input type="password" id="password" />*/}
                
-              <Button mt="6" mb="-10" textAlign="center" bg ="indigo.600" _pressed={{ bg: '#DDD' }} _hover={{ bg: 'indigo.800' }} colorScheme="indigo" type="submit" onPress={()=> {this.submit()}}>
+              <Button mt="6" mb="-10" textAlign="center" bg ="indigo.600" _pressed={{ bg: '#DDD' }} _hover={{ bg: 'indigo.800' }} colorScheme="indigo" type="submit">
                 Sign in
                 
               </Button>
@@ -134,16 +147,11 @@ const Logeo = (props) => {
           <div className="signupForm">
             <form onSubmit={getDataSignUp}>
               
-              <Input
-                w={"100%"}
-                type="email"
-                id="email"
-                placeholder="Email"
-              />
+              <Input w={"100%"} type="email" id="email" placeholder="Email" isRequired _hover = {{borderColor: '#4f46e5'}} _invalid=  {{borderColor: '#4f46e5' }}/>
               
-             <Input w={"100%"} type="text" id="name" placeholder="Name" /><Text fontSize="2xl"></Text>
-              <Input w={"100%"} type="text" id="username" placeholder="Username" /><Text fontSize="2xl"></Text>
-              <Input w={"100%"} type="password" id="password" placeholder="Password" /><Text fontSize="2xl"></Text>
+             <Input isRequired w={"100%"}  type="text" id="name" placeholder="Name" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
+              <Input isRequired w={"100%"} type="text" id="username" placeholder="Username" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
+              <Input isRequired w={"100%"} type="password" id="password" placeholder="Password" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }}/><Text fontSize="2xl"></Text>
               <FormControl>
                 
               <Select id="role"
@@ -162,12 +170,12 @@ const Logeo = (props) => {
                 </FormControl.ErrorMessage>
             </FormControl>
               <br></br>
-              <Button type="submit">Sign up</Button>
+              <Button type="submit" mt="2" mb="-10" textAlign="center" bg ="indigo.600" _pressed={{ bg: '#DDD' }} _hover={{ bg: 'indigo.800' }} colorScheme="indigo">Sign up</Button>
+              <button type="submit" style={{opacity : "0",  width : "100%", height : "40px", left:"0" }}>Sign in</button>
             </form>
             <Center>
               <Link><Text  mt="5"   italic color="indigo.600" onClick={() => setIsRegistered(!registered)}>Already have an account? Sign In</Text></Link>
             </Center>
-            <Button onPress={() => setIsRegistered(!registered)}>Click</Button>
           </div>
         )}
         </Box>
