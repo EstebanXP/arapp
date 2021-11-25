@@ -22,6 +22,7 @@ import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
 import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex} from "native-base"
+import { MdAndroid } from "react-icons/md";
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
   const [user, setUser] = useState(null);
@@ -31,7 +32,8 @@ function App() {
   const linkStyle = {
     margin: "0",
     textDecoration: "none",
-    color: 'Black'
+    color: 'White',
+    marginHorizontal : "1"
   };
 
   async function getData() {
@@ -85,11 +87,17 @@ function App() {
                 <Router>
                 <Box w="100%" py="4"  bg="indigo.600" flex={1}>
                   <Center>
-                  <HStack maxW="1000" w="90%" bg="white" >
-                    <Heading color="" size="md"  >On-Stage Setlist Manager </Heading>
+                  <HStack maxW="1000" w="90%" >
+                    <Heading color="" size="md">On-Stage Setlist Manager </Heading>
                     <HStack position="absolute" right="0" bottom="0">
-                    <Text Bold><Link style={linkStyle} to="/">Home</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
+                    
+                    <Link style={linkStyle} to="/">
+                      <MdAndroid></MdAndroid>
+                        
+                      
+                      
+                  </Link>
+                    <Text bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
                     
                     </HStack>
                   </HStack>
