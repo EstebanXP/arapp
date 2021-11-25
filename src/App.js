@@ -4,7 +4,7 @@ import ManageBands from "./views/ManageBands";
 import ManageSetlists from "./views/ManageSetlists";
 import ManageSets from "./views/ManageSets";
 import AddSongs from "./views/AddSongs";
-import ManageMembers from "./views/ManageMembers";
+//import ManageMembers from "./views/ManageMembers";
 import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
 import ManageSongs from "./views/ManageSongs";
@@ -77,9 +77,9 @@ function App() {
                   <li>
                     <Link to="/">Home</Link>
                   </li>
-                  <li>
+                  {/*<li>
                     <Link to="/manageMembers">Manage Members</Link>
-                  </li>
+                  </li>*/}
                   {/*<li>
                     <Link to="/uMembers">Update Members</Link>
                   </li>*/}
@@ -97,9 +97,9 @@ function App() {
                   </li>
 
                   <Switch>
-                    <Route path="/manageMembers">
+                    {/*<Route path="/manageMembers">
                       <ManageMembers userID = {user.uid}/>
-                    </Route>
+                    </Route>*/}
                     {/*<Route path="/uMembers">
                       <UMembers />
                     </Route>*/}

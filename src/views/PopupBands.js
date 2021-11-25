@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Popup.css";
-import { deleteDoc, doc, updateDoc,} from "firebase/firestore";
+import {
+    collection,
+    query,
+    onSnapshot,
+    deleteDoc,
+    doc,
+    updateDoc,
+    arrayUnion,
+    arrayRemove,
+} from "firebase/firestore";
 import db from "../firebase";
 
 const PopupBands = (props) => {
+    const [lista, setLista] = useState([]);
+
+    useEffect(() => {
+        const usersObject = query(collection(db, "Users")); //Guardar referencia de la coleccion
+        const usersSnapshot = onSnapshot(usersObject, (querySnapshot) => {
+        let data = [];
+        querySnapshot.forEach((doc) => {
+            data.push({ ...doc.data(), id: doc.id });
+        });
+        setLista(data); //Se guardan todos los datos en el arreglo lista para poder usarlos aqui
+        });
+        return () => usersSnapshot();
+    }, []);
+
+    const deleteUserOnBand = async (userID) => {
+        await updateDoc(doc(db, "Bands", props.thisBand.id), {
+            bandMembers: arrayRemove(userID),
+        });
+    };
+    const addUserOnBand = async (userID) => {
+        await updateDoc(doc(db, "Bands", props.thisBand.id), {
+            bandMembers: arrayUnion(userID),
+        });
+    };
+
     //deleteBand
     const deleteBand = async (bandId) => {
         await deleteDoc(doc(db, "Bands", bandId));
@@ -45,7 +79,38 @@ const PopupBands = (props) => {
                         Music Genre:{" "}
                         <input name="bandGenre" defaultValue={props.thisBand.bandGenres}></input>{" "}
                         <br></br>
-                        <button type="submit">Save </button>
+                        Members:
+                        {lista.map((user) => {
+                        if (props.thisBand.bandMembers.includes(user.id)) {
+                            return (
+                            <div>
+                                <p>Name: {user.userName}, Username: {user.userUsername}</p>
+                                <button onClick={() => deleteUserOnBand(user.id)}>
+                                remove user
+                                </button>
+                            </div>
+                            );
+                        }
+                        })}
+                        {/**Division/ */}
+                        <hr></hr>
+                        {lista
+                        .map((user) => {
+                            if(user.userRole == "Band Member"){
+                                return (
+                                <div>
+                                    <p>
+                                    {"Name: " + user.userName + ", Username: " + user.userUsername}{" "}
+                                    <button onClick={() => addUserOnBand(user.id)}>
+                                        Añadir
+                                    </button>{" "}
+                                    </p>
+                                </div>
+                                );
+                            }
+                        })}
+                        <br></br>
+                        <button type="submit">Save set</button>
                         <button
                         onClick={() => {
                             deleteBand(props.thisBand.id);
