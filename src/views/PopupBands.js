@@ -43,7 +43,7 @@ const PopupBands = (props) => {
                         <input name="bandDescription" defaultValue={props.thisBand.bandDescription}></input>{" "}
                         <br></br>
                         Music Genre:{" "}
-                        <input name="bandGenre" defaultValue={props.thisBand.bandGenre}></input>{" "}
+                        <input name="bandGenre" defaultValue={props.thisBand.bandGenres}></input>{" "}
                         <br></br>
                         <button type="submit">Save </button>
                         <button

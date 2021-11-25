@@ -11,7 +11,7 @@ const ShowBands = (props) => {
         <p>Name: {props.tband.bandName}</p>
         <p>Logo: {props.tband.bandLogo}</p>
         <p>Description: {props.tband.bandDescription}</p>
-        <p>Music Genre: {props.tband.bandGenre}</p>
+        <p>Music Genre: {props.tband.bandGenres}</p>
         <p>Band members: </p>
         <ManageMemInBands tsongs = {props.tband.bandMembers}/>
 
