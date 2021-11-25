@@ -69,7 +69,7 @@ const ManageBandss = (props) => {
   const createBand = async () => {
     await addDoc(bandsCollectionRef, {
       bandName: newName,
-      bandGenre: newGenre,
+      bandGenres: newGenre,
       bandDescription: newDescription,
       bandMembers: bandUsers,
       bandLogo: "sin logo",
