@@ -130,6 +130,8 @@ const Logeo = (props) => {
                 _hover = {{
                   borderColor: '#4f46e5' 
                 }}
+                _invalid={{borderColor: '#4f46e5' }}
+                _focus ={{borderColor: '#4f46e5' }}
               />
                {/*<input type="password" id="password" />*/}
                
@@ -147,11 +149,10 @@ const Logeo = (props) => {
           <div className="signupForm">
             <form onSubmit={getDataSignUp}>
               
-              <Input w={"100%"} type="email" id="email" placeholder="Email" isRequired _hover = {{borderColor: '#4f46e5'}} _invalid=  {{borderColor: '#4f46e5' }}/>
-              
-             <Input isRequired w={"100%"}  type="text" id="name" placeholder="Name" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
-              <Input isRequired w={"100%"} type="text" id="username" placeholder="Username" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
-              <Input isRequired w={"100%"} type="password" id="password" placeholder="Password" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }}/><Text fontSize="2xl"></Text>
+              <Input w={"100%"} type="email" id="email" placeholder="Email" isRequired _hover = {{borderColor: '#4f46e5'}} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} />    
+              <Input isRequired w={"100%"}  type="text" id="name" placeholder="Name" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
+              <Input isRequired w={"100%"} type="text" id="username" placeholder="Username" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
+              <Input isRequired w={"100%"} type="password" id="password" placeholder="Password" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }}/><Text fontSize="2xl"></Text>
               <FormControl>
                 
               <Select id="role"
