@@ -21,12 +21,18 @@ import Logeo from "./views/Logeo";
 import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
-
+import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex} from "native-base"
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
   const [userName, setUserName] = useState();
+
+  const linkStyle = {
+    margin: "0",
+    textDecoration: "none",
+    color: 'Black'
+  };
 
   async function getData() {
     const docRef = doc(db, "Users", user.uid);
@@ -49,76 +55,98 @@ function App() {
     }
   }, [user]);
 
+ 
+
   if (user === null) {
     return (
-      <div>
-        <Logeo setUser={setUser}></Logeo>
-      </div>
+      <NativeBaseProvider>
+        <div className="fondoLogin">
+        
+        <Center direction="row" flex={1} p="6">
+       
+          <Logeo setUser={setUser}></Logeo>
+        </Center>
+        
+        </div>
+        
+        
+      </NativeBaseProvider>
+      
     );
   }
 
   return (
-    <div>
+    <NativeBaseProvider>
+        
       {(() => {
         switch (data) {
           case "Band Member":
             return (
-              <div className="bandMemberWrapper">
-                <h1>Hola mundo</h1>
                 <Router>
-                  <Switch></Switch>
-                </Router>
-              </div>
+                <Box w="100%" py="4"  bg="indigo.600" flex={1}>
+                  <Center>
+                  <HStack maxW="1000" w="90%" bg="white" >
+                    <Heading color="" size="md"  >On-Stage Setlist Manager </Heading>
+                    <HStack position="absolute" right="0" bottom="0">
+                    <Text Bold><Link style={linkStyle} to="/">Home</Link></Text>
+                    <Text Bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
+                    
+                    </HStack>
+                  </HStack>
+                  </Center>
+                </Box>
+                <Center>
+                <Box maxW="1000" w="90%">
+                  <h1>Hola mundo</h1>
+                  
+                    <Switch></Switch>
+              </Box>
+              </Center>
+              </Router>
             );
           case "Band Manager":
             return (
-              <div className="bandManagerWrapper">
+              <div>
                 <Router>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  {/*<li>
-                    <Link to="/manageMembers">Manage Members</Link>
-                  </li>*/}
-                  {/*<li>
-                    <Link to="/uMembers">Update Members</Link>
-                  </li>*/}
-                  <li>
-                    <Link to="/manageBands">Manage Bands</Link>
-                  </li>
-                  {/*<li>
-                    <Link to="/updateBands">Update Bands</Link>
-                  </li>*/}
-                  <li>
-                    <Link to="/addTags">Add Tag</Link>
-                  </li>
-                  <li>
-                    <Link to="/updateTags">Update Tag</Link>
-                  </li>
-
-                  <Switch>
-                    {/*<Route path="/manageMembers">
-                      <ManageMembers userID = {user.uid}/>
-                    </Route>*/}
-                    {/*<Route path="/uMembers">
-                      <UMembers />
-                    </Route>*/}
-                    <Route path="/manageBands">
-                      <ManageBands userID = {user.uid} bandManager = {userName}/>
-                    </Route>
-                    <Route path="/addTags">
-                      <ManageTags></ManageTags>
-                    </Route>
-                    <Route path="/updateTags">
-                      <UTags />
-                    </Route>
-                    {/*<Route path="/updateBands">
-                      <UBands />
-                    </Route>*/}
-                    <Route path="/">
-                      <Home />
-                    </Route>
-                  </Switch>
+                <Box w="100%" py="4"  bg="indigo.600" flex={1}>
+                  <Center>
+                  <HStack maxW="1000" w="90%" bg="white" >
+                    <Heading color="" size="md"  >On-Stage Setlist Manager </Heading>
+                    <HStack position="absolute" right="0" bottom="0">
+                    <Text Bold><Link style={linkStyle} to="/">Home</Link></Text>
+                    <Text Bold><Link style={linkStyle} to="/manageBands">Manage Bands</Link></Text>
+                    <Text Bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
+                    <Text Bold><Link style={linkStyle} to="/updateTags">Update Tag</Link></Text>
+                    </HStack>
+                  </HStack>
+                  </Center>
+                </Box>
+                <Center>
+                <Box maxW="1000" w="90%">
+                    <Switch>
+                      
+                      {/*<Route path="/uMembers">
+                        <UMembers />
+                      </Route>*/}
+                      <Route path="/manageBands">
+                        <ManageBands userID = {user.uid} bandManager = {userName}/>
+                      </Route>
+                      <Route path="/addTags">
+                        <ManageTags></ManageTags>
+                      </Route>
+                      <Route path="/updateTags">
+                        <UTags />
+                      </Route>
+                      {/*<Route path="/updateBands">
+                        <UBands />
+                      </Route>*/}
+                      <Route path="/">
+                        <Home />
+                      </Route>
+                    </Switch>
+                  
+                </Box>
+                </Center>
                 </Router>
               </div>
             );
@@ -211,7 +239,7 @@ function App() {
             return null;
         }
       })()}
-    </div>
+    </NativeBaseProvider>
   );
 }
 

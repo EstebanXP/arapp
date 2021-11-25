@@ -15,7 +15,7 @@ import {
   query,
   onSnapshot,
 } from "firebase/firestore";
-import { NativeBaseProvider, Box, Input, Button, Alert,Text, Heading, Center} from "native-base";
+import { NativeBaseProvider, Box, Input, Button, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
 
 const Logeo = (props) => {
   const [registered, setIsRegistered] = useState(true);
@@ -86,11 +86,11 @@ const Logeo = (props) => {
 
   return (
     <NativeBaseProvider>
-      <Center flex={1}>
-        <Box width="xs">
-        <Heading size="xl" mb="10" mt="48" textAlign="center">{registered ? "We missed you!" : "Hello there :)"}</Heading>
+      
+        <Box width="xs" bg="white" opacity=".9" p="10" borderRadius="20" shadow="4" >
+        <Heading size="lg" mb="10" textAlign="center">{registered ? "We missed you!" : "Hello there :)"}</Heading>
         {registered ? (
-          <div className="loginForm">
+          <div className="loginForm" >
             <form onSubmit={getDataLogIn}>
              
               <Input
@@ -119,45 +119,60 @@ const Logeo = (props) => {
                 placeholder="Password"
               />
                {/*<input type="password" id="password" />*/}
-              <br></br>
-              <button type="submit">Sign in</button>
+               
+              <Button mt="6" mb="-10" textAlign="center" bg ="indigo.600" _pressed={{ bg: '#DDD' }} _hover={{ bg: 'indigo.800' }} colorScheme="indigo" type="submit" onPress={()=> {this.submit()}}>
+                Sign in
+                
+              </Button>
+              <button type="submit" style={{opacity : "0",  width : "100%", height : "40px", left:"0" }}>Sign in</button>
             </form>
-            <button onClick={() => setIsRegistered(!registered)}>Click</button>
+            <Center>
+              <Link><Text  mt="5"   italic color="indigo.600" onClick={() => setIsRegistered(!registered)}>Don’t have an account? Sign Up</Text></Link>
+            </Center>
           </div>
         ) : (
           <div className="signupForm">
             <form onSubmit={getDataSignUp}>
-              Mail:{" "}
-              <input
+              
+              <Input
+                w={"100%"}
                 type="email"
                 id="email"
-                placeholder="example@example.com"
+                placeholder="Email"
               />
+              
+             <Input w={"100%"} type="text" id="name" placeholder="Name" /><Text fontSize="2xl"></Text>
+              <Input w={"100%"} type="text" id="username" placeholder="Username" /><Text fontSize="2xl"></Text>
+              <Input w={"100%"} type="password" id="password" placeholder="Password" /><Text fontSize="2xl"></Text>
+              <FormControl>
+                
+              <Select id="role"
+              minWidth="200"
+              colorScheme="indigo"
+              accessibilityLabel="Choose Service"
+              placeholder="Choose Role"
+              mt="1"
+              >
+                <Select.Item value="Band Member" label="Band Member">Band Member</Select.Item>
+                <Select.Item value="Band Manager" label="Band Manager" >Band Manager</Select.Item>
+                <Select.Item value="Live Experience Designer" label="Live Experience Designer">Live Experience Designer</Select.Item>
+              </Select>
+              <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                  Please make a selection!
+                </FormControl.ErrorMessage>
+            </FormControl>
               <br></br>
-              Name: <input type="text" id="name" placeholder="Juan Perez" />
-              <br></br>
-              User name:{" "}
-              <input type="text" id="username" placeholder="Maquina de fuego" />
-              <br></br>
-              Password: <input type="password" id="password" />
-              <br></br>
-              Role:
-              <select id="role">
-                <option value="Band Member">Band Member</option>
-                <option value="Band Manager">Band Manager</option>
-                <option value="Live Experience Designer">
-                  Live Experience Designer
-                </option>
-              </select>
-              <br></br>
-              <button>Sign up</button>
+              <Button type="submit">Sign up</Button>
             </form>
-            <Text>Don't you have an account? Sign Up</Text>
-            <button onClick={() => setIsRegistered(!registered)}>Click</button>
+            <Center>
+              <Link><Text  mt="5"   italic color="indigo.600" onClick={() => setIsRegistered(!registered)}>Already have an account? Sign In</Text></Link>
+            </Center>
+            <Button onPress={() => setIsRegistered(!registered)}>Click</Button>
           </div>
         )}
         </Box>
-      </Center>
+      
+     
     </NativeBaseProvider>
   );
 };
