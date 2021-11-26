@@ -191,7 +191,7 @@ function App() {
                         <Notifications />
                       </Route>
                       <Route path="/">
-                        <Home />
+                        <Home data={data} />
                       </Route>
                     </Switch>
                   
@@ -267,14 +267,14 @@ function App() {
                     <Route path="/addLiveShows">
                       <AddLiveShows />
                     </Route>
-                    <Route path="/">
-                      <Home />
-                    </Route>
                     <Route path="/notifications">
                       <Notifications />
                     </Route>
                     <Route path="/profile">
                       <Notifications />
+                    </Route>
+                    <Route path="/">
+                      <Home data={data} />
                     </Route>
                   </Switch>
                 </Router>
