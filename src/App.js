@@ -132,15 +132,32 @@ function App() {
             return (
               <div>
                 <Router>
-                <Box w="100%" py="4"  bg="indigo.600" flex={1}>
+                <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
-                  <HStack maxW="1000" w="90%" bg="white" >
-                    <Heading color="" size="md"  >On-Stage Setlist Manager </Heading>
-                    <HStack position="absolute" right="0" bottom="0">
-                    <Text Bold><Link style={linkStyle} to="/">Home</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/manageBands">Manage Bands</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/updateTags">Update Tag</Link></Text>
+                  <HStack maxW="1000" w="90%" >
+                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">On-Stage Setlist Manager </Heading>
+                    <Box mx="auto"></Box>
+                    <HStack >
+                    <Link style={linkStyle} to="/">
+                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
+                          <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
+                          Profile
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/manageBands">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
+                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
+                          Home
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
+                          <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications>
+                          Notifications
+                      </Badge>
+                    </Link>
+                   
+                    
                     </HStack>
                   </HStack>
                   </Center>
