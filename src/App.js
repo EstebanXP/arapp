@@ -9,9 +9,11 @@ import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
 import ManageSongs from "./views/ManageSongs";
 import Prueba1 from "./views/Prueba1";
+import Profile from "./views/profile";
 //import UMembers from "./views/UMembers";
 //import UBands from "./views/UBands";
 //import USetlists from "./views/USetlists";
+import Notifications from "./views/notifications";
 import UTags from "./views/UTags";
 import AddLiveShows from "./views/AddLiveShows";
 import ULiveShows from "./views/ULiveShows";
@@ -22,9 +24,10 @@ import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
 import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge} from "native-base"
-import {AiOutlineHome } from "react-icons/ai";
-import {FaUser} from "react-icons/fa"
-import {MdNotifications} from 'react-icons/md'
+import {AiOutlineHome, AiFillHome } from "react-icons/ai";
+import {FaUser,FaRegUser} from "react-icons/fa"
+import {MdNotifications, MdNotificationsNone} from 'react-icons/md'
+
 
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
@@ -86,7 +89,7 @@ function App() {
         
       {(() => {
         switch (data) {
-          case "Band Mana":
+          case "Band Member":
             return (
                 <Router>
                 <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
@@ -96,7 +99,7 @@ function App() {
                     <Box mx="auto"></Box>
                     <HStack >
                     <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
+                      <Badge colorScheme= { navState === 0 ?"indigo" : "white"} borderRadius="10"mx="1" w={"24"}>
                           <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
                           Profile
                       </Badge>
@@ -132,19 +135,35 @@ function App() {
             return (
               <div>
                 <Router>
-                <Box w="100%" py="4"  bg="indigo.600" flex={1}>
+                <Box w="100%" py="4"   borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
-                  <HStack maxW="1000" w="90%" bg="white" >
-                    <Heading color="" size="md"  >On-Stage Setlist Manager </Heading>
-                    <HStack position="absolute" right="0" bottom="0">
-                    <Text Bold><Link style={linkStyle} to="/">Home</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/manageBands">Manage Bands</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/addTags">Add Tag</Link></Text>
-                    <Text Bold><Link style={linkStyle} to="/updateTags">Update Tag</Link></Text>
+                  <HStack maxW="1000" w="90%" >
+                    <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                    <Box mx="auto"></Box>
+                    <HStack >
+                    <Link style={linkStyle} to="/profile" onClick={()=>{setNavState(0)}}>
+                      <Badge colorScheme= { navState === 0 ?"indigo" : "white"} borderRadius="10"mx="1" w={"24"}>
+                          {navState === 0 ? <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser> : <FaRegUser style style={{color : "#8e8d8a"}}></FaRegUser> }
+                          { navState === 0 ? <Text fontSize="xs" bold color="indigo.600">Profile</Text> : <Text fontSize="xs"  color="#8e8d8a">Profile</Text>}
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/" onClick={()=>{setNavState(1)}}>
+                      <Badge colorScheme={ navState === 1 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"} >
+                      { navState === 1 ? <AiFillHome style={{color : "rgb(79, 70, 229)"}}></AiFillHome> : <AiOutlineHome style={{color : "#8e8d8a"}}></AiOutlineHome>} 
+                      { navState === 1 ? <Text fontSize="xs" bold color="indigo.600">Home</Text> : <Text fontSize="xs"  color="#8e8d8a">Home</Text>}
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/notifications" onClick={()=>{setNavState(2)}}>
+                      <Badge colorScheme={ navState === 2 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"}>
+                          { navState === 2 ? <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications> : <MdNotificationsNone style={{color : "#8e8d8a"}}></MdNotificationsNone>}
+                          { navState === 2 ? <Text fontSize="xs" bold color="indigo.600">Notifications</Text> : <Text fontSize="xs"  color="#8e8d8a">Notifications</Text>}
+                      </Badge>
+                    </Link>
                     </HStack>
                   </HStack>
                   </Center>
                 </Box>
+                <Box w="100%" py="1" bg="indigo.100" borderBottomRadius="10"></Box>
                 <Center>
                 <Box maxW="1000" w="90%">
                     <Switch>
@@ -152,6 +171,9 @@ function App() {
                       {/*<Route path="/uMembers">
                         <UMembers />
                       </Route>*/}
+                      <Route path="/profile">
+                        <Profile userID = {user.uid} bandManager = {userName}/>
+                      </Route>
                       <Route path="/manageBands">
                         <ManageBands userID = {user.uid} bandManager = {userName}/>
                       </Route>
@@ -164,6 +186,10 @@ function App() {
                       {/*<Route path="/updateBands">
                         <UBands />
                       </Route>*/}
+                      
+                      <Route path="/notifications">
+                        <Notifications />
+                      </Route>
                       <Route path="/">
                         <Home />
                       </Route>
@@ -176,46 +202,35 @@ function App() {
             );
           case "Live Experience Designer":
             return (
-              <div className="LEDWrapper">
                 <Router>
-                  <ul>
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
-                    
-                    <li>
-                      <Link to="/manageSetlists">Manage Setlist</Link>
-                    </li>
-                    <li>
-                      <Link to="/manageSets">Manage Sets</Link>
-                    </li>
-                    {/*<li>
-                      <Link to="/addSongs">Add Songs</Link>
-                    </li>
-                    <li>
-                      <Link to="/addChords">Add Chords</Link>
-                    </li>
-                    */}
-                    <li>
-                      <Link to="/manageSongs">Manage Songs</Link>
-                    </li>
-                    <li>
-                      <Link to="/prueba1">Prueba</Link>
-                    </li>
-                    
-                    <li>
-                      <Link to="/updateTags">Update Tag</Link>
-                    </li>
-                    <li>
-                      <Link to="/ManageTags">Manage Tag</Link>
-                    </li>
-                    <li>
-                      <Link to="/addLiveShows">Add Live Shows</Link>
-                    </li>
-                    <li>
-                      <Link to="/updateLiveShows">Update Live Shows</Link>
-                    </li>
-                  </ul>
+                  <Box w="100%" py="4"   borderColor="indigo.500" shadow={2} flex={1}>
+                    <Center>
+                    <HStack maxW="1000" w="90%" >
+                      <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                      <Box mx="auto"></Box>
+                      <HStack >
+                      <Link style={linkStyle} to="/profile" onClick={()=>{setNavState(0)}}>
+                        <Badge colorScheme= { navState === 0 ?"indigo" : "white"} borderRadius="10"mx="1" w={"24"}>
+                            {navState === 0 ? <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser> : <FaRegUser style style={{color : "#8e8d8a"}}></FaRegUser> }
+                            { navState === 0 ? <Text fontSize="xs" bold color="indigo.600">Profile</Text> : <Text fontSize="xs"  color="#8e8d8a">Profile</Text>}
+                        </Badge>
+                      </Link>
+                      <Link style={linkStyle} to="/" onClick={()=>{setNavState(1)}}>
+                        <Badge colorScheme={ navState === 1 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"} >
+                        { navState === 1 ? <AiFillHome style={{color : "rgb(79, 70, 229)"}}></AiFillHome> : <AiOutlineHome style={{color : "#8e8d8a"}}></AiOutlineHome>} 
+                        { navState === 1 ? <Text fontSize="xs" bold color="indigo.600">Home</Text> : <Text fontSize="xs"  color="#8e8d8a">Home</Text>}
+                        </Badge>
+                      </Link>
+                      <Link style={linkStyle} to="/notifications" onClick={()=>{setNavState(2)}}>
+                        <Badge colorScheme={ navState === 2 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"}>
+                            { navState === 2 ? <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications> : <MdNotificationsNone style={{color : "#8e8d8a"}}></MdNotificationsNone>}
+                            { navState === 2 ? <Text fontSize="xs" bold color="indigo.600">Notifications</Text> : <Text fontSize="xs"  color="#8e8d8a">Notifications</Text>}
+                        </Badge>
+                      </Link>
+                      </HStack>
+                    </HStack>
+                    </Center>
+                  </Box>
                   <Switch>
                     <Route path="/manageSets">
                       <ManageSets userID = {user.uid}/>
@@ -255,9 +270,15 @@ function App() {
                     <Route path="/">
                       <Home />
                     </Route>
+                    <Route path="/notifications">
+                      <Notifications />
+                    </Route>
+                    <Route path="/profile">
+                      <Notifications />
+                    </Route>
                   </Switch>
                 </Router>
-              </div>
+             
             );
           default:
             return null;
