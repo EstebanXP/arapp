@@ -9,9 +9,11 @@ import AddChords from "./views/AddChords";
 import AddTags from "./views/AddTags";
 import ManageSongs from "./views/ManageSongs";
 import Prueba1 from "./views/Prueba1";
+import Profile from "./views/profile";
 //import UMembers from "./views/UMembers";
 //import UBands from "./views/UBands";
 //import USetlists from "./views/USetlists";
+import Notifications from "./views/notifications";
 import UTags from "./views/UTags";
 import AddLiveShows from "./views/AddLiveShows";
 import ULiveShows from "./views/ULiveShows";
@@ -25,6 +27,7 @@ import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Conte
 import {AiOutlineHome } from "react-icons/ai";
 import {FaUser} from "react-icons/fa"
 import {MdNotifications} from 'react-icons/md'
+
 
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
@@ -86,7 +89,7 @@ function App() {
         
       {(() => {
         switch (data) {
-          case "Band Mana":
+          case "Band Member":
             return (
                 <Router>
                 <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
@@ -138,7 +141,7 @@ function App() {
                     <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Band Manager</Heading>
                     <Box mx="auto"></Box>
                     <HStack >
-                    <Link style={linkStyle} to="/">
+                    <Link style={linkStyle} to="/profile">
                       <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
                           <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
                           Profile
@@ -169,6 +172,9 @@ function App() {
                       {/*<Route path="/uMembers">
                         <UMembers />
                       </Route>*/}
+                      <Route path="/profile">
+                        <Profile userID = {user.uid} bandManager = {userName}/>
+                      </Route>
                       <Route path="/manageBands">
                         <ManageBands userID = {user.uid} bandManager = {userName}/>
                       </Route>
@@ -184,6 +190,9 @@ function App() {
                       <Route path="/">
                         <Home />
                       </Route>
+                      <Route path="/notifications">
+                        <Notifications />
+                      </Route>
                     </Switch>
                   
                 </Box>
@@ -197,7 +206,7 @@ function App() {
                   <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
                   <HStack maxW="1000" w="90%" >
-                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Live Experience</Heading>
                     <Box mx="auto"></Box>
                     <HStack >
                     <Link style={linkStyle} to="/">
@@ -212,7 +221,7 @@ function App() {
                           Home
                       </Badge>
                     </Link>
-                    <Link style={linkStyle} to="/">
+                    <Link style={linkStyle} to="/notifications">
                       <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
                           <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications>
                           Notifications
@@ -262,6 +271,9 @@ function App() {
                     </Route>
                     <Route path="/">
                       <Home />
+                    </Route>
+                    <Route path="/notifications">
+                      <Notifications />
                     </Route>
                   </Switch>
                 </Router>
