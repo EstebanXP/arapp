@@ -135,7 +135,7 @@ function App() {
                 <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
                   <HStack maxW="1000" w="90%" >
-                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">On-Stage Setlist Manager </Heading>
+                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Band Manager</Heading>
                     <Box mx="auto"></Box>
                     <HStack >
                     <Link style={linkStyle} to="/">
@@ -193,46 +193,37 @@ function App() {
             );
           case "Live Experience Designer":
             return (
-              <div className="LEDWrapper">
                 <Router>
-                  <ul>
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
+                  <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
+                  <Center>
+                  <HStack maxW="1000" w="90%" >
+                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                    <Box mx="auto"></Box>
+                    <HStack >
+                    <Link style={linkStyle} to="/">
+                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
+                          <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
+                          Profile
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/manageBands">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
+                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
+                          Home
+                      </Badge>
+                    </Link>
+                    <Link style={linkStyle} to="/">
+                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
+                          <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications>
+                          Notifications
+                      </Badge>
+                    </Link>
+                   
                     
-                    <li>
-                      <Link to="/manageSetlists">Manage Setlist</Link>
-                    </li>
-                    <li>
-                      <Link to="/manageSets">Manage Sets</Link>
-                    </li>
-                    {/*<li>
-                      <Link to="/addSongs">Add Songs</Link>
-                    </li>
-                    <li>
-                      <Link to="/addChords">Add Chords</Link>
-                    </li>
-                    */}
-                    <li>
-                      <Link to="/manageSongs">Manage Songs</Link>
-                    </li>
-                    <li>
-                      <Link to="/prueba1">Prueba</Link>
-                    </li>
-                    
-                    <li>
-                      <Link to="/updateTags">Update Tag</Link>
-                    </li>
-                    <li>
-                      <Link to="/ManageTags">Manage Tag</Link>
-                    </li>
-                    <li>
-                      <Link to="/addLiveShows">Add Live Shows</Link>
-                    </li>
-                    <li>
-                      <Link to="/updateLiveShows">Update Live Shows</Link>
-                    </li>
-                  </ul>
+                    </HStack>
+                  </HStack>
+                  </Center>
+                </Box>
                   <Switch>
                     <Route path="/manageSets">
                       <ManageSets userID = {user.uid}/>
@@ -274,7 +265,7 @@ function App() {
                     </Route>
                   </Switch>
                 </Router>
-              </div>
+             
             );
           default:
             return null;
