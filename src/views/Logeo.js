@@ -92,6 +92,7 @@ const Logeo = (props) => {
         <Heading size="lg" mb="10" textAlign="center">{registered ? "We missed you!" : "Hello there :)"}</Heading>
         {registered ? (
           <div className="loginForm" >
+             {/**AQUI EMPIEZA LA VISTA DE LOG IN*/}
             <form onSubmit={getDataLogIn}>
              
               <Input
@@ -140,13 +141,16 @@ const Logeo = (props) => {
                 
               </Button>
               <button type="submit" style={{opacity : "0",  width : "100%", height : "40px", left:"0" }}>Sign in</button>
+            {/**AQUI TERMINA LA VISTA DE LOG IN*/}
             </form>
             <Center>
               <Link><Text  mt="5"   italic color="indigo.600" onClick={() => setIsRegistered(!registered)}>Don’t have an account? Sign Up</Text></Link>
             </Center>
           </div>
         ) : (
+          
           <div className="signupForm">
+            {/**AQUI EMPIEZA LA VISTA DE SIGN UP */}
             <form onSubmit={getDataSignUp}>
               
               <Input w={"100%"} type="email" id="email" placeholder="Email" isRequired _hover = {{borderColor: '#4f46e5'}} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} />    
@@ -177,6 +181,7 @@ const Logeo = (props) => {
             <Center>
               <Link><Text  mt="5"   italic color="indigo.600" onClick={() => setIsRegistered(!registered)}>Already have an account? Sign In</Text></Link>
             </Center>
+             {/**AQUI TERMINA LA VISTA DE SIGN UP*/}
           </div>
         )}
         </Box>

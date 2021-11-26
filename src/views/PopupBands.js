@@ -14,7 +14,13 @@ import db from "../firebase";
 import { NativeBaseProvider, Box, View, Stack, HStack, Input, Button, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
 
 const PopupBands = (props) => {
+    {/* STATES*/}
     const [lista, setLista] = useState([]);
+    const [newBandName,setNewBandName]= useState("");
+    
+
+    {/*FUncIOnes STATES*/}
+    const handleNBNC = (event) => setNewBandName(event.target.value);
 
     useEffect(() => {
         const usersObject = query(collection(db, "Users")); //Guardar referencia de la coleccion
@@ -48,15 +54,16 @@ const PopupBands = (props) => {
     //save changes
     async function saveOnSubmit(e) {
         e.preventDefault();
-        const newName = e.target.bandName.value;
-        const newLogo = e.target.bandLogo.value;
-        const newDescription = e.target.bandDescription.value;
-        const newMusicGenre = e.target.bandGenre.value;
+        console.log(newBandName+"HOLA");
+        //const newName = e.target.bandName.value;
+        //const newLogo = e.target.bandLogo.value;
+        //const newDescription = e.target.bandDescription.value;
+        //const newMusicGenre = e.target.bandGenre.value;
         await updateDoc(doc(db, "Bands", props.thisBand.id), {
-            bandName: newName,
-            bandLogo: newLogo,
-            bandDescription : newDescription,
-            bandGenre: newMusicGenre
+            bandName: newBandName,
+            //bandLogo: newLogo,
+            //bandDescription : newDescription,
+            //bandGenre: newMusicGenre
         });
         props.setPopStatus(false);
     }
@@ -72,6 +79,7 @@ const PopupBands = (props) => {
                             <View style={{justifyContent: 'center'}}>
                                 <Text w="120">Band Name: </Text>
                             </View>
+                            <h1>PROBAR AQUI</h1>
                             <Input
                                 defaultValue={props.thisBand.bandName}
                                 type="bandName"
@@ -79,7 +87,7 @@ const PopupBands = (props) => {
                                 id="bandName"
                     
                                 placeholder="Band Name"
-                                onChange={props.thisBand.bandName}
+                                onChange={handleNBNC}
                                 w={"100%"}
                                 isRequired
                                 
@@ -205,7 +213,7 @@ const PopupBands = (props) => {
 
                 <form onSubmit={saveOnSubmit}>
                     <div>
-                        Name: 
+                        Name 1: 
                         <input name="bandName" defaultValue={props.thisBand.bandName}></input>{" "}
                         <br></br>
                         Logo:{" "}
