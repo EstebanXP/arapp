@@ -209,7 +209,7 @@ function App() {
                     <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Live Experience</Heading>
                     <Box mx="auto"></Box>
                     <HStack >
-                    <Link style={linkStyle} to="/">
+                    <Link style={linkStyle} to="/profile">
                       <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
                           <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
                           Profile
@@ -273,6 +273,9 @@ function App() {
                       <Home />
                     </Route>
                     <Route path="/notifications">
+                      <Notifications />
+                    </Route>
+                    <Route path="/profile">
                       <Notifications />
                     </Route>
                   </Switch>
