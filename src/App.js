@@ -86,10 +86,10 @@ function App() {
         
       {(() => {
         switch (data) {
-          case "Band Manager":
+          case "Band Mana":
             return (
                 <Router>
-                <Box w="100%" py="4" borderBottomRadius="10"   borderColor="indigo.500" shadow={2} flex={1}>
+                <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
                   <HStack maxW="1000" w="90%" >
                     <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">On-Stage Setlist Manager </Heading>
@@ -128,7 +128,7 @@ function App() {
               </Center>
               </Router>
             );
-          case "Band Member":
+          case "Band Manager":
             return (
               <div>
                 <Router>
