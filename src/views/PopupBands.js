@@ -11,6 +11,7 @@ import {
     arrayRemove,
 } from "firebase/firestore";
 import db from "../firebase";
+import { NativeBaseProvider, Box, View, Stack, HStack, Input, Button, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
 
 const PopupBands = (props) => {
     const [lista, setLista] = useState([]);
@@ -64,7 +65,144 @@ const PopupBands = (props) => {
         <div className="popup">
             <div className="popup-inner">
                 <button className="close-btn" onClick={() => props.setPopStatus(false)}>Close</button>
-                <h3>Edit</h3>
+                <form onSubmit={saveOnSubmit}>
+                    <Stack space={0} alignItems="left">
+                        <Heading size="lg" mb="10" textAlign="Left">{"Edit"}</Heading>
+                        <HStack mb="1%" space={2} alignItems="left">
+                            <View style={{justifyContent: 'center'}}>
+                                <Text w="120">Band Name: </Text>
+                            </View>
+                            <Input
+                                defaultValue={props.thisBand.bandName}
+                                type="bandName"
+                                name="bandName"
+                                id="bandName"
+                    
+                                placeholder="Band Name"
+                                onChange={props.thisBand.bandName}
+                                w={"100%"}
+                                isRequired
+                                
+                                _hover = {{
+                                borderColor: '#4f46e5' 
+                                }}
+                                _invalid={{borderColor: '#4f46e5' }}
+                                _focus ={{borderColor: '#4f46e5' }}
+                                _disabled ={{borderColor: '#4f46e5' }}
+                            />
+                        </HStack>
+            
+                        <HStack mb="1%" space={2} alignItems="left">
+                            <View style={{justifyContent: 'center'}}>
+                                <Text w="120">Logo: </Text>
+                            </View>
+                            <Input
+                                defaultValue={props.thisBand.bandLogo}
+                                type="bandLogo"
+                                name="bandLogo"
+                                id="bandLogo"
+                    
+                                placeholder="Band Logo"
+                                onChange={props.thisBand.bandLogo}
+                                w={"100%"}
+                                isRequired
+                                
+                                _hover = {{
+                                borderColor: '#4f46e5' 
+                                }}
+                                _invalid={{borderColor: '#4f46e5' }}
+                                _focus ={{borderColor: '#4f46e5' }}
+                                _disabled ={{borderColor: '#4f46e5' }}
+                            />
+                        </HStack>
+                        <HStack mb="1%" space={2} alignItems="left">
+                            <View style={{justifyContent: 'center'}}>
+                                <Text w="120">Band Description: </Text>
+                            </View>
+                            <Input
+                                defaultValue={props.thisBand.bandDescription}
+                                type="bandDescription"
+                                name="bandDescription"
+                                id="bandDescription"
+                    
+                                placeholder="bandDescription"
+                                onChange={props.thisBand.bandDescription}
+                                w={"100%"}
+                                isRequired
+                                
+                                _hover = {{
+                                borderColor: '#4f46e5' 
+                                }}
+                                _invalid={{borderColor: '#4f46e5' }}
+                                _focus ={{borderColor: '#4f46e5' }}
+                                _disabled ={{borderColor: '#4f46e5' }}
+                            />
+                        </HStack>
+                        <HStack mb="1%" space={2} alignItems="left">
+                            <View style={{justifyContent: 'center'}}>
+                                <Text w="120">Music Genre: </Text>
+                            </View>
+                            <Input
+                                defaultValue={props.thisBand.bandGenre}
+                                type="bandGenre"
+                                name="bandGenre"
+                                id="bandGenre"
+                    
+                                placeholder="bandGenre"
+                                onChange={props.thisBand.bandGenre}
+                                w={"100%"}
+                                isRequired
+                                
+                                _hover = {{
+                                borderColor: '#4f46e5' 
+                                }}
+                                _invalid={{borderColor: '#4f46e5' }}
+                                _focus ={{borderColor: '#4f46e5' }}
+                                _disabled ={{borderColor: '#4f46e5' }}
+                            />
+                        </HStack>
+                    </Stack>
+                    Members:
+                        {lista.map((user) => {
+                        if (props.thisBand.bandMembers.includes(user.id)) {
+                            return (
+                            <div>
+                                <p>Name: {user.userName}, Username: {user.userUsername}</p>
+                                <button onClick={() => deleteUserOnBand(user.id)}>
+                                remove user
+                                </button>
+                            </div>
+                            );
+                        }
+                        })}
+                        {/**Division/ */}
+                        <hr></hr>
+                        {lista
+                        .map((user) => {
+                            if(user.userRole == "Band Member"){
+                                return (
+                                <div>
+                                    <p>
+                                    {"Name: " + user.userName + ", Username: " + user.userUsername}{" "}
+                                    <button onClick={() => addUserOnBand(user.id)}>
+                                        Añadir
+                                    </button>{" "}
+                                    </p>
+                                </div>
+                                );
+                            }
+                        })}
+                        <br></br>
+                        <button type="submit">Save set</button>
+                        <button
+                        onClick={() => {
+                            deleteBand(props.thisBand.id);
+                        }}
+                        >
+                        Delete band
+                        </button>
+                </form>
+
                 <form onSubmit={saveOnSubmit}>
                     <div>
                         Name: 
