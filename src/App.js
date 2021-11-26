@@ -24,9 +24,9 @@ import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
 import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge} from "native-base"
-import {AiOutlineHome } from "react-icons/ai";
-import {FaUser} from "react-icons/fa"
-import {MdNotifications} from 'react-icons/md'
+import {AiOutlineHome, AiFillHome } from "react-icons/ai";
+import {FaUser,FaRegUser} from "react-icons/fa"
+import {MdNotifications, MdNotificationsNone} from 'react-icons/md'
 
 
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
@@ -99,7 +99,7 @@ function App() {
                     <Box mx="auto"></Box>
                     <HStack >
                     <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
+                      <Badge colorScheme= { navState === 0 ?"indigo" : "white"} borderRadius="10"mx="1" w={"24"}>
                           <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
                           Profile
                       </Badge>
@@ -135,36 +135,35 @@ function App() {
             return (
               <div>
                 <Router>
-                <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
+                <Box w="100%" py="4"   borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
                   <HStack maxW="1000" w="90%" >
-                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                    <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
                     <Box mx="auto"></Box>
                     <HStack >
-                    <Link style={linkStyle} to="/profile">
-                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
-                          <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
-                          Profile
+                    <Link style={linkStyle} to="/profile" onClick={()=>{setNavState(0)}}>
+                      <Badge colorScheme= { navState === 0 ?"indigo" : "white"} borderRadius="10"mx="1" w={"24"}>
+                          {navState === 0 ? <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser> : <FaRegUser style style={{color : "#8e8d8a"}}></FaRegUser> }
+                          { navState === 0 ? <Text fontSize="xs" bold color="indigo.600">Profile</Text> : <Text fontSize="xs"  color="#8e8d8a">Profile</Text>}
                       </Badge>
                     </Link>
-                    <Link style={linkStyle} to="/manageBands">
-                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
-                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
-                          Home
+                    <Link style={linkStyle} to="/" onClick={()=>{setNavState(1)}}>
+                      <Badge colorScheme={ navState === 1 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"} >
+                      { navState === 1 ? <AiFillHome style={{color : "rgb(79, 70, 229)"}}></AiFillHome> : <AiOutlineHome style={{color : "#8e8d8a"}}></AiOutlineHome>} 
+                      { navState === 1 ? <Text fontSize="xs" bold color="indigo.600">Home</Text> : <Text fontSize="xs"  color="#8e8d8a">Home</Text>}
                       </Badge>
                     </Link>
-                    <Link style={linkStyle} to="/">
-                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
-                          <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications>
-                          Notifications
+                    <Link style={linkStyle} to="/notifications" onClick={()=>{setNavState(2)}}>
+                      <Badge colorScheme={ navState === 2 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"}>
+                          { navState === 2 ? <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications> : <MdNotificationsNone style={{color : "#8e8d8a"}}></MdNotificationsNone>}
+                          { navState === 2 ? <Text fontSize="xs" bold color="indigo.600">Notifications</Text> : <Text fontSize="xs"  color="#8e8d8a">Notifications</Text>}
                       </Badge>
                     </Link>
-                   
-                    
                     </HStack>
                   </HStack>
                   </Center>
                 </Box>
+                <Box w="100%" py="1" bg="indigo.100" borderBottomRadius="10"></Box>
                 <Center>
                 <Box maxW="1000" w="90%">
                     <Switch>
@@ -187,11 +186,12 @@ function App() {
                       {/*<Route path="/updateBands">
                         <UBands />
                       </Route>*/}
-                      <Route path="/">
-                        <Home />
-                      </Route>
+                      
                       <Route path="/notifications">
                         <Notifications />
+                      </Route>
+                      <Route path="/">
+                        <Home />
                       </Route>
                     </Switch>
                   
@@ -203,36 +203,34 @@ function App() {
           case "Live Experience Designer":
             return (
                 <Router>
-                  <Box w="100%" py="4" borderBottomRadius="10"  borderColor="indigo.500" shadow={2} flex={1}>
-                  <Center>
-                  <HStack maxW="1000" w="90%" >
-                    <Heading color="rgb(79, 70, 229)" size="md" mt="auto" mb="auto">Live Experience</Heading>
-                    <Box mx="auto"></Box>
-                    <HStack >
-                    <Link style={linkStyle} to="/profile">
-                      <Badge colorScheme="indigo" borderRadius="10"mx="1" w={"24"}>
-                          <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser>
-                          Profile
-                      </Badge>
-                    </Link>
-                    <Link style={linkStyle} to="/manageBands">
-                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
-                          <AiOutlineHome style={{color : "rgb(79, 70, 229)"}}></AiOutlineHome>
-                          Home
-                      </Badge>
-                    </Link>
-                    <Link style={linkStyle} to="/notifications">
-                      <Badge colorScheme="indigo" borderRadius="10" mx="1" w={"24"}>
-                          <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications>
-                          Notifications
-                      </Badge>
-                    </Link>
-                   
-                    
+                  <Box w="100%" py="4"   borderColor="indigo.500" shadow={2} flex={1}>
+                    <Center>
+                    <HStack maxW="1000" w="90%" >
+                      <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                      <Box mx="auto"></Box>
+                      <HStack >
+                      <Link style={linkStyle} to="/profile" onClick={()=>{setNavState(0)}}>
+                        <Badge colorScheme= { navState === 0 ?"indigo" : "white"} borderRadius="10"mx="1" w={"24"}>
+                            {navState === 0 ? <FaUser style={{color : "rgb(79, 70, 229)"}}></FaUser> : <FaRegUser style style={{color : "#8e8d8a"}}></FaRegUser> }
+                            { navState === 0 ? <Text fontSize="xs" bold color="indigo.600">Profile</Text> : <Text fontSize="xs"  color="#8e8d8a">Profile</Text>}
+                        </Badge>
+                      </Link>
+                      <Link style={linkStyle} to="/" onClick={()=>{setNavState(1)}}>
+                        <Badge colorScheme={ navState === 1 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"} >
+                        { navState === 1 ? <AiFillHome style={{color : "rgb(79, 70, 229)"}}></AiFillHome> : <AiOutlineHome style={{color : "#8e8d8a"}}></AiOutlineHome>} 
+                        { navState === 1 ? <Text fontSize="xs" bold color="indigo.600">Home</Text> : <Text fontSize="xs"  color="#8e8d8a">Home</Text>}
+                        </Badge>
+                      </Link>
+                      <Link style={linkStyle} to="/notifications" onClick={()=>{setNavState(2)}}>
+                        <Badge colorScheme={ navState === 2 ?"indigo" : "white"}  borderRadius="10" mx="1" w={"24"}>
+                            { navState === 2 ? <MdNotifications style={{color : "rgb(79, 70, 229)"}}></MdNotifications> : <MdNotificationsNone style={{color : "#8e8d8a"}}></MdNotificationsNone>}
+                            { navState === 2 ? <Text fontSize="xs" bold color="indigo.600">Notifications</Text> : <Text fontSize="xs"  color="#8e8d8a">Notifications</Text>}
+                        </Badge>
+                      </Link>
+                      </HStack>
                     </HStack>
-                  </HStack>
-                  </Center>
-                </Box>
+                    </Center>
+                  </Box>
                   <Switch>
                     <Route path="/manageSets">
                       <ManageSets userID = {user.uid}/>
