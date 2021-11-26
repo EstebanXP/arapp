@@ -11,7 +11,7 @@ import {
     arrayRemove,
 } from "firebase/firestore";
 import db from "../firebase";
-
+//Kevin chinga tu madre
 const PopupBands = (props) => {
     const [lista, setLista] = useState([]);
 
