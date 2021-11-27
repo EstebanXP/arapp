@@ -9,7 +9,8 @@ import {
 import db from "../firebase";
 import ShowBands from "./ShowBands";
 import emailjs from "emailjs-com"; //npm install emailjs-com --save
-
+import {Box} from 'native-base'
+import Carousel from "./Carousel";
 const ManageBandss = (props) => {
   const [bands, setBands] = useState([]);
   const [searchParam, setSearchParam] = useState("");
@@ -189,7 +190,14 @@ const ManageBandss = (props) => {
           </select>
         </label>
       </form>
-
+      <Carousel show={4}>
+                <Box px="10" py="10" m="2" bg="black"></Box>
+                <Box px="10" py="10" m="2"  bg="black"></Box>
+                <Box px="10" py="10" m="2"  bg="black"></Box>
+                <Box px="10" py="10" m="2"  bg="black"></Box>
+                <Box px="10" py="10" m="2"  bg="black"></Box>
+                <Box px="10" py="10" m="2"  bg="black"></Box>
+            </Carousel>
       
       {bands.filter((val) => {
           if (searchParam === "") {
