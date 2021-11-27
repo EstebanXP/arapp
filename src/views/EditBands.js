@@ -15,7 +15,7 @@ import {
     arrayRemove,
 } from "firebase/firestore";
 import db from "../firebase";
-import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
+import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
@@ -62,7 +62,7 @@ const EditBands = (props) => {
     //deleteBand
     const deleteBand = async (bandId) => {
         await deleteDoc(doc(db, "Bands", bandId));
-        props.setPopStatus(false);
+        
     };
 
     //save changes
@@ -79,22 +79,17 @@ const EditBands = (props) => {
             bandDescription : newDescription,
             bandGenres: newMusicGenre
         });
-        props.setPopStatus(false);
+        
     }
 
-    async function closePopUp(a) {
-        a.preventDefault();
-        console.log(newMusicGenre);
-        props.setPopStatus(false);
-    }
 
     return(
-        <div className="popup" >
-            <div className="popup-inner">
+        <Box>
+           
 
-                <Heading size="lg" mb="10" textAlign="Left">{"Edit Band"}</Heading>
+                <Heading size="lg" mb="10" textAlign="Left">Edit Band</Heading>
                 <Link to='/home'>
-                <button class="btn" ><i class="fa fa-close"></i> Close</button>
+                <button class="btn"> Close</button>
                 </Link>
                 <br></br>
                 <br></br>
@@ -297,8 +292,8 @@ const EditBands = (props) => {
                         </button>
                     </div>
                 </form> */}
-            </div>
-        </div>
+            
+        </Box>
     );
 };
 

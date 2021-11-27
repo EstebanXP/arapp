@@ -52,7 +52,7 @@ const Carousel = (props) => {
             <HStack>
             {(()=>{
                 for(let i=0;i<(length - show); i++){
-                    console.log(i)
+                    
                     
                 }
             })()}

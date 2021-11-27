@@ -12,6 +12,7 @@ import Prueba1 from "./views/Prueba1";
 import Profile from "./views/profile";
 import carouselBands from './views/CarouselBands'
 import carouselShows from './views/CarouselShows'
+import EditBands from './views/EditBands'
 //import UMembers from "./views/UMembers";
 //import UBands from "./views/UBands";
 //import USetlists from "./views/USetlists";
@@ -25,7 +26,7 @@ import Logeo from "./views/Logeo";
 import db from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ManageTags from "./views/ManageTags";
-import { Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge } from "native-base"
+import { Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge, Button } from "native-base"
 import { AiOutlineHome, AiFillHome } from "react-icons/ai";
 import { FaUser, FaRegUser } from "react-icons/fa"
 import { MdNotifications, MdNotificationsNone } from 'react-icons/md'
@@ -37,7 +38,7 @@ function App() {
   const [data, setData] = useState();
   const [userName, setUserName] = useState();
   const [navState, setNavState] = useState(1);
-
+  const [band, setBand] = useState();
   const linkStyle = {
     margin: "0",
     textDecoration: "none",
@@ -155,7 +156,7 @@ function App() {
                               {navState === 1 ? <Text fontSize="xs" bold color="indigo.600">Home</Text> : <Text fontSize="xs" color="#8e8d8a">Home</Text>}
                             </Badge>
                           </Link>
-                          <Link style={linkStyle} to="/notifications" onClick={() => { setNavState(2) }}>
+                          <Link style={linkStyle} to="/editBands" onClick={() => { setNavState(2) }}>
                             <Badge colorScheme={navState === 2 ? "indigo" : "white"} borderRadius="10" mx="1" w={"24"}>
                               {navState === 2 ? <MdNotifications style={{ color: "rgb(79, 70, 229)" }}></MdNotifications> : <MdNotificationsNone style={{ color: "#8e8d8a" }}></MdNotificationsNone>}
                               {navState === 2 ? <Text fontSize="xs" bold color="indigo.600">Notifications</Text> : <Text fontSize="xs" color="#8e8d8a">Notifications</Text>}
@@ -166,6 +167,7 @@ function App() {
                     </Center>
                   </Box>
                   <Box w="100%" py="1" bg="indigo.100" borderBottomRadius="10"></Box>
+                  <Button onPress={()=>{console.log(band)}}>Jalale Puto</Button>
                   <Center>
                     <Box maxW="1000" w="90%">
                       <Switch>
@@ -179,8 +181,8 @@ function App() {
                         <Route path="/manageBands">
                           <ManageBands userID={user.uid} bandManager={userName} />
                         </Route>
-                        <Route path="/popUpBand">
-                          <popUpBand userID={user.uid} bandManager={userName} />
+                        <Route path="/editBands">
+                          <EditBands userID={user.uid} bandManager={userName} thisBand={band} />
                         </Route>
                         <Route path="/addTags">
                           <ManageTags></ManageTags>
@@ -201,7 +203,7 @@ function App() {
                           <Notifications />
                         </Route>
                         <Route path="/">
-                          <Home data={data} />
+                          <Home data={data} setBand={setBand}/>
                         </Route>
                       </Switch>
 

@@ -12,7 +12,7 @@ const Home = (props) => {
     if(props.data === "Band Manager")
     return (
         <div>          
-            <CarouselBands></CarouselBands>
+            <CarouselBands setBand={props.setBand}></CarouselBands>
             <CarouselShows></CarouselShows>
         </div>
     )
