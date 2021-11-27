@@ -139,3 +139,8 @@ img.right-arrow:hover, img.left-arrow:hover{
   }
 
 }
+
+.carousel-bands{
+  overflow-x: hidden;
+    padding: 10px;
+}

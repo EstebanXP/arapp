@@ -106,7 +106,7 @@ const CarouselBands = (props) => {
 
 
   return (
-    <div>
+    <div className="carousel-bands">
       <form>
         <label>
           Order by:
@@ -116,16 +116,15 @@ const CarouselBands = (props) => {
           </select>
         </label>
       </form>
-      <Carousel show={4}>
+      <Carousel show={3}>
         
           {bands.map((band) => {
             //if (props.userID == band.createdBy) {
             return (
-              <div>
-              <Box px="10" py="10" m="2" bg="primary.200">
+              
+              
                 <ShowBands tband={band} />
-              </Box>
-              </div>
+              
             );
             //}            
           })}

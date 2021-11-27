@@ -2,12 +2,13 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import left from '../assets/left.png';
 import right from '../assets/right.png';
-
-
+import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons/bs"
+import {Box,Circle, HStack, Text} from "native-base"
 const Carousel = (props) => {
     const {children, show} = props
     const [currentIndex, setCurrentIndex] = useState(0)
     const [length, setLength] = useState(children.length)
+    const [index, setIndex] =useState(4)
     const next = () => {
         if (currentIndex < (length - show)) {
             setCurrentIndex(prevState => prevState + 1)
@@ -25,6 +26,21 @@ const Carousel = (props) => {
     }, [children])
     return (
         <div className="carousel-container">
+            <div className="contenedorFlechas">
+                {/* You can alwas change the content of the button to other things */}
+                
+                    <BsFillArrowLeftCircleFill size ="2em" style={{margin : "2"}} color="#818cf8" onClick={prev}/>
+                
+                
+                    
+                {/* You can alwas change the content of the button to other things */}
+                
+                    <BsFillArrowRightCircleFill size ="2em" style={{margin : "2"}} color="#818cf8" onClick={next}/>
+                    
+             
+                    
+                
+            </div>
             <div className="carousel-content-wrapper">
                 <div
                     className={`carousel-content show-${show}`}
@@ -33,20 +49,16 @@ const Carousel = (props) => {
                     {children}
                 </div>
             </div>
-            <div className="contenedorFlechas">
-                {/* You can alwas change the content of the button to other things */}
-                <div className="left-arrowCont">
-                    <img src={left} onClick={prev} className="left-arrow"></img>
-                </div>
+            <HStack>
+            {(()=>{
+                for(let i=0;i<(length - show); i++){
+                    console.log(i)
                     
-                    <div className="divProdFlecha"></div>
-                {/* You can alwas change the content of the button to other things */}
-                <div className="right-arrowCont">
-                    <img src={right} onClick={next} className="right-arrow"></img>
-                </div>
-                    
-                
-            </div>
+                }
+            })()}
+            <Circle mx="1"size="2" bg="indigo.500"/>
+            </HStack>
+            
         </div>
     )
 }
