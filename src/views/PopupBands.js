@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../css/Popup.css";
+import "../css/Buttons.css";
+
+
 import {
     collection,
     query,
@@ -11,7 +14,11 @@ import {
     arrayRemove,
 } from "firebase/firestore";
 import db from "../firebase";
-import { NativeBaseProvider, Box, View, Stack, HStack, Input, Button, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
+import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+const element = <FontAwesomeIcon icon={faCoffee} />
 
 const PopupBands = (props) => {
     {/* STATES*/}
@@ -74,13 +81,27 @@ const PopupBands = (props) => {
         props.setPopStatus(false);
     }
 
+    async function closePopUp(a) {
+        a.preventDefault();
+        console.log(newMusicGenre);
+        props.setPopStatus(false);
+    }
+
     return props.trigger ? (
-        <div className="popup">
+        <div className="popup" >
             <div className="popup-inner">
-                <button className="close-btn" onClick={() => props.setPopStatus(false)}>Close</button>
+
+                <Heading size="lg" mb="10" textAlign="Left">{"Edit Band"}</Heading>
+                           
+                <button class="btn" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
+                <br></br>
+                <br></br>
+
                 <form onSubmit={saveOnSubmit}>
+
                     <Stack space={0} alignItems="left">
-                        <Heading size="lg" mb="10" textAlign="Left">{"Edit"}</Heading>
+                            
+
                         <HStack mb="1%" space={2} alignItems="left">
                             <View style={{justifyContent: 'center'}}>
                                 <Text w="120">Band Name: </Text>
@@ -219,7 +240,7 @@ const PopupBands = (props) => {
                         </button>
                 </form>
 
-                <form onSubmit={saveOnSubmit}>
+                {/* <form onSubmit={saveOnSubmit}>
                     <div>
                         Name 1: 
                         <input name="bandName" defaultValue={props.thisBand.bandName}></input>{" "}
@@ -245,9 +266,9 @@ const PopupBands = (props) => {
                             </div>
                             );
                         }
-                        })}
+                        })} */}
                         {/**Division/ */}
-                        <hr></hr>
+                        {/* <hr></hr>
                         {lista
                         .map((user) => {
                             if(user.userRole == "Band Member"){
@@ -273,7 +294,7 @@ const PopupBands = (props) => {
                         Delete band
                         </button>
                     </div>
-                </form>
+                </form> */}
             </div>
         </div>
     ) : null;
