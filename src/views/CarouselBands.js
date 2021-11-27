@@ -121,11 +121,11 @@ const CarouselBands = (props) => {
           {bands.map((band) => {
             //if (props.userID == band.createdBy) {
             return (
-              <Box px="10" py="10" m="2" bg="black">
-              
+              <div>
+              <Box px="10" py="10" m="2" bg="primary.200">
                 <ShowBands tband={band} />
-              
               </Box>
+              </div>
             );
             //}            
           })}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Content, Flex, Badge} from "native-base"
 import  Carousel  from './Carousel'
-import ManageBands from './ManageBands'
+import CarouselShows from './CarouselShows'
 import CarouselBands from './CarouselBands'
 const Home = (props) => {
 
@@ -14,6 +14,7 @@ const Home = (props) => {
         <div>
             
             <CarouselBands></CarouselBands>
+            <CarouselShows></CarouselShows>
         </div>
     )
     else if(props.data === "Live Experience Designer"){
