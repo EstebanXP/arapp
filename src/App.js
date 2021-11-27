@@ -179,6 +179,9 @@ function App() {
                         <Route path="/manageBands">
                           <ManageBands userID={user.uid} bandManager={userName} />
                         </Route>
+                        <Route path="/popUpBand">
+                          <popUpBand userID={user.uid} bandManager={userName} />
+                        </Route>
                         <Route path="/addTags">
                           <ManageTags></ManageTags>
                         </Route>
