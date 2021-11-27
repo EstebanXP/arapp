@@ -16,10 +16,10 @@ import { NativeBaseProvider, Box, View, Stack, HStack, Input, Button, Alert,Text
 const PopupBands = (props) => {
     {/* STATES*/}
     const [lista, setLista] = useState([]);
-    const [newBandName,setNewBandName]= useState("");
-    const [newLogo,setNewLogo]= useState("");
-    const [newDescription,setNewDescription]= useState("");
-    const [newMusicGenre,setNewMusicGenre]= useState("");
+    const [newBandName,setNewBandName]= useState(props.thisBand.bandName);
+    const [newLogo,setNewLogo]= useState(props.thisBand.bandLogo);
+    const [newDescription,setNewDescription]= useState(props.thisBand.bandDescription);
+    const [newMusicGenre,setNewMusicGenre]= useState(props.thisBand.bandGenres);
     
 
     {/*FUNCIONES STATES*/}
@@ -96,7 +96,7 @@ const PopupBands = (props) => {
                                 onChange={handleNBNC}
                                 w={"100%"}
                                 isRequired
-                                
+
                                 _hover = {{
                                 borderColor: '#4f46e5' 
                                 }}
@@ -115,7 +115,7 @@ const PopupBands = (props) => {
                                 type="bandLogo"
                                 name="bandLogo"
                                 id="bandLogo"
-                    
+                                
                                 placeholder="Band Logo"
                                 onChange={handleNBLC}
                                 w={"100%"}
