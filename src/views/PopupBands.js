@@ -17,10 +17,16 @@ const PopupBands = (props) => {
     {/* STATES*/}
     const [lista, setLista] = useState([]);
     const [newBandName,setNewBandName]= useState("");
+    const [newLogo,setNewLogo]= useState("");
+    const [newDescription,setNewDescription]= useState("");
+    const [newMusicGenre,setNewMusicGenre]= useState("");
     
 
-    {/*FUncIOnes STATES*/}
+    {/*FUNCIONES STATES*/}
     const handleNBNC = (event) => setNewBandName(event.target.value);
+    const handleNBLC = (event) => setNewLogo(event.target.value);
+    const handleNBDC = (event) => setNewDescription(event.target.value);
+    const handleNMGC = (event) => setNewMusicGenre(event.target.value);
 
     useEffect(() => {
         const usersObject = query(collection(db, "Users")); //Guardar referencia de la coleccion
@@ -54,16 +60,16 @@ const PopupBands = (props) => {
     //save changes
     async function saveOnSubmit(e) {
         e.preventDefault();
-        console.log(newBandName+"HOLA");
+        console.log(newMusicGenre);
         //const newName = e.target.bandName.value;
         //const newLogo = e.target.bandLogo.value;
         //const newDescription = e.target.bandDescription.value;
         //const newMusicGenre = e.target.bandGenre.value;
         await updateDoc(doc(db, "Bands", props.thisBand.id), {
             bandName: newBandName,
-            //bandLogo: newLogo,
-            //bandDescription : newDescription,
-            //bandGenre: newMusicGenre
+            bandLogo: newLogo,
+            bandDescription : newDescription,
+            bandGenres: newMusicGenre
         });
         props.setPopStatus(false);
     }
@@ -79,7 +85,6 @@ const PopupBands = (props) => {
                             <View style={{justifyContent: 'center'}}>
                                 <Text w="120">Band Name: </Text>
                             </View>
-                            <h1>PROBAR AQUI</h1>
                             <Input
                                 defaultValue={props.thisBand.bandName}
                                 type="bandName"
@@ -87,6 +92,7 @@ const PopupBands = (props) => {
                                 id="bandName"
                     
                                 placeholder="Band Name"
+                                
                                 onChange={handleNBNC}
                                 w={"100%"}
                                 isRequired
@@ -111,7 +117,7 @@ const PopupBands = (props) => {
                                 id="bandLogo"
                     
                                 placeholder="Band Logo"
-                                onChange={props.thisBand.bandLogo}
+                                onChange={handleNBLC}
                                 w={"100%"}
                                 isRequired
                                 
@@ -134,7 +140,8 @@ const PopupBands = (props) => {
                                 id="bandDescription"
                     
                                 placeholder="bandDescription"
-                                onChange={props.thisBand.bandDescription}
+                       
+                                onChange={handleNBDC}
                                 w={"100%"}
                                 isRequired
                                 
@@ -151,15 +158,16 @@ const PopupBands = (props) => {
                                 <Text w="120">Music Genre: </Text>
                             </View>
                             <Input
-                                defaultValue={props.thisBand.bandGenre}
+                                defaultValue={props.thisBand.bandGenres}
                                 type="bandGenre"
                                 name="bandGenre"
                                 id="bandGenre"
                     
                                 placeholder="bandGenre"
-                                onChange={props.thisBand.bandGenre}
+                                onChange={handleNMGC}
                                 w={"100%"}
                                 isRequired
+                             
                                 
                                 _hover = {{
                                 borderColor: '#4f46e5' 
