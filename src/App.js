@@ -169,8 +169,6 @@ function App() {
                       </HStack>
                     </Center>
                   </Box>
-                  <Box w="100%" py="1" bg="indigo.100" borderBottomRadius="10"></Box>
-                 
                   <Center>
                     <Box maxW="1000" w="90%">
                       <Switch>
@@ -249,52 +247,56 @@ function App() {
                     </HStack>
                   </Center>
                 </Box>
-                <Switch>
-                  <Route path="/manageSets">
-                    <ManageSets userID={user.uid} />
-                  </Route>
-                  <Route path="/updateTags">
-                    <UTags />
-                  </Route>
-                  <Route path="/manageSetlists">
-                    <ManageSetlists userID={user.uid} />
-                  </Route>
-                  <Route path="/prueba1">
+                <Center>
+                  <Box maxW="1000" w="90%">
+                  <Switch>
+                    <Route path="/manageSets">
+                      <ManageSets userID={user.uid} />
+                    </Route>
+                    <Route path="/updateTags">
+                      <UTags />
+                    </Route>
+                    <Route path="/manageSetlists">
+                      <ManageSetlists userID={user.uid} />
+                    </Route>
+                    <Route path="/prueba1">
 
-                    <Prueba1></Prueba1>
-                  </Route>
+                      <Prueba1></Prueba1>
+                    </Route>
 
-                  <Route path="/ManageTags">
-                    <ManageTags></ManageTags>
-                  </Route>
-                  <Route path="/manageSongs">
-                    <ManageSongs />
-                  </Route>
-                  <Route path="/manageSets">
-                    <ManageSets />
-                  </Route>
-                  <Route path="/addSongs">
-                    <AddSongs />
-                  </Route>
-                  <Route path="/addChords">
-                    <AddChords />
-                  </Route>
-                  <Route path="/updateLiveShows">
-                    <ULiveShows />
-                  </Route>
-                  <Route path="/addLiveShows">
-                    <AddLiveShows />
-                  </Route>
-                  <Route path="/notifications">
-                    <Notifications />
-                  </Route>
-                  <Route path="/profile">
-                    <Notifications />
-                  </Route>
-                  <Route path="/">
-                    <Home data={data} />
-                  </Route>
-                </Switch>
+                    <Route path="/ManageTags">
+                      <ManageTags></ManageTags>
+                    </Route>
+                    <Route path="/manageSongs">
+                      <ManageSongs />
+                    </Route>
+                    <Route path="/manageSets">
+                      <ManageSets />
+                    </Route>
+                    <Route path="/addSongs">
+                      <AddSongs />
+                    </Route>
+                    <Route path="/addChords">
+                      <AddChords />
+                    </Route>
+                    <Route path="/updateLiveShows">
+                      <ULiveShows />
+                    </Route>
+                    <Route path="/addLiveShows">
+                      <AddLiveShows />
+                    </Route>
+                    <Route path="/notifications">
+                      <Notifications />
+                    </Route>
+                    <Route path="/profile">
+                      <Notifications />
+                    </Route>
+                    <Route path="/">
+                      <Home data={data} />
+                    </Route>
+                  </Switch>
+                </Box>
+              </Center>
               </Router>
 
             );

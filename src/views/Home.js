@@ -4,6 +4,10 @@ import  Carousel  from './Carousel'
 import CarouselShows from './CarouselShows'
 import CarouselBands from './CarouselBands'
 import PopupBands from './PopupBands'
+import ShowSongs from './ShowSongs'
+import ShowTags from './ShowTags'
+import ShowSetlists from './ShowSetlists'
+import ShowSets from './ShowSets'
 const Home = (props) => {
     
     useEffect(()=>{
@@ -27,7 +31,15 @@ const Home = (props) => {
     else if(props.data === "Live Experience Designer"){
         return(
             <div>
-                <h1>Live Experience Designer</h1>
+                {popBand ? <PopupBands thisBand={band} popBand={popBand} setPopBand={setPopBand}/> : null}
+                <Heading size="sm" color="#8e8d8a">Bands</Heading>
+                <CarouselBands setBand={setBand} setPopBand={setPopBand} popBand={popBand}></CarouselBands>
+                <Heading size="sm" color="#8e8d8a">Shows</Heading>
+                <CarouselShows ></CarouselShows>
+                
+                <ShowSongs></ShowSongs>
+               
+                
             </div>
         )
     }
