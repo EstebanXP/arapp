@@ -7,7 +7,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
   const [popStatus, setPopStatus] = useState(false);
   function bandFunc(){
     props.setBand(props.tband);
+    
   }
+  const LinkB = props.linkBand;
   return (
     <Box bg="white" borderRadius="20" shadow={4} mx="2%">
         <Center>
@@ -18,7 +20,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
         <p>Band members: </p>
         <ManageMemInBands tsongs = {props.tband.bandMembers}/>
 
-        <Button borderRadius="10" w="50%" mx="auto"colorScheme="indigo" onPress={() => {props.setBand(props.tband)}}>Edit this band</Button>
+        <Button borderRadius="10" w="50%" mx="auto"colorScheme="indigo" onPress={()=>{props.setBand(props.tband)}}>Edit this band</Button>
+        
         {/*<PopupBands
           trigger={popStatus}
           setPopStatus={setPopStatus}

@@ -3,15 +3,17 @@ import {Box, NativeBaseProvider, Heading, HStack, Text, Center, Container, Conte
 import  Carousel  from './Carousel'
 import CarouselShows from './CarouselShows'
 import CarouselBands from './CarouselBands'
+
 const Home = (props) => {
 
     useEffect(()=>{
 
     })
-
+    
     if(props.data === "Band Manager")
     return (
-        <div>          
+        <div> 
+        
             <CarouselBands setBand={props.setBand}></CarouselBands>
             <CarouselShows></CarouselShows>
         </div>

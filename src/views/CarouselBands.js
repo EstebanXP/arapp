@@ -104,7 +104,7 @@ const CarouselBands = (props) => {
   }
 
 
-
+  const LinkB = props.linkBand;
   return (
     <div className="carousel-bands">
       <form>
@@ -123,7 +123,7 @@ const CarouselBands = (props) => {
             return (
               
               
-                <ShowBands tband={band} setBand={props.setBand} />
+                <ShowBands tband={band} setBand={props.setBand} linkBand={props.linkBand} />
               
             );
             //}            

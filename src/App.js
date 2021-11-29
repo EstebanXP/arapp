@@ -20,7 +20,7 @@ import Notifications from "./views/notifications";
 import UTags from "./views/UTags";
 import AddLiveShows from "./views/AddLiveShows";
 import ULiveShows from "./views/ULiveShows";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Logeo from "./views/Logeo";
 import db from "./firebase";
@@ -34,6 +34,7 @@ import { MdNotifications, MdNotificationsNone } from 'react-icons/md'
 
 //Aqui estan todas las rutas, si necesitan agregar una propia pueden hacerlo
 function App() {
+  
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
   const [userName, setUserName] = useState();
@@ -46,6 +47,12 @@ function App() {
     marginHorizontal: "1"
   };
 
+  function linkBand(){
+    return(
+      <Link to="/editBands"><Button borderRadius="10" w="50%" mx="auto"colorScheme="indigo" >Edit this band</Button></Link>
+    )
+  }
+  
   async function getData() {
     const docRef = doc(db, "Users", user.uid);
     const docSnap = await getDoc(docRef);
@@ -167,7 +174,7 @@ function App() {
                     </Center>
                   </Box>
                   <Box w="100%" py="1" bg="indigo.100" borderBottomRadius="10"></Box>
-                  <Button onPress={()=>{console.log(band)}}>Jalale Puto</Button>
+                 
                   <Center>
                     <Box maxW="1000" w="90%">
                       <Switch>
@@ -203,7 +210,7 @@ function App() {
                           <Notifications />
                         </Route>
                         <Route path="/">
-                          <Home data={data} setBand={setBand}/>
+                          <Home data={data} setBand={setBand} linkBand={linkBand} />
                         </Route>
                       </Switch>
 
