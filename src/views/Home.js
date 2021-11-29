@@ -11,6 +11,7 @@ const Home = (props) => {
     })
     const [popBand, setPopBand] = useState(false);
     const [band, setBand] = useState();
+    
     console.log(popBand)
     if(props.data === "Band Manager")
     return (

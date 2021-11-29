@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import Carousel from "./Carousel";
 
-import {Box, Heading, Text, Badge, Button, Center} from "native-base"
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog} from "native-base"
 import db from '../firebase';
 import {
     collection,
@@ -24,6 +24,11 @@ const CarouselShows = () => {
 
     const [shows, setShows] = useState([]);
     const showsCollectionRef = collection(db, "LiveShows");
+    const [isOpen, setIsOpen] = React.useState(false)
+
+  const onClose = () => setIsOpen(false)
+
+  const cancelRef = React.useRef(null)
 
     //get live shows
     useEffect(() => {
@@ -49,10 +54,11 @@ const CarouselShows = () => {
     const deleteLiveShow = async (id) => {
         const showDoc = doc(db, "LiveShows", id);
         await deleteDoc(showDoc);
+        setIsOpen(false);
     };
 
     return (
-        <div>
+        <div className="carousel-shows">
             <Carousel show={4}>
             {shows.map((show) => {
                 return (
@@ -66,8 +72,41 @@ const CarouselShows = () => {
                         <Text>Place: {show.showPlace}</Text>
                         <Text>Tour: {show.showTour}</Text>
                         
-                        
-                        <button onClick ={() => {deleteLiveShow(show.id)}}>Delete Live Show</button>
+                        <Center>
+                            <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)}>
+                                Delete Show
+                            </Button>
+                            <AlertDialog
+                                leastDestructiveRef={cancelRef}
+                                isOpen={isOpen}
+                                onClose={onClose}
+                            >
+                                <AlertDialog.Content>
+                                <AlertDialog.CloseButton />
+                                <AlertDialog.Header>Delete Show</AlertDialog.Header>
+                                <AlertDialog.Body>
+                                    This will delete this show. This action cannot be
+                                    reversed. Deleted data can not be recovered.
+                                </AlertDialog.Body>
+                                <AlertDialog.Footer>
+                                    <Button.Group space={2}>
+                                    <Button
+                                        borderRadius="10"
+                                        variant="unstyled"
+                                        colorScheme="coolGray"
+                                        onPress={onClose}
+                                        ref={cancelRef}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button borderRadius="10" colorScheme="danger" onPress ={() => {deleteLiveShow(show.id)}}>
+                                        Delete
+                                    </Button>
+                                    </Button.Group>
+                                </AlertDialog.Footer>
+                                </AlertDialog.Content>
+                            </AlertDialog>
+                        </Center>
                     </Box>
                    </Box>
                 );

@@ -159,7 +159,7 @@ function App() {
                               {navState === 1 ? <Text fontSize="xs" bold color="indigo.600">Home</Text> : <Text fontSize="xs" color="#8e8d8a">Home</Text>}
                             </Badge>
                           </Link>
-                          <Link style={linkStyle} to="/editBands" onClick={() => { setNavState(2) }}>
+                          <Link style={linkStyle} to="/notifications" onClick={() => { setNavState(2) }}>
                             <Badge colorScheme={navState === 2 ? "indigo" : "white"} borderRadius="10" mx="1" w={"24"}>
                               {navState === 2 ? <MdNotifications style={{ color: "rgb(79, 70, 229)" }}></MdNotifications> : <MdNotificationsNone style={{ color: "#8e8d8a" }}></MdNotificationsNone>}
                               {navState === 2 ? <Text fontSize="xs" bold color="indigo.600">Notifications</Text> : <Text fontSize="xs" color="#8e8d8a">Notifications</Text>}
@@ -207,6 +207,9 @@ function App() {
                         </Route>
                         <Route path="/">
                           <Home data={data}/>
+                        </Route>
+                        <Route path="/addLiveShows">
+                          <AddLiveShows />
                         </Route>
                       </Switch>
 
