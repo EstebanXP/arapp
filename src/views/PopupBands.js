@@ -84,10 +84,10 @@ const PopupBands = (props) => {
     async function closePopUp(a) {
         a.preventDefault();
         console.log(newMusicGenre);
-        props.setPopStatus(false);
+        props.setPopBand(false);
     }
 
-    return props.trigger ? (
+    return props.popBand ? (
         <div className="popup" >
             <div className="popup-inner">
 

@@ -39,7 +39,7 @@ function App() {
   const [data, setData] = useState();
   const [userName, setUserName] = useState();
   const [navState, setNavState] = useState(1);
-  const [band, setBand] = useState();
+  
   const linkStyle = {
     margin: "0",
     textDecoration: "none",
@@ -47,11 +47,7 @@ function App() {
     marginHorizontal: "1"
   };
 
-  function linkBand(){
-    return(
-      <Link to="/editBands"><Button borderRadius="10" w="50%" mx="auto"colorScheme="indigo" >Edit this band</Button></Link>
-    )
-  }
+
   
   async function getData() {
     const docRef = doc(db, "Users", user.uid);
@@ -189,7 +185,7 @@ function App() {
                           <ManageBands userID={user.uid} bandManager={userName} />
                         </Route>
                         <Route path="/editBands">
-                          <EditBands userID={user.uid} bandManager={userName} thisBand={band} />
+                          <EditBands userID={user.uid} bandManager={userName}  />
                         </Route>
                         <Route path="/addTags">
                           <ManageTags></ManageTags>
@@ -210,7 +206,7 @@ function App() {
                           <Notifications />
                         </Route>
                         <Route path="/">
-                          <Home data={data} setBand={setBand} linkBand={linkBand} />
+                          <Home data={data}/>
                         </Route>
                       </Switch>
 

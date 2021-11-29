@@ -11,23 +11,21 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
   }
   const LinkB = props.linkBand;
   return (
-    <Box bg="white" borderRadius="20" shadow={4} mx="2%">
-        <Center>
-        <Heading textAlign="center" maxW="90%">{props.tband.bandName}</Heading> </Center>
-        {/*<p>Logo: {props.tband.bandLogo}</p>*/}
-        <Text textAlign="center" isTruncated maxW="90%">{props.tband.bandDescription}</Text>
-        <Badge w="50%" colorScheme="lime" borderRadius="5" mx="auto">{props.tband.bandGenres}</Badge>
-        <p>Band members: </p>
-        <ManageMemInBands tsongs = {props.tband.bandMembers}/>
+    <Box w="100%">
+      <Box bg="white" borderRadius="20" shadow={4} mx="2" h="100%">
+          <Center>
+          <Heading textAlign="center" maxW="90%" mt="2">{props.tband.bandName}</Heading> </Center>
+          {/*<p>Logo: {props.tband.bandLogo}</p>*/}
+          <Text textAlign="center" isTruncated maxW="90%">{props.tband.bandDescription}</Text>
+          <Badge w="50%" colorScheme="light" borderRadius="5" mx="auto" mt="2">{props.tband.bandGenres}</Badge>
+          <p>Band members: </p>
+          <ManageMemInBands tsongs = {props.tband.bandMembers}/>
 
-        <Button borderRadius="10" w="50%" mx="auto"colorScheme="indigo" onPress={()=>{props.setBand(props.tband)}}>Edit this band</Button>
+          <Button borderRadius="10" w="50%" position="absolute" left="25%"bottom="2"colorScheme="indigo" onPress={()=>{props.setBand(props.tband); props.setPopBand(true);}}>Edit this band</Button>
+          
+          
         
-        {/*<PopupBands
-          trigger={popStatus}
-          setPopStatus={setPopStatus}
-          thisBand = {props.tband}
-        />*/}
-      
+      </Box>
     </Box>
   );
 };

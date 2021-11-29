@@ -29,13 +29,13 @@ const Carousel = (props) => {
             <div className="contenedorFlechas">
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <BsFillArrowLeftCircleFill size ="2em" style={{margin : "2"}} color="#818cf8" onClick={prev}/>
+                    <BsFillArrowLeftCircleFill size ="2em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
                 
                 
                     
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <BsFillArrowRightCircleFill size ="2em" style={{margin : "2"}} color="#818cf8" onClick={next}/>
+                    <BsFillArrowRightCircleFill size ="2em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
                     
              
                     
@@ -51,8 +51,7 @@ const Carousel = (props) => {
             </div>
             <HStack>
             {(()=>{
-                console.log("lenght" + length);
-                console.log(show);
+                
                 for(let i=0;i<(length - show); i++){
                     return(
                         <Circle mx="1"size="2" bg="indigo.500"/>

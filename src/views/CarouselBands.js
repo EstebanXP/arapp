@@ -123,7 +123,7 @@ const CarouselBands = (props) => {
             return (
               
               
-                <ShowBands tband={band} setBand={props.setBand} linkBand={props.linkBand} />
+                <ShowBands tband={band} setBand={props.setBand} setPopBand={props.setPopBand} popBand={props.popBand}/>
               
             );
             //}            
