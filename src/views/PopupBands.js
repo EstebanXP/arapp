@@ -61,7 +61,7 @@ const PopupBands = (props) => {
     //deleteBand
     const deleteBand = async (bandId) => {
         await deleteDoc(doc(db, "Bands", bandId));
-        props.setPopStatus(false);
+        props.setPopBand(false);
     };
 
     //save changes
@@ -78,7 +78,7 @@ const PopupBands = (props) => {
             bandDescription : newDescription,
             bandGenres: newMusicGenre
         });
-        props.setPopStatus(false);
+        props.setPopBand(false);
     }
 
     async function closePopUp(a) {
