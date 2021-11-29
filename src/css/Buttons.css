@@ -3,7 +3,7 @@
 
 
 /* Style buttons */
-.btn {
+.btn-close {
     border: 1px solid rgba(218,62,82); /* Remove borders */
     border-radius: 8px;
     position: absolute;
@@ -16,9 +16,25 @@
   }
   
   /* Darker background on mouse-over */
-  .btn:hover {
+  .btn-close:hover {
     background-color: rgba(218,62,82);
     color: white;
   }
 
+  .btn-remove {
+    border: 1px solid rgba(218,62,82); /* Remove borders */
+    border-radius: 8px;
+    position: absolute;
+    right: 450px;
+    background-color: white;
+    color: rgba(218,62,82); /* White text */
+    padding: 8px 12px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
   
+  /* Darker background on mouse-over */
+  .btn-remove:hover {
+    background-color: rgba(218,62,82);
+    color: white;
+  }

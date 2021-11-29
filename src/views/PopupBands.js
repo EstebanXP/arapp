@@ -93,7 +93,7 @@ const PopupBands = (props) => {
 
                 <Heading size="lg" mb="10" textAlign="Left">{"Edit Band"}</Heading>
                            
-                <button class="btn" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
+                <button class="btn-close" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
                 <br></br>
                 <br></br>
 
@@ -104,9 +104,10 @@ const PopupBands = (props) => {
 
                         <HStack mb="1%" space={2} alignItems="left">
                             <View style={{justifyContent: 'center'}}>
-                                <Text w="120">Band Name: </Text>
+                                <Text fontSize="xl" w="180">Band Name: </Text>
                             </View>
                             <Input
+                                size="xl"
                                 defaultValue={props.thisBand.bandName}
                                 type="bandName"
                                 name="bandName"
@@ -129,9 +130,10 @@ const PopupBands = (props) => {
             
                         <HStack mb="1%" space={2} alignItems="left">
                             <View style={{justifyContent: 'center'}}>
-                                <Text w="120">Logo: </Text>
+                                <Text fontSize="xl" w="180">Logo: </Text>
                             </View>
                             <Input
+                                size="xl"
                                 defaultValue={props.thisBand.bandLogo}
                                 type="bandLogo"
                                 name="bandLogo"
@@ -152,9 +154,10 @@ const PopupBands = (props) => {
                         </HStack>
                         <HStack mb="1%" space={2} alignItems="left">
                             <View style={{justifyContent: 'center'}}>
-                                <Text w="120">Band Description: </Text>
+                                <Text fontSize="xl" w="180">Band Description: </Text>
                             </View>
                             <Input
+                                size="xl"
                                 defaultValue={props.thisBand.bandDescription}
                                 type="bandDescription"
                                 name="bandDescription"
@@ -176,9 +179,10 @@ const PopupBands = (props) => {
                         </HStack>
                         <HStack mb="1%" space={2} alignItems="left">
                             <View style={{justifyContent: 'center'}}>
-                                <Text w="120">Music Genre: </Text>
+                                <Text fontSize="xl" w="180">Music Genre: </Text>
                             </View>
                             <Input
+                                size="xl"
                                 defaultValue={props.thisBand.bandGenres}
                                 type="bandGenre"
                                 name="bandGenre"
@@ -199,15 +203,13 @@ const PopupBands = (props) => {
                             />
                         </HStack>
                     </Stack>
-                    Members:
+                    <Text bold fontSize="2xl">Members:</Text>
                         {lista.map((user) => {
                         if (props.thisBand.bandMembers.includes(user.id)) {
                             return (
                             <div>
-                                <p>Name: {user.userName}, Username: {user.userUsername}</p>
-                                <button onClick={() => deleteUserOnBand(user.id)}>
-                                remove user
-                                </button>
+                                <Text fontSize="xl" w="120" lineHeight="2xl" >Name: {user.userName}, Username: {user.userUsername}</Text>
+                                <button class="btn-remove"  onClick={() => deleteUserOnBand(user.id)}><i class="fa fa-trash"></i> Remove user</button>
                             </div>
                             );
                         }
@@ -218,14 +220,14 @@ const PopupBands = (props) => {
                         .map((user) => {
                             if(user.userRole == "Band Member"){
                                 return (
-                                <div>
-                                    <p>
+                                <p>
+                                    <Text fontSize="xl" w="120">
                                     {"Name: " + user.userName + ", Username: " + user.userUsername}{" "}
                                     <button onClick={() => addUserOnBand(user.id)}>
                                         Añadir
                                     </button>{" "}
-                                    </p>
-                                </div>
+                                    </Text>
+                                </p>
                                 );
                             }
                         })}
