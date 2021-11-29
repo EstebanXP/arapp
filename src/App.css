@@ -41,7 +41,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
+  padding-bottom: 10px;
 }
 
 .carousel-wrapper {
@@ -166,5 +167,5 @@ img.right-arrow:hover, img.left-arrow:hover{
 }
 .carousel-shows{
   overflow-x: hidden;
-    
+   
 }

@@ -64,7 +64,7 @@ const PopupBands = (props) => {
     //save changes
     async function saveOnSubmit(e) {
         e.preventDefault();
-        console.log(newMusicGenre);
+        
         //const newName = e.target.bandName.value;
         //const newLogo = e.target.bandLogo.value;
         //const newDescription = e.target.bandDescription.value;
@@ -80,7 +80,7 @@ const PopupBands = (props) => {
 
     async function closePopUp(a) {
         a.preventDefault();
-        console.log(newMusicGenre);
+  
         props.setPopBand(false);
     }
 

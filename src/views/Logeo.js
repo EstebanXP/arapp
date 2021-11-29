@@ -53,8 +53,6 @@ const Logeo = (props) => {
     const role = e.target.role.value;
     const name = e.target.name.value;
     const uname = e.target.username.value;
-    console.log(email);
-    console.log(password);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in

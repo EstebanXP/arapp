@@ -53,7 +53,7 @@ function App() {
     const docRef = doc(db, "Users", user.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      
       setData(docSnap.data().userRole);
       setUserName(docSnap.data().userName);
     } else {

@@ -63,7 +63,7 @@ const CarouselBands = (props) => {
     setBandUsers([...bandUsers, u.id]);
     setEmailEmail([...emailEmail, u.userEmail]);
     setEmailUsername([...emailUsername, u.userName]);
-    console.log(emailEmail, emailUsername, emailBandname);
+    
   }
 
   //create Sets
