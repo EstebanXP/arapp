@@ -292,7 +292,7 @@ function App() {
                       <Notifications />
                     </Route>
                     <Route path="/">
-                      <Home data={data} />
+                      <Home data={data} userID={user.uid}/>
                     </Route>
                   </Switch>
                 </Box>

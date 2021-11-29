@@ -4,10 +4,11 @@ import  Carousel  from './Carousel'
 import CarouselShows from './CarouselShows'
 import CarouselBands from './CarouselBands'
 import PopupBands from './PopupBands'
-import ShowSongs from './ShowSongs'
+import ManageSets from './ManageSets'
+import ManageSetlists from './ManageSetlists'
+import ManageSongs from './ManageSongs'
 import ShowTags from './ShowTags'
-import ShowSetlists from './ShowSetlists'
-import ShowSets from './ShowSets'
+import ManageTags from './ManageTags'
 const Home = (props) => {
     
     useEffect(()=>{
@@ -36,9 +37,10 @@ const Home = (props) => {
                 <CarouselBands setBand={setBand} setPopBand={setPopBand} popBand={popBand}></CarouselBands>
                 <Heading size="sm" color="#8e8d8a">Shows</Heading>
                 <CarouselShows ></CarouselShows>
-                
-                <ShowSongs></ShowSongs>
-               
+                <ManageSets></ManageSets>
+                <ManageTags></ManageTags>
+                <ManageSetlists userID={props.userID} />
+                <ManageSongs />
                 
             </div>
         )

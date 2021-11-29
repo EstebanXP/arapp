@@ -12,13 +12,13 @@ const Carousel = (props) => {
     const [index, setIndex] =useState(length - show)
     const next = () => {
         if (currentIndex < (length - show)) {
-            setCurrentIndex(prevState => prevState + show)
+            setCurrentIndex(prevState => prevState + 1)
         }
     }
     
     const prev = () => {
         if (currentIndex > 0) {
-            setCurrentIndex(prevState => prevState - show)
+            setCurrentIndex(prevState => prevState - 1)
         }
     }
     // Set the length to match current children from props
@@ -27,16 +27,16 @@ const Carousel = (props) => {
     }, [children])
     return (
         <div className="carousel-container">
-            <div className="contenedorFlechas">
+            <div className="contenedorFlechasChico">
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <AiOutlineLeft size ="2em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
+                    <AiOutlineLeft size =".5em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
                 
                 
                     
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <AiOutlineRight size ="2em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
+                    <AiOutlineRight size =".5em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
                     
              
                     
@@ -50,18 +50,7 @@ const Carousel = (props) => {
                     {children}
                 </div>
             </div>
-            <HStack>
-            {(()=>{
-                
-                for(let i=0;i<(length - show); i++){
-                    return(
-                        <Circle mx="1"size="2" bg="indigo.500"/>
-                    )
-                    
-                }
-            })()}
-            <Circle mx="1"size="2" bg="indigo.500"/>
-            </HStack>
+            
             
         </div>
     )

@@ -5,7 +5,8 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import db from "../firebase";
-
+import {Box, Heading, Text, Badge, Button, Center, Image} from "native-base"
+import  Carousel from "./CarouselChico";
 const ManageSongs = (props) => {
   const [lista, setLista] = useState([]);
 
@@ -22,17 +23,31 @@ const ManageSongs = (props) => {
   }, []);
 
   return (
-    <div className="col-md-8">
+    <Carousel show={2}>
       {lista.map((link) => {
           if(props.tsongs.includes(link.id)){
             return(
-              <div className="card mb-1">
-                <p>Name: {link.userName} , Username: {link.userUsername}</p>
-              </div>
+              <Box w="100%" >
+                <Box  h="100%" borderRadius="20" mx="2">
+                  <Center>
+                    <Image
+                    mt="2"
+                      source={{
+                        uri: "https://wallpaperaccess.com/full/317501.jpg",
+                      }}
+                      alt="Alternate Text"
+                      size="xs"
+                      borderRadius="100"
+                    />
+                  <Text>{link.userName}</Text><Text bold mb="2"> @{link.userUsername}</Text>
+                  </Center>
+                
+                </Box>              
+              </Box>
             )
           }
       })}
-    </div>
+    </Carousel>
   );
 };
 
