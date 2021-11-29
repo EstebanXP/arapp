@@ -17,7 +17,6 @@ import db from "../firebase";
 import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import Carousel from './Carousel'
 
 const element = <FontAwesomeIcon icon={faCoffee} />
 
@@ -80,7 +79,6 @@ const PopupBands = (props) => {
             bandGenres: newMusicGenre
         });
         props.setPopBand(false);
-        props.setPopBand(true);
     }
 
     async function closePopUp(a) {
@@ -202,23 +200,19 @@ const PopupBands = (props) => {
                         </HStack>
                     </Stack>
                     Members:
-                    <Carousel show={7}>
                         {lista.map((user) => {
                         if (props.thisBand.bandMembers.includes(user.id)) {
                             return (
-                            <Box w="100%">
-                                <Box mx="2">
+                            <div>
                                 <p>Name: {user.userName}, Username: {user.userUsername}</p>
                                 <button onClick={() => deleteUserOnBand(user.id)}>
                                 remove user
                                 </button>
-                                </Box>
-                            </Box>
+                            </div>
                             );
                         }
                         })}
                         {/**Division/ */}
-                    </Carousel>
                         <hr></hr>
                         {lista
                         .map((user) => {
