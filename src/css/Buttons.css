@@ -24,8 +24,6 @@
   .btn-remove {
     border: 1px solid rgba(218,62,82); /* Remove borders */
     border-radius: 8px;
-    position: absolute;
-    right: 450px;
     background-color: white;
     color: rgba(218,62,82); /* White text */
     padding: 8px 12px; /* Some padding */
@@ -38,3 +36,44 @@
     background-color: rgba(218,62,82);
     color: white;
   }
+
+
+.btn-add {
+    border: 1px solid rgba(59, 206, 172); /* Remove borders */
+    border-radius: 8px;
+    position: absolute;
+    right: 35px;
+    background-color: white;
+    color: rgba(59, 206, 172); /* White text */
+    padding: 8px 12px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  
+  /* Darker background on mouse-over */
+  .btn-add:hover {
+    background-color: rgba(59, 206, 172);
+    color: white;
+  }
+
+  .btn-save {
+    border-radius: 8px;
+    border: 0px;
+    background-color: rgb(99, 102, 241);
+    color: white; /* White text */
+    padding: 12px 12px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  
+  .btn-delete {
+    border-radius: 8px;
+    border: 0px;
+    background-color: rgb(239, 68, 68);
+    color: white; /* White text */
+    padding: 12px 12px; /* Some padding */
+    margin-left: 10px;
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  

@@ -50,7 +50,7 @@ const Carousel = (props) => {
                     {children}
                 </div>
             </div>
-            <HStack>
+            {/* <HStack>
             {(()=>{
                 
                 for(let i=0;i<(length - show); i++){
@@ -61,7 +61,7 @@ const Carousel = (props) => {
                 }
             })()}
             <Circle mx="1"size="2" bg="indigo.500"/>
-            </HStack>
+            </HStack> */}
             
         </div>
     )

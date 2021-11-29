@@ -15,10 +15,7 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
-const element = <FontAwesomeIcon icon={faCoffee} />
+import Carousel from './Carousel'
 
 const PopupBands = (props) => {
     {/* STATES*/}
@@ -91,7 +88,7 @@ const PopupBands = (props) => {
         <div className="popup" >
             <div className="popup-inner">
 
-                <Heading size="lg" mb="10" textAlign="Left">{"Edit Band"}</Heading>
+                <Heading size="xl" mb="10" textAlign="Left">{"Edit Band"}</Heading>
                            
                 <button class="btn-close" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
                 <br></br>
@@ -204,16 +201,26 @@ const PopupBands = (props) => {
                         </HStack>
                     </Stack>
                     <Text bold fontSize="2xl">Members:</Text>
+                    <Carousel show={7}>
                         {lista.map((user) => {
                         if (props.thisBand.bandMembers.includes(user.id)) {
                             return (
-                            <div>
-                                <Text fontSize="xl" w="120" lineHeight="2xl" >Name: {user.userName}, Username: {user.userUsername}</Text>
+                            <Box w="100%">
+                                <Box mx="2">
+                                    <Center>
+                                    <br></br>
+                                    <i class="fa fa-user"></i>
+                                    <Text fontSize="xl" lineHeight="3xl" >Name: {user.userName}</Text>
+                                    <Text fontSize="xl" lineHeight="2xl" >Username: {user.userUsername}</Text>
+                                    <br></br>
                                 <button class="btn-remove"  onClick={() => deleteUserOnBand(user.id)}><i class="fa fa-trash"></i> Remove user</button>
-                            </div>
+                                </Center>
+                                </Box>
+                            </Box>
                             );
                         }
                         })}
+                          </Carousel>
                         {/**Division/ */}
                         <hr></hr>
                         {lista
@@ -223,23 +230,18 @@ const PopupBands = (props) => {
                                 <p>
                                     <Text fontSize="xl" w="120">
                                     {"Name: " + user.userName + ", Username: " + user.userUsername}{" "}
-                                    <button onClick={() => addUserOnBand(user.id)}>
-                                        Añadir
-                                    </button>{" "}
+                                    <button class="btn-add" onClick={() => addUserOnBand(user.id)}><i class="fa fa-user-plus"></i> Añadir</button>{" "}
                                     </Text>
                                 </p>
                                 );
                             }
                         })}
-                        <br></br>
-                        <button type="submit">Save set</button>
-                        <button
+                        <button class="btn-save" type="submit"><i class="fa fa-save"></i> Save Band</button>
+                        <button class="btn-delete" type="submit"
                         onClick={() => {
                             deleteBand(props.thisBand.id);
                         }}
-                        >
-                        Delete band
-                        </button>
+                        ><i class="fa fa-trash"></i> Delete band</button>
                 </form>
 
                 {/* <form onSubmit={saveOnSubmit}>
