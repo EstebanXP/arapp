@@ -56,15 +56,17 @@ const CarouselShows = () => {
             <Carousel show={4}>
             {shows.map((show) => {
                 return (
-                   <Box>
-                    <Box  h="100%" mx="2" bg="white" borderRadius="20" shadow={4}>
-                        <h3>Band: {show.showBand}</h3>
-                        <h3>Date: {show.showDate}</h3>
-                        <h3>Location: {show.showLocation}</h3>
-                        <h3>Show name: {show.showName}</h3>
-                        <h3>Place: {show.showPlace}</h3>
-                        <h3>Tag: {show.showTag}</h3>
-                        <h3>Tour: {show.showTour}</h3>
+                   <Box w="100">
+                    <Box  h="100%" mx="2" bg="white" borderRadius="20" shadow={4} >
+                        <Heading textAlign="center">{show.showBand}</Heading>
+                        <Badge w="50%" colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{show.showTag}</Badge>
+                        <Text>Date: {show.showDate}</Text>
+                        <Text>Location: {show.showLocation}</Text>
+                        <Text>Show name: {show.showName}</Text>
+                        <Text>Place: {show.showPlace}</Text>
+                        <Text>Tour: {show.showTour}</Text>
+                        
+                        
                         <button onClick ={() => {deleteLiveShow(show.id)}}>Delete Live Show</button>
                     </Box>
                    </Box>
