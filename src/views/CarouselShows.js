@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import Carousel from "./Carousel";
 import {BsTrash} from "react-icons/bs"
-import {Box, Heading, Text, Badge, Button, Center, AlertDialog} from "native-base"
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack} from "native-base"
 import db from '../firebase';
 import {
     collection,
@@ -65,13 +65,16 @@ const CarouselShows = () => {
                 return (
                    <Box w="100" >
                     <Box  h="100%" mx="2" bg="white" borderRadius="20" shadow={4} >
+                        
                         <Heading textAlign="center" mt="2">{show.showBand}</Heading>
                         <Badge  colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{show.showTag}</Badge>
-                        <Text>Date: {show.showDate}</Text>
-                        <Text>Location: {show.showLocation}</Text>
-                        <Text>Show name: {show.showName}</Text>
-                        <Text>Place: {show.showPlace}</Text>
-                        <Text>Tour: {show.showTour}</Text>
+                        <Stack ml="2">
+                            <Text><Text bold>Date: </Text>{show.showDate}</Text>
+                            <Text><Text bold>Location: </Text>{show.showLocation}</Text>
+                            <Text><Text bold>Show name: </Text> {show.showName}</Text>
+                            <Text><Text bold>Place: </Text> {show.showPlace}</Text>
+                            <Text><Text bold>Tour: </Text>{show.showTour}</Text>
+                        </Stack>
                         
                         <Center mb="2">
                             <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)}>

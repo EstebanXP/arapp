@@ -245,9 +245,9 @@ const PopupBands = (props) => {
                                     >
                                         <AlertDialog.Content>
                                         <AlertDialog.CloseButton />
-                                        <AlertDialog.Header>Delete Show</AlertDialog.Header>
+                                        <AlertDialog.Header>Remove</AlertDialog.Header>
                                         <AlertDialog.Body>
-                                            This will delete this show. This action cannot be
+                                            This will remove this member from the band. This action cannot be
                                             reversed. Deleted data can not be recovered.
                                         </AlertDialog.Body>
                                         <AlertDialog.Footer>
@@ -262,7 +262,7 @@ const PopupBands = (props) => {
                                                 Cancel
                                             </Button>
                                             <Button borderRadius="10" colorScheme="danger" onPress ={() => {deleteUserOnBand(user.id)}}>
-                                                Delete
+                                                Remove
                                             </Button>
                                             </Button.Group>
                                         </AlertDialog.Footer>
