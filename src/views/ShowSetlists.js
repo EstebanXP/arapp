@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 import PopupSetlists from "./PopupSetlists";
 import db from "../firebase";
 import {
@@ -34,22 +35,24 @@ const ShowSetlists = (props) => {
     <div className="container">
       <div className="card-body">
         <p>Name: {props.tsetlist.name}</p>
-        <p>
-          List of sets:{" "}
-          {list.map((set) => {
-            if (set.setListID === props.tsetlist.id) {
-              return (
-                <div>
-                  <ShowSets tset={set} />
-                  
-                </div>
-              );
-            }
-          })}
-        </p>
         <p>Show: {props.tsetlist.show}</p>
         <p>Band: {props.tsetlist.band}</p>
         <p>Tag: {props.tsetlist.tag}</p>
+          List of sets:{" "}
+          <Stack>
+          {list.map((set) => {
+            if (set.setListID === props.tsetlist.id) {
+              return (
+                <Box bg="warmGray.50">
+                  <ShowSets tset={set} />
+                  
+                </Box>
+              );
+            }
+          })}
+
+        </Stack>
+        
 
         <PopupSetlists
           trigger={popStatus}
