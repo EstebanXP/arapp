@@ -15,7 +15,9 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import {BsTrash} from "react-icons/bs"
-import { NativeBaseProvider, AlertDialog, Image, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon, Button} from "native-base";
+import {FaTimes} from 'react-icons/fa'
+import {MdModeEditOutline} from 'react-icons/md'
+import { NativeBaseProvider, AlertDialog, Image, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon, Button, Badge} from "native-base";
 import Carousel from './CarouselChico'
 
 const PopupBands = (props) => {
@@ -109,9 +111,7 @@ const PopupBands = (props) => {
                 <br></br>
                 <form onSubmit={saveOnSubmit}>
                     <HStack>
-                    <Stack space={0} alignItems="left" w="70%">
-                            
-
+                    <Stack space={0} alignItems="left" my="auto" w="70%">
                         <HStack mb="1%" space={2} alignItems="left">
                             <View style={{justifyContent: 'center'}}>
                                 <Text fontSize="sm" w="180">Band Name: </Text>
@@ -213,13 +213,14 @@ const PopupBands = (props) => {
                             />
                         </HStack>
                     </Stack>
-                    <Box mx="auto">
+                    <Box my="auto" w="30%">
+                    <Text bold fontSize="2md">Members:</Text>
                     <Carousel show={3}>
                         {lista.map((user) => {
                         
                             return (
                             <Box w="100%">
-                                <Box mx="1"  bg="warmGray.100" borderRadius="20" mt="1">
+                                <Box mx="1"  bg="warmGray.100" borderRadius="20" mt="1" h="100%">
                                     <Center>
                                     <br></br>
                                     <Image
@@ -231,8 +232,8 @@ const PopupBands = (props) => {
                                     size="xs"
                                     borderRadius="100"
                                     />
-                                    <Text  lineHeight="3md" >{user.userName}</Text>
-                                    <Text bold mb="2" lineHeight="2md" >@{user.userUsername}</Text>
+                                    <Text textAlign="center" lineHeight="3md" >{user.userName}</Text>
+                                    <Text textAlign="center" bold mb="2" lineHeight="2md" >@{user.userUsername}</Text>
                                     
                                     <Button colorScheme="danger" borderRadius="10"mb="2"  onPress={() => setIsOpen(!isOpen)}>
                                         <BsTrash size=".8em" color="white"></BsTrash>
@@ -363,188 +364,74 @@ const PopupBands = (props) => {
     ) : (
         <div className="popup" >
         <div className="popup-inner">
-            <Heading size="md" mb="10" textAlign="Left">{"Edit Band"}</Heading>       
-            <button class="btn-close" onClick={closePopUp}><i class="fa fa-close"></i></button>
-            <br></br>
-            <br></br>
-            
+                 
+            <Button borderRadius="8"colorScheme="danger" position="absolute" top="4" right="4" width="8" onPress={()=>{props.setPopBand(false)}}><FaTimes color="white"></FaTimes></Button>
+            <Image borderLeftRadius="20"  source={{
+                          uri: props.thisBand.bandLogo,
+                      }} 
+                      fallbackSource ={{ uri : "https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"}}
+                      alt="Alternate Text"
+                      w="400"
+                      h="100%"
+                      alt="Alternate Text"
+                      position="absolute"
+                      top="0"
+                      left="0"
+                /> 
                 <HStack>
-                <Stack space={0} alignItems="left" w="70%">
-                        
-
-                    <HStack mb="1%" space={2} alignItems="left">
-                        <View style={{justifyContent: 'center'}}>
-                            <Text fontSize="sm" w="180">Band Name: </Text>
-                        </View>
-                        <Text
-                            
-                            defaultValue={props.thisBand.bandName}
-                            w={"100%"}
-                            isRequired
-                       >{props.thisBand.bandName}</Text>
-                    </HStack>
-        
-                    <HStack mb="1%" space={2} alignItems="left">
-                        <View style={{justifyContent: 'center'}}>
-                            <Text fontSize="sm" w="180">Logo: </Text>
-                        </View>
-                        <Input
-                            size="sm"
-                            defaultValue={props.thisBand.bandLogo}
-                            type="bandLogo"
-                            name="bandLogo"
-                            id="bandLogo"
-                            
-                            placeholder="Band Logo"
-                            onChange={handleNBLC}
-                            w={"100%"}
-                            isRequired
-                            
-                            _hover = {{
-                            borderColor: '#4f46e5' 
-                            }}
-                            _invalid={{borderColor: '#4f46e5' }}
-                            _focus ={{borderColor: '#4f46e5' }}
-                            _disabled ={{borderColor: '#4f46e5' }}
-                        />
-                    </HStack>
-                    <HStack mb="1%" space={2} alignItems="left">
-                        <View style={{justifyContent: 'center'}}>
-                            <Text fontSize="sm" w="180">Band Description: </Text>
-                        </View>
-                        <Input
-                            size="sm"
-                            defaultValue={props.thisBand.bandDescription}
-                            type="bandDescription"
-                            name="bandDescription"
-                            id="bandDescription"
+                <Box p="20%">
                 
-                            placeholder="bandDescription"
-                   
-                            onChange={handleNBDC}
-                            w={"100%"}
-                            isRequired
-                            
-                            _hover = {{
-                            borderColor: '#4f46e5' 
-                            }}
-                            _invalid={{borderColor: '#4f46e5' }}
-                            _focus ={{borderColor: '#4f46e5' }}
-                            _disabled ={{borderColor: '#4f46e5' }}
-                        />
-                    </HStack>
-                    <HStack mb="1%" space={2} alignItems="left">
-                        <View style={{justifyContent: 'center'}}>
-                            <Text fontSize="sm" w="180">Music Genre: </Text>
-                        </View>
-                        <Input
-                            size="sm"
-                            defaultValue={props.thisBand.bandGenres}
-                            type="bandGenre"
-                            name="bandGenre"
-                            id="bandGenre"
-                
-                            placeholder="bandGenre"
-                            onChange={handleNMGC}
-                            w={"100%"}
-                            isRequired
-                         
-                            
-                            _hover = {{
-                            borderColor: '#4f46e5' 
-                            }}
-                            _invalid={{borderColor: '#4f46e5' }}
-                            _focus ={{borderColor: '#4f46e5' }}
-                            _disabled ={{borderColor: '#4f46e5' }}
-                        />
-                    </HStack>
-                </Stack>
-                <Box mx="auto">
-                <Carousel show={3}>
-                    {lista.map((user) => {
-                    
-                        return (
-                        <Box w="100%">
-                            <Box mx="1"  bg="warmGray.100" borderRadius="20" mt="1">
-                                <Center>
-                                <br></br>
-                                <Image
-                                mt="2"
-                                source={{
-                                    uri: "https://wallpaperaccess.com/full/317501.jpg",
-                                }}
-                                alt="Alternate Text"
-                                size="xs"
-                                borderRadius="100"
-                                />
-                                <Text  lineHeight="3md" >{user.userName}</Text>
-                                <Text bold mb="2" lineHeight="2md" >@{user.userUsername}</Text>
-                                
-                                <Button colorScheme="danger" borderRadius="10"mb="2"  onPress={() => setIsOpen(!isOpen)}>
-                                    <BsTrash size=".8em" color="white"></BsTrash>
-                                </Button>
-                                <AlertDialog
-                                    leastDestructiveRef={cancelRef}
-                                    isOpen={isOpen}
-                                    onClose={onClose}
-                                >
-                                    <AlertDialog.Content>
-                                    <AlertDialog.CloseButton />
-                                    <AlertDialog.Header>Delete Show</AlertDialog.Header>
-                                    <AlertDialog.Body>
-                                        This will delete this show. This action cannot be
-                                        reversed. Deleted data can not be recovered.
-                                    </AlertDialog.Body>
-                                    <AlertDialog.Footer>
-                                        <Button.Group space={2}>
-                                        <Button
-                                            borderRadius="10"
-                                            variant="unstyled"
-                                            colorScheme="coolGray"
-                                            onPress={onClose}
-                                            ref={cancelRef}
-                                        >
-                                            Cancel
-                                        </Button>
-                                        <Button borderRadius="10" colorScheme="danger" onPress ={() => {deleteUserOnBand(user.id)}}>
-                                            Delete
-                                        </Button>
-                                        </Button.Group>
-                                    </AlertDialog.Footer>
-                                    </AlertDialog.Content>
-                                </AlertDialog>
-                                </Center>
-                            
-                            </Box>
-                        </Box>
-                        );
-                    
-                    })}
-                      </Carousel>
                 </Box>
+                <Stack space={0} alignItems="left" w="50%" m="auto">
+                    <Heading size="xl" textAlign="Left">{props.thisBand.bandName}</Heading>         
+                    <Text w="100%">{props.thisBand.bandDescription}</Text>
+                    <Badge  colorScheme="light" borderRadius="5" mx="auto" my="2">{props.thisBand.bandGenres}</Badge>
+                    <Box>
+                        
+                        <Carousel show={3}>
+                            {lista.map((user) => {
+                            
+                                return (
+                                <Box w="100%">
+                                    <Box mx="1"  bg="warmGray.100" borderRadius="20" mt="1" h="100%">
+                                        <Center>
+                                        <br></br>
+                                        <Image
+                                        
+                                        source={{
+                                            uri: "https://wallpaperaccess.com/full/317501.jpg",
+                                        }}
+                                        alt="Alternate Text"
+                                        size="xs"
+                                        borderRadius="100"
+                                        />
+                                        <Text textAlign="center" lineHeight="3md" >{user.userName}</Text>
+                                        <Text textAlign="center" bold mb="2" lineHeight="2md" >@{user.userUsername}</Text>
+                                        
+                                        
+                                        </Center>
+                                    
+                                    </Box>
+                                </Box>
+                                );
+                            
+                            })}
+                      </Carousel>
+                    </Box>
+                    
+                        
+                    
+                </Stack>
+                
                 </HStack>
-                <Text bold fontSize="2md">Members:</Text>
+                <HStack  position="absolute" bottom="4"> 
+                            <Button colorScheme="indigo"borderRadius="8" onPress={()=>{setEdit(!edit)}}><MdModeEditOutline color="white"/></Button>
+                </HStack>
                 
                     {/**Division/ */}
-                    <hr></hr>
-                    {listaBandMembers
-                    .map((user) => {
-                        if(user.userRole == "Band Member"){
-                            return (
-                            <p>
-                                <Text fontSize="md" w="120">
-                                {"Name: " + user.userName + ", Username: " + user.userUsername}{" "}
-                                <button class="btn-add" onClick={() => addUserOnBand(user.id)}><i class="fa fa-user-plus"></i> Añadir</button>{" "}
-                                </Text>
-                            </p>
-                            );
-                    }})}
-                    <button class="btn-save" onClick={()=>{setEdit(!edit)}}><i class="fa fa-save"></i> Edit Band</button>
-                    <button class="btn-delete" 
-                    onClick={() => {
-                        deleteBand(props.thisBand.id);
-                    }}
-                    ><i class="fa fa-trash"></i> Delete band</button>
+                    
+                    
+                    
                     
             
 
