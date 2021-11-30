@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import Carousel from "./Carousel";
-
+import {BsTrash} from "react-icons/bs"
 import {Box, Heading, Text, Badge, Button, Center, AlertDialog} from "native-base"
 import db from '../firebase';
 import {
@@ -74,7 +74,7 @@ const CarouselShows = () => {
                         
                         <Center mb="2">
                             <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)}>
-                                Delete Show
+                                <BsTrash color="white"></BsTrash>
                             </Button>
                             <AlertDialog
                                 leastDestructiveRef={cancelRef}

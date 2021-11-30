@@ -144,7 +144,7 @@ function App() {
                   <Box w="100%" py="4" borderColor="indigo.500" mb=".5"shadow={4} flex={1}>
                     <Center>
                       <HStack maxW="1000" w="90%" >
-                        <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                        <Heading color="warmGray.500" size="md" mt="auto" mb="auto">Band Manager</Heading>
                         <Box mx="auto"></Box>
                         <HStack >
                           <Link style={linkStyle} to="/profile" onClick={() => { setNavState(0) }}>
