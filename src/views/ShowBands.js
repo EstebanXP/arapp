@@ -14,8 +14,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
     <Box w="100%">
       <Box bg="white" borderRadius="20" shadow={4} mx="2" h="100%">
           <Center>
-          <Heading textAlign="center" maxW="90%" mt="2">{props.tband.bandName}</Heading> </Center>
-          <Text textAlign="center" isTruncated maxW="90%">{props.tband.bandDescription}</Text>
+          <Heading textAlign="center" maxW="90%" mt="2">{props.tband.bandName}</Heading> 
+          <Text textAlign="center" isTruncated maxW="90%">{props.tband.bandDescription}</Text> </Center>
           <Badge  colorScheme="light" borderRadius="5" mx="auto" mt="2">{props.tband.bandGenres}</Badge>
          
           <ManageMemInBands tsongs = {props.tband.bandMembers}/>

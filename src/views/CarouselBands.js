@@ -111,8 +111,8 @@ const CarouselBands = (props) => {
         <label>
           Order by:
           <select value={sortings} onChange={handleChange}>
-            <option value="name">name</option>
-            <option value="members">members</option>
+            <option value="bandName">Band Name</option>
+            <option value="bandGenres">Genres</option>
           </select>
         </label>
       </form>
