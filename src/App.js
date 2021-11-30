@@ -128,7 +128,7 @@ function App() {
                     </HStack>
                   </Center>
                 </Box>
-                <Center>
+                <Center bg="warmGray.50">
                   <Box maxW="1000" w="90%">
                     <h1>Hola mundo</h1>
 
@@ -141,7 +141,7 @@ function App() {
             return (
               <div>
                 <Router>
-                  <Box w="100%" py="4" borderColor="indigo.500" shadow={4} flex={1}>
+                  <Box w="100%" py="4" borderColor="indigo.500" mb=".5"shadow={4} flex={1}>
                     <Center>
                       <HStack maxW="1000" w="90%" >
                         <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
@@ -169,7 +169,7 @@ function App() {
                       </HStack>
                     </Center>
                   </Box>
-                  <Center>
+                  <Center bg="warmGray.50">
                     <Box maxW="1000" w="90%">
                       <Switch>
 
@@ -219,7 +219,8 @@ function App() {
           case "Live Experience Designer":
             return (
               <Router>
-                <Box w="100%" py="4" borderColor="indigo.500" shadow={2} flex={1}>
+                <Box w="100%" py="4" borderColor="indigo.500"shadow={4}  mb=".5" flex={1}>
+        
                   <Center>
                     <HStack maxW="1000" w="90%" >
                       <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Live Experience Designer</Heading>
@@ -247,7 +248,8 @@ function App() {
                     </HStack>
                   </Center>
                 </Box>
-                <Center>
+                
+                <Center bg="warmGray.50">
                   <Box maxW="1000" w="90%">
                   <Switch>
                     <Route path="/manageSets">

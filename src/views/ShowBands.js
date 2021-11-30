@@ -15,7 +15,7 @@ import {BiExpandAlt} from "react-icons/bi"
     <Box w="100%">
       <Box bg="white" borderRadius="20" shadow={4} mx="2" h="100%">
         <Center>
-          <Heading textAlign="center" maxW="90%" mt="2">{props.tband.bandName}</Heading> 
+          <Heading textAlign="center" maxW="70%" mt="2">{props.tband.bandName}</Heading> 
           <Text textAlign="center" isTruncated maxW="90%">{props.tband.bandDescription}</Text> 
           <Badge  colorScheme="light" borderRadius="5" mx="auto" mt="2">{props.tband.bandGenres}</Badge>
          </Center>
