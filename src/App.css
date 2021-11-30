@@ -135,7 +135,7 @@
 .contenedorFlechasChico{
   display: flex;
   margin-left: 10px;
-  
+  float: right;
  
 }
 

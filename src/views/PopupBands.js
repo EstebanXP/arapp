@@ -87,15 +87,11 @@ const PopupBands = (props) => {
     return props.popBand ? (
         <div className="popup" >
             <div className="popup-inner">
-
-                <Heading size="xl" mb="10" textAlign="Left">{"Edit Band"}</Heading>
-                           
+                <Heading size="xl" mb="10" textAlign="Left">{"Edit Band"}</Heading>       
                 <button class="btn-close" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
                 <br></br>
                 <br></br>
-
                 <form onSubmit={saveOnSubmit}>
-
                     <Stack space={0} alignItems="left">
                             
 
