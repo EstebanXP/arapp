@@ -223,7 +223,7 @@ function App() {
         
                   <Center>
                     <HStack maxW="1000" w="90%" >
-                      <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Live Experience Designer</Heading>
+                      <Heading color="warmGray.500" size="md" mt="auto" mb="auto">Live Experience Designer</Heading>
                       <Box mx="auto"></Box>
                       <HStack >
                         <Link style={linkStyle} to="/profile" onClick={() => { setNavState(0) }}>
