@@ -6,6 +6,17 @@ import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai"
 import {Box,Circle, HStack, Text} from "native-base"
 const Carousel = (props) => {
+    let Indicator = () => {
+        
+        return <HStack>{Array.from(Array(30), (e, i) => {
+            if(i<length - show){
+                return <Circle mx="1"size="2" bg= {currentIndex === (i*show) ? "indigo.500" : "indigo.200"} key={i}/>
+            }
+            else{
+                return null;
+            }
+        })}</HStack>
+      }
     const {children, show} = props
     const [currentIndex, setCurrentIndex] = useState(0)
     const [length, setLength] = useState(children.length)
@@ -60,7 +71,11 @@ const Carousel = (props) => {
             })()}
             <Circle mx="1"size="2" bg="indigo.500"/>
             </HStack> */}
-            <Circle mx="1"size="2" bg="indigo.500"/>
+            <div className="estado-circulos">
+                <Indicator/>
+                
+            </div>
+            
         </div>
     )
 }

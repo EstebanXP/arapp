@@ -136,8 +136,10 @@
 
 .contenedorFlechas{
   display: flex;
-  width: 90%;
   
+  position: absolute;
+  top : 20px;
+  right: 10px;
  
 }
 .contenedorFlechasChico{
@@ -146,6 +148,13 @@
   margin-right: 10px;
   float: right;
  
+}
+
+.estado-circulos{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .right-arrowCont{
