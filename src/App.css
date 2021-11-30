@@ -169,3 +169,6 @@ img.right-arrow:hover, img.left-arrow:hover{
   overflow-x: hidden;
    
 }
+::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}

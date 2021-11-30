@@ -289,7 +289,7 @@ function App() {
                       <Notifications />
                     </Route>
                     <Route path="/profile">
-                      <Notifications />
+                      <Profile/>
                     </Route>
                     <Route path="/">
                       <Home data={data} userID={user.uid}/>
