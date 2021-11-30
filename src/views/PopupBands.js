@@ -14,7 +14,7 @@ import {
     arrayRemove,
 } from "firebase/firestore";
 import db from "../firebase";
-import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon} from "native-base";
+import { NativeBaseProvider, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon, Button} from "native-base";
 import Carousel from './Carousel'
 
 const PopupBands = (props) => {
@@ -88,6 +88,7 @@ const PopupBands = (props) => {
         <div className="popup" >
             
             <div className="popup-inner">
+            <Button onPress={()=>{setEdit(!edit)}}>Cambio de estado</Button>
                 <Heading size="xl" mb="10" textAlign="Left">{"Edit Band"}</Heading>       
                 <button class="btn-close" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
                 <br></br>
@@ -303,6 +304,7 @@ const PopupBands = (props) => {
         <div className="popup" >
             
             <div className="popup-inner">
+                <Button onPress={()=>{setEdit(!edit)}}>Cambio de estado</Button>
                 <Heading size="xl" mb="10" textAlign="Left">{props.thisBand.bandName}</Heading>       
                 <button class="btn-close" onClick={closePopUp}><i class="fa fa-close"></i> Close</button>
                 <br></br>
