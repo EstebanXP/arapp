@@ -38,6 +38,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState();
   const [userName, setUserName] = useState();
+  const [userUsername, setUserUsername] = useState();
   const [navState, setNavState] = useState(1);
   
   const linkStyle = {
@@ -56,6 +57,7 @@ function App() {
       
       setData(docSnap.data().userRole);
       setUserName(docSnap.data().userName);
+      setUserUsername(docSnap.data().userUsername);
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
@@ -291,7 +293,7 @@ function App() {
                       <Notifications />
                     </Route>
                     <Route path="/profile">
-                      <Profile/>
+                      <Profile  userName={userName} userRole={data} userUsername={userUsername} />
                     </Route>
                     <Route path="/">
                       <Home data={data} userID={user.uid}/>

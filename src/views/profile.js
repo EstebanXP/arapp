@@ -17,7 +17,7 @@ import {
 } from 'native-base';
 import { View, SafeAreaView} from 'react-native'
 
-export default function profile() {
+export default function profile(props) {
     return (
         <View>
              <NativeBaseProvider>
@@ -32,11 +32,9 @@ export default function profile() {
                     }}
                     alt="Alternate Text"
                     />
-                    <Heading textAlign="center" color="black" fontSize="3xl" position="absolute" top="245">
-                        name
-                    </Heading>
-                    <Text textAlign="center" color="black" position="absolute" top="72" >user</Text>
-                    <Text textAlign="center" color="black" position="absolute" top="80" >@role</Text>      
+                    <Heading textAlign="center" color="black" fontSize="3xl" position="absolute" top="245">{props.userName}</Heading>
+                    <Text textAlign="center" color="black" position="absolute" top="72" >@{props.userUsername}</Text>
+                    <Text textAlign="center" color="black" position="absolute" top="80" >{props.userRole}</Text>      
                 </Center>
             </NativeBaseProvider>
         </View>        
