@@ -27,7 +27,7 @@ const Carousel = (props) => {
     }, [children])
     console.log("aqui hay " + length + " y show " + show)
     return (
-        <div className="carousel-container">
+        <div className="carousel-container-chico">
             {length - show > 0 ?  <div className="contenedorFlechasChico">
                 {/* You can alwas change the content of the button to other things */}
                 

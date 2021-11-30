@@ -62,7 +62,7 @@ const CarouselShows = () => {
             <Carousel show={4}>
             {shows.map((show) => {
                 return (
-                   <Box w="100">
+                   <Box w="100" >
                     <Box  h="100%" mx="2" bg="white" borderRadius="20" shadow={4} >
                         <Heading textAlign="center" mt="2">{show.showBand}</Heading>
                         <Badge  colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{show.showTag}</Badge>

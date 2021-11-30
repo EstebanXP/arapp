@@ -169,7 +169,7 @@ function App() {
                       </HStack>
                     </Center>
                   </Box>
-                  <Center bg="warmGray.50">
+                  <Center >
                     <Box maxW="1000" w="90%">
                       <Switch>
 
@@ -249,7 +249,7 @@ function App() {
                   </Center>
                 </Box>
                 
-                <Center bg="warmGray.50">
+                <Center >
                   <Box maxW="1000" w="90%">
                   <Switch>
                     <Route path="/manageSets">
