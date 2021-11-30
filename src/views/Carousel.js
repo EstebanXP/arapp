@@ -60,7 +60,7 @@ const Carousel = (props) => {
             })()}
             <Circle mx="1"size="2" bg="indigo.500"/>
             </HStack> */}
-            
+            <Circle mx="1"size="2" bg="indigo.500"/>
         </div>
     )
 }
