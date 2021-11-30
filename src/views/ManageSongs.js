@@ -120,7 +120,6 @@ const ManageSongs = (props) => {
     <div className="col-md-8">
       <div className="SearchBar">
         <div className="searchDiv">
-          <h1>Hola mundo desde el componente Songs</h1>
           <form className="FormularioSearchSong">
             Nombre de la cancion:
             <input
