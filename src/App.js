@@ -179,7 +179,7 @@ function App() {
                         <UMembers />
                       </Route>*/}
                         <Route path="/profile">
-                          <Profile userID={user.uid} bandManager={userName} />
+                          <Profile userName={userName} userRole={data} userUsername={userUsername} />
                         </Route>
                         <Route path="/manageBands">
                           <ManageBands userID={user.uid} bandManager={userName} />
