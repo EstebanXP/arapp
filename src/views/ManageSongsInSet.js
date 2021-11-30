@@ -5,6 +5,7 @@ import {
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
+
 import db from "../firebase";
 import ShowSongs from "./ShowSongs";
 import {MdModeEditOutline} from 'react-icons/md'
@@ -34,7 +35,7 @@ const ManageSongs = (props) => {
 
   return (
     <div className="col-md-8">
-      <h1>Songs in set</h1>
+      <Heading>Songs in set</Heading>
       <Button colorScheme="white" mr="2" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => props.setPopStatus(true)}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
       <input
         type="text"

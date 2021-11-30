@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import PopupSongs from "./PopupSongs";
 import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri"
 import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
+import {MdModeEditOutline} from 'react-icons/md'
 const ShowSongs = (props) => {
   const [popStatus, setPopStatus] = useState(false);
   const [showSongs, setShowSongs] = useState(false)
@@ -37,8 +38,11 @@ const ShowSongs = (props) => {
       
         
         { showSongs ? 
-          (<Box>
-            <button onClick={() => setPopStatus(true)}>Editar</button>
+          (<Box mx="4">
+            <HStack>
+              <Text bold>Lyrics:</Text>
+              <Button colorScheme="white" ml="auto" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => setPopStatus(true)}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
+            </HStack>
             <Text>{props.lyrics}</Text>
             <Text>Acordes: {props.chords}</Text>
             
