@@ -54,7 +54,6 @@ function ManageTags() {
                 return (
                     <div>
                         <ShowTags tag={tag}></ShowTags>
-                        <button onClick ={() => {deleteTag(tag.id)}}>Delete Tag</button>
                     </div>
                 );
             })}
