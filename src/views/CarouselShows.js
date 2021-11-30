@@ -64,15 +64,15 @@ const CarouselShows = () => {
                 return (
                    <Box w="100">
                     <Box  h="100%" mx="2" bg="white" borderRadius="20" shadow={4} >
-                        <Heading textAlign="center">{show.showBand}</Heading>
-                        <Badge w="50%" colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{show.showTag}</Badge>
+                        <Heading textAlign="center" mt="2">{show.showBand}</Heading>
+                        <Badge  colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{show.showTag}</Badge>
                         <Text>Date: {show.showDate}</Text>
                         <Text>Location: {show.showLocation}</Text>
                         <Text>Show name: {show.showName}</Text>
                         <Text>Place: {show.showPlace}</Text>
                         <Text>Tour: {show.showTour}</Text>
                         
-                        <Center>
+                        <Center mb="2">
                             <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)}>
                                 Delete Show
                             </Button>

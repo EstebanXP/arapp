@@ -141,7 +141,7 @@ function App() {
             return (
               <div>
                 <Router>
-                  <Box w="100%" py="4" borderColor="indigo.500" shadow={2} flex={1}>
+                  <Box w="100%" py="4" borderColor="indigo.500" shadow={4} flex={1}>
                     <Center>
                       <HStack maxW="1000" w="90%" >
                         <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
@@ -222,7 +222,7 @@ function App() {
                 <Box w="100%" py="4" borderColor="indigo.500" shadow={2} flex={1}>
                   <Center>
                     <HStack maxW="1000" w="90%" >
-                      <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Band Manager</Heading>
+                      <Heading color="#8e8d8a" size="md" mt="auto" mb="auto">Live Experience Designer</Heading>
                       <Box mx="auto"></Box>
                       <HStack >
                         <Link style={linkStyle} to="/profile" onClick={() => { setNavState(0) }}>
