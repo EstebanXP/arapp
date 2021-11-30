@@ -19,7 +19,7 @@ const ShowSets = (props) => {
           <HStack ml="auto">
             {/*Poner el boton de editar dentro del set*/}
             
-            <Button borderRadius="10" size="6"  colorScheme="fuchsia" onPress={() => setShowSongs(!showSongs)}>{showSongs ? <RiArrowDropUpLine color="white" /> : <RiArrowDropDownLine color="white" />}</Button>
+            <Button borderRadius="10" size="6"  colorScheme="info" onPress={() => setShowSongs(!showSongs)}>{showSongs ? <RiArrowDropUpLine color="white" /> : <RiArrowDropDownLine color="white" />}</Button>
           </HStack>
         
         </HStack>

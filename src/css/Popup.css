@@ -12,6 +12,10 @@
     z-index: 60;
 }
 
+.form-popup{
+    z-index: 60;
+}
+
 .popup-inner{
     position: relative;
     padding: 32px;

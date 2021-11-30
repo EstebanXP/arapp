@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 import PopupSetlists from "./PopupSetlists";
+import { BiExpandAlt } from "react-icons/bi";
 import db from "../firebase";
 import {
   collection,
@@ -34,20 +35,21 @@ const ShowSetlists = (props) => {
   return (
     <div className="carousel-setlists">
       <Box>
-        <Heading size="md" w="90%" mx="auto" mt="2" textAlign="center">{props.tsetlist.name}</Heading>
-        <Badge  colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{props.tsetlist.tag}</Badge>
-        <HStack mx="2" my="1">
-          <Text mr="auto" textAlign="center">{props.tsetlist.show}</Text>
-          <Box px="1"/>
-          <Text ml="auto" textAlign="center">{props.tsetlist.band}</Text>
-          
+        <Heading size="md" w="70%" mx="auto" mt="4" textAlign="center">{props.tsetlist.name}</Heading>
+        
+        <HStack mx="2" my="2">
+          <Box >
+            <Text bold ml="auto" textAlign="center">{props.tsetlist.band}</Text>
+            <Text mr="auto" textAlign="center">{props.tsetlist.show}</Text>
+          </Box>
+          <Badge  colorScheme="indigo" borderRadius="5" ml="auto" my="auto">{props.tsetlist.tag}</Badge>
         </HStack>
-        <Text ml="2" bold>Sets</Text>
+        
           <Stack>
           {list.map((set) => {
             if (set.setListID === props.tsetlist.id) {
               return (
-                <Box  borderColor="fuchsia.200" borderTopWidth="1" bordeBottomWidth="1">
+                <Box  borderColor="info.200" borderTopWidth="1" bordeBottomWidth="1">
                   <ShowSets tset={set} />
                   
                 </Box>
@@ -63,7 +65,8 @@ const ShowSetlists = (props) => {
           setPopStatus={setPopStatus}
           thisSetlist={props.tsetlist}
         />
-        <Button colorScheme="indigo" w="32" mx="auto"  my="2"borderRadius="8" onPress={() => setPopStatus(true)}>Edit this setlist</Button>
+         <Button mt="2" borderRadius="10" size="6" position="absolute" top="2" right="2" colorScheme="indigo" onPress={() => setPopStatus(true)}><BiExpandAlt color="white"/></Button>
+        
       </Box>
     </div>
   );

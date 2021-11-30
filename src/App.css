@@ -225,3 +225,17 @@ img.right-arrow:hover, img.left-arrow:hover{
   font-size: 12px;
   color: rgb(31, 41, 55);
 }
+.input-order-songs{
+  height: 24px;
+  padding: 1px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 6px;
+  border-color: rgb(229, 229, 229);
+  border-width: 1px;
+  width: 100px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: rgb(31, 41, 55);
+}

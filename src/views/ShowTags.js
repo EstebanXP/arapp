@@ -7,7 +7,7 @@ function ShowTags(props) {
   return (
     
       
-      <Pressable dflexWrap="wrap" m="1" onPress={() => setPopStatus(true)}>
+      <Pressable dflexWrap="wrap" mx="1" mt="1" onPress={() => setPopStatus(true)}>
         <Badge colorScheme="indigo" borderRadius="5" mt="2">{props.tag.tagName}</Badge>
       </Pressable>
     

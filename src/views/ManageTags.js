@@ -67,7 +67,7 @@ function ManageTags() {
                     <Button colorScheme="indigo" borderRightRadius="8" borderLeftRadius="0" size="6"  onPress = {createTag}><RiAddLine color="#FFF"/></Button>
                     </HStack>
                     
-                        <Box display="flex" flexDirection="row" flexWrap="wrap">
+                        <Box display="flex" flexDirection="row" flexWrap="wrap" mb="2">
                             {tags.map((tag) => {
                                 return (
                                     

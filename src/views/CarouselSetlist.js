@@ -135,10 +135,17 @@ const ManageSetlists = (props) => {
             h="26px"
               type="text"
               name="title"
-              placeholder="Search..."
+              placeholder="Search setlists..."
               onChange={(event) => {
                 setSearchParam(event.target.value);
+                
               }}
+              _hover = {{
+                borderColor: '#4f46e5' 
+              }}
+              _invalid={{borderColor: '#4f46e5' }}
+              _focus ={{borderColor: '#4f46e5' }}
+              _disabled ={{borderColor: '#4f46e5' }}
             ></Input>
           </HStack>
           <Carousel show={5}>

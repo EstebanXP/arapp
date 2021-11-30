@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 import {
   collection,
   query,
@@ -117,125 +118,37 @@ const ManageSongs = (props) => {
   }, [sortings, editStatus]);
 
   return (
-    <div className="col-md-8">
-      <div className="SearchBar">
-        <div className="searchDiv">
-          <form className="FormularioSearchSong">
-            Nombre de la cancion:
-            <input
-              type="text"
-              className="nombreCancion"
-              name="cancion"
-              onChange={getData}
-              required
-            ></input>
-            {datos.cancion}
-            <br />
-            Artista:
-            <input
-              type="text"
-              className="nombreArtista"
-              name="artista"
-              onChange={getData}
-              required
-            ></input>
-            {datos.artista}
-            <br />
-          </form>
-          <button onClick={() => buscarCancion()}>Buscar</button>
-          {status === true ? (
-            <div className="foundSong">
-              <form onSubmit={addSongToDB}>
-                <h1>Song found</h1>
-                Lyrics: <textarea defaultValue={localLyrics}></textarea>
-                <br />
-                Chords:{" "}
-                <input
-                  type="text"
-                  className="songChords"
-                  name="chords"
-                  onChange={getData}
-                ></input>
-                <br />
-                Tempo:{" "}
-                <input
-                  type="text"
-                  className="songTempo"
-                  name="tempo"
-                  onChange={getData}
-                ></input>
-                <br />
-                Tab:{" "}
-                <textarea
-                  type="text"
-                  className="songTab"
-                  name="tab"
-                  onChange={getData}
-                ></textarea>
-                <br />
-                Tags:
-                <input
-                  type="text"
-                  name="tag"
-                  placeholder="Search..."
-                  onChange={(event) => {
-                    setTagSearchParam(event.target.value);
-                  }}
-                ></input>
-                {tags
-                  .filter((val) => {
-                    if (tagSearchParam === "") {
-                      return null;
-                    } else if (val.tagName.toLowerCase().includes(tagSearchParam.toLowerCase())) {
-                      return val;
-                    }
-                  })
-                  .map((tag) => {
-                    return (
-                      <div>
-                        <ShowTags tag={tag}></ShowTags>
-                        <button type="button" onClick={() => setTagsArray([...tagsArray,tag.tagName])}>
-                          Añadir Tag
-                        </button>
-                      </div>
-                    );
-                  })}
-                <h2>Do you want to save?</h2>
-                <button type="submit">Yes</button>
-                <button>No</button>
-              </form>
-            </div>
-          ) : (
-            <div>
-              <h1 className="songNotFound">
-                Song not found, you can write it down
-              </h1>
-              <input type="text"></input>
-              <h2>Do you want to save?</h2>
-              <button onClick={addSongToDB}>Yes</button>
-              <button>No</button>
-            </div>
-          )}
-        </div>
-      </div>
-      <h1>Lista de Canciones</h1>
-      <input
-        type="text"
-        name="title"
-        placeholder="Search..."
-        onChange={(event) => {
-          setSearchParam(event.target.value);
-        }}
-      ></input>
-      <form>
-        <label>
-          Pick your sorting parameter:
-          <select value={sortings} onChange={handleChange}>
-            <option value="artist">Artist</option>
-            <option value="title">Title</option>
-          </select>
-        </label>
-      </form>
+    <Box   mx="2" bg="white" borderRadius="20" shadow={4} >
+      <Box mx="4">
+        <HStack>
+          <Input
+            mt="4"
+            w="72%"
+            type="text"
+            name="title"
+            placeholder="Search songs..."
+            onChange={(event) => {
+              setSearchParam(event.target.value);
+            }}
+            _hover = {{
+              borderColor: '#4f46e5' 
+            }}
+            _invalid={{borderColor: '#4f46e5' }}
+            _focus ={{borderColor: '#4f46e5' }}
+            _disabled ={{borderColor: '#4f46e5' }}
+            h="6"
+            borderRadius="6"
+          />
+          <Text mt="4" ml="auto" mr="2">Order by:</Text>
+          <Box mt="4">
+              
+              <select className="input-order-songs" value={sortings} onChange={handleChange}>
+                <option value="artist">Artist</option>
+                <option value="title">Title</option>
+              </select>
+            
+          </Box>
+        </HStack>
       {lista
         .filter((val) => {
           if (searchParam === "") {
@@ -268,7 +181,10 @@ const ManageSongs = (props) => {
             </div>
           </div>
         ))}
-    </div>
+                
+      </Box>
+    </Box>
+
   );
 };
 
