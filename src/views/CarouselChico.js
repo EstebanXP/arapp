@@ -25,23 +25,20 @@ const Carousel = (props) => {
     useEffect(() => {
         setLength(children.length)
     }, [children])
+    console.log("aqui hay " + length + " y show " + show)
     return (
         <div className="carousel-container">
-            <div className="contenedorFlechasChico">
+            {length - show > 0 ?  <div className="contenedorFlechasChico">
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <AiOutlineLeft size =".5em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
+                    <AiOutlineLeft size =".7em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
                 
                 
                     
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <AiOutlineRight size =".5em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
-                    
-             
-                    
-                
-            </div>
+                    <AiOutlineRight size =".7em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
+            </div> : null} 
             <div className="carousel-content-wrapper">
                 <div
                     className={`carousel-content show-${show}`}

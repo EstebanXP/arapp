@@ -15,8 +15,9 @@ const ManageSongs = (props) => {
     const usersSnapshot = onSnapshot(usersObject, (querySnapshot) => {
       let data = [];
       querySnapshot.forEach((doc) => {
+        if(props.tsongs.includes(doc.id)){
         data.push({ ...doc.data(), id: doc.id });
-      });
+      }});
       setLista(data);
     });
     return () => usersSnapshot();
@@ -25,7 +26,7 @@ const ManageSongs = (props) => {
   return (
     <Carousel show={2}>
       {lista.map((link) => {
-          if(props.tsongs.includes(link.id)){
+          
             return(
               <Box w="100%" >
                 <Box  h="100%" borderRadius="20" mx="2">
@@ -45,7 +46,7 @@ const ManageSongs = (props) => {
                 </Box>              
               </Box>
             )
-          }
+          
       })}
     </Carousel>
   );

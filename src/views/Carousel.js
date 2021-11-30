@@ -25,23 +25,21 @@ const Carousel = (props) => {
     useEffect(() => {
         setLength(children.length)
     }, [children])
+    
     return (
         <div className="carousel-container">
-            <div className="contenedorFlechas">
+            {length - show > 0 ?  <div className="contenedorFlechas">
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <AiOutlineLeft size ="2em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
+                    <AiOutlineLeft size ="1em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>
                 
                 
                     
                 {/* You can alwas change the content of the button to other things */}
                 
-                    <AiOutlineRight size ="2em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
-                    
-             
-                    
-                
-            </div>
+                    <AiOutlineRight size ="1em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
+            </div> : null} 
+           
             <div className="carousel-content-wrapper">
                 <div
                     className={`carousel-content show-${show}`}
