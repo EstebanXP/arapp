@@ -11,6 +11,7 @@ import ShowTags from './ShowTags'
 import ManageTags from './ManageTags'
 import CarouselSetlist from './CarouselSetlist'
 import SongsListHome from './SongsListHome'
+import PopupTags from './PopupTags'
 const Home = (props) => {
     
     useEffect(()=>{
@@ -18,11 +19,12 @@ const Home = (props) => {
     })
     const [popBand, setPopBand] = useState(false);
     const [band, setBand] = useState();
-    
-  
+    const [tag, setTag] = useState();
+    const [popStatusTag, setPopStatusTag] = useState();
     if(props.data === "Band Manager")
     return (
-        <div> 
+        <div>
+             
             {popBand ? <PopupBands thisBand={band} popBand={popBand} setPopBand={setPopBand}/> : null}
             <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
             <Heading size="md" ml="2" >Bands</Heading>
@@ -36,6 +38,7 @@ const Home = (props) => {
     else if(props.data === "Live Experience Designer"){
         return(
             <div>
+                <PopupTags trigger={popStatusTag} setPopStatus={setPopStatusTag} tag={tag}></PopupTags>
                 <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                 <Heading size="md" ml="2" >Setlists</Heading>
                 <CarouselSetlist userID={props.userID} />
@@ -44,7 +47,7 @@ const Home = (props) => {
                     <Box w="30%">
                         <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                         <Heading size="md" ml="2"mb="4" >Tags</Heading>
-                        <ManageTags></ManageTags>
+                        <ManageTags setTag={setTag} setPopStatusTag={setPopStatusTag} popStatusTag={popStatusTag}></ManageTags>
                     </Box>
                     <Box w="70%">
                         <Box py="1"borderRadius="100" mt="2"w="12" ml="2"  bg="fuchsia.400"/>

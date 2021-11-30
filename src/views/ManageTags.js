@@ -13,7 +13,7 @@ import {
 } from 'firebase/firestore';
 import ShowTags from './ShowTags';
 
-function ManageTags() {
+function ManageTags(props) {
 
     const [newName, setNewName] = useState("");
 
@@ -71,7 +71,7 @@ function ManageTags() {
                             {tags.map((tag) => {
                                 return (
                                     
-                                        <ShowTags tag={tag}></ShowTags>
+                                        <ShowTags setTag={props.setTag} setPopStatusTag={props.setPopStatusTag} popStatusTag={props.popStatusTag} tag={tag}></ShowTags>
                                     
                                 );
                             })}

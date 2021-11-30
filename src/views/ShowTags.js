@@ -7,20 +7,15 @@ function ShowTags(props) {
   return (
     
       
-      <Pressable dflexWrap="wrap" mx="1" mt="1" onPress={() => setPopStatus(true)}>
+      <Pressable dflexWrap="wrap" mx="1" mt="1" onPress={() => {props.setPopStatusTag(true); props.setTag(props.tag)}}>
         <Badge colorScheme="indigo" borderRadius="5" mt="2">{props.tag.tagName}</Badge>
       </Pressable>
-    
       
   );
 }
-/*
-      Sacar de componentes
+
+     
       
-        <PopupTags
-          trigger={popStatus}
-          setPopStatus={setPopStatus}
-          tag={props.tag}
-      ></PopupTags>*/
+        
 
 export default ShowTags;
