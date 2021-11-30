@@ -39,13 +39,16 @@ const Home = (props) => {
                 <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                 <Heading size="md" ml="2" >Setlists</Heading>
                 <CarouselSetlist userID={props.userID} />
-                <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
-                <Heading size="md" ml="2" >Tags</Heading>
+                
                 <HStack>
                     <Box w="30%">
+                        <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
+                        <Heading size="md" ml="2"mb="4" >Tags</Heading>
                         <ManageTags></ManageTags>
                     </Box>
                     <Box w="70%">
+                        <Box py="1"borderRadius="100" mt="2"w="12" ml="2"  bg="fuchsia.400"/>
+                        <Heading size="md" ml="2" mb="4">Songs</Heading>
                         <SongsListHome />
                     </Box>
                 

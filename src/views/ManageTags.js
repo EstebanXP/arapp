@@ -1,5 +1,7 @@
 import React,{useEffect, useState} from 'react';
-
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
+import {GrFormAdd} from "react-icons/gr"
+import {RiAddLine} from "react-icons/ri"
 import db from '../firebase';
 import {
     collection,
@@ -43,22 +45,41 @@ function ManageTags() {
     };
 
     return (
-        <div>
-            <h3>Name:</h3>
-            <input onChange={(event) => {
-                setNewName(event.target.value)
-            }}/>
-            <button onClick = {createTag}>Create Tag</button>
         
-            {tags.map((tag) => {
-                return (
-                    <div>
-                        <ShowTags tag={tag}></ShowTags>
-                    </div>
-                );
-            })}
+            <Box   mx="2" bg="white" borderRadius="20" shadow={4} >
+                <Box m="2">
+                    <HStack mt="2" mx="1">
+                    <Input w="100%" h="6" onChange={(event) => {
+                        setNewName(event.target.value)
+                        
+                        
+                    }}
+                    _hover = {{
+                        borderColor: '#4f46e5' 
+                      }}
+                      _invalid={{borderColor: '#4f46e5' }}
+                      _focus ={{borderColor: '#4f46e5' }}
+                      _disabled ={{borderColor: '#4f46e5' }}
+                      borderRightRadius="0" borderLeftRadius="8"
+                      placeholder="Create a new tag"
+                      
+                    />
+                    <Button colorScheme="indigo" borderRightRadius="8" borderLeftRadius="0" size="6"  onPress = {createTag}><RiAddLine color="#FFF"/></Button>
+                    </HStack>
+                    
+                        <Box display="flex" flexDirection="row" flexWrap="wrap">
+                            {tags.map((tag) => {
+                                return (
+                                    
+                                        <ShowTags tag={tag}></ShowTags>
+                                    
+                                );
+                            })}
+                        </Box>
+                </Box>
+            </Box>
         
-        </div>
+        
     )
 }
 
