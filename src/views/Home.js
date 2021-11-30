@@ -53,6 +53,7 @@ const Home = (props) => {
                     </Box>
                 
                 </HStack>
+                <Box py="10"></Box>
             </div>
         )
     }

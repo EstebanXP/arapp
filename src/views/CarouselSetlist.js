@@ -171,7 +171,7 @@ const ManageSetlists = (props) => {
               //if(props.userID == setlist.createdBy) {
               return (
                 <Box w="100" >
-                  <Box  h="100%" mx="2" bg="white" borderRadius="20" shadow={4} >
+                  <Box   mx="2" bg="white" borderRadius="20" shadow={4} >
                     <ShowSetlists tsetlist={setlist} />
                   </Box>
                 </Box>

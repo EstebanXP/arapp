@@ -123,6 +123,7 @@ const ManageSongs = (props) => {
         <HStack>
           <Input
             mt="4"
+            mb="4"
             w="72%"
             type="text"
             name="title"
@@ -149,6 +150,7 @@ const ManageSongs = (props) => {
             
           </Box>
         </HStack>
+      </Box>
       {lista
         .filter((val) => {
           if (searchParam === "") {
@@ -168,9 +170,10 @@ const ManageSongs = (props) => {
           /* else if(val.Tags.filter(ele=>)*/
         })
         .map((link) => (
-          <div className="card mb-1">
-            {/*AQUI SE MANDA EL OBJETO PARA QUE SE RENDEREE INDIVIDUALMENTE */}
-            <div key={link.id}>
+          
+           
+            <Box  borderColor="info.200" borderTopWidth="1" bordeBottomWidth="1" key={link.id}>
+            
               <ShowSongs
                 song={link}
                 title={link.title}
@@ -178,11 +181,11 @@ const ManageSongs = (props) => {
                 lyrics={link.lyrics}
                 chords={link.chords}
               ></ShowSongs>
-            </div>
-          </div>
+            </Box>
+         
         ))}
                 
-      </Box>
+      
     </Box>
 
   );
