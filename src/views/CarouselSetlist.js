@@ -117,7 +117,7 @@ const ManageSetlists = (props) => {
         <div>
           
 
-          <HStack ml="2">
+          <HStack ml="2" mb="2">
             <HStack>
               <Text mr="2"mt="0.5">
                 Order by:

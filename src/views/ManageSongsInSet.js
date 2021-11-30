@@ -7,7 +7,8 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import ShowSongs from "./ShowSongs";
-
+import {MdModeEditOutline} from 'react-icons/md'
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 const ManageSongs = (props) => {
   const [editStatus, setEditStatus] = useState(false);
   const [lista, setLista] = useState([]);
@@ -34,6 +35,7 @@ const ManageSongs = (props) => {
   return (
     <div className="col-md-8">
       <h1>Songs in set</h1>
+      <Button colorScheme="white" mr="2" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => props.setPopStatus(true)}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
       <input
         type="text"
         name="title"
@@ -42,6 +44,7 @@ const ManageSongs = (props) => {
           setSearchParam(event.target.value);
         }}
       ></input>
+
       <form>
         <label>
           sort by:

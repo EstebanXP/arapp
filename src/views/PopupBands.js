@@ -425,7 +425,7 @@ const PopupBands = (props) => {
                 
                 </HStack>
                 <HStack  position="absolute" bottom="4"> 
-                            <Button colorScheme="indigo"borderRadius="8" onPress={()=>{setEdit(!edit)}}><MdModeEditOutline color="white"/></Button>
+                            <Button colorScheme="indigo" borderRadius="10" size="6" onPress={()=>{setEdit(!edit)}}><MdModeEditOutline color="white"/></Button>
                 </HStack>
                 
                     {/**Division/ */}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../css/Popup.css";
+import { Button} from "native-base"
 import {
   collection,
   query,
@@ -12,7 +13,7 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import ShowSongs from "./ShowSongs";
-
+import {MdModeEditOutline} from 'react-icons/md'
 const PopupSets = (props) => {
   const [lista, setLista] = useState([]);
 
@@ -66,6 +67,7 @@ const PopupSets = (props) => {
           Close
         </button>
         <h3>Edit</h3>
+        
         <form onSubmit={saveOnSubmit}>
           <div>
             Name:

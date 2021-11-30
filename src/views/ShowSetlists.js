@@ -32,18 +32,22 @@ const ShowSetlists = (props) => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="card-body">
-        <p>Name: {props.tsetlist.name}</p>
-        <p>Show: {props.tsetlist.show}</p>
-        <p>Band: {props.tsetlist.band}</p>
-        <p>Tag: {props.tsetlist.tag}</p>
-          List of sets:{" "}
+    <div className="carousel-setlists">
+      <Box>
+        <Heading size="md" w="90%" mx="auto" mt="2" textAlign="center">{props.tsetlist.name}</Heading>
+        <Badge  colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{props.tsetlist.tag}</Badge>
+        <HStack mx="2" my="1">
+          <Text mr="auto" textAlign="center">{props.tsetlist.show}</Text>
+          <Box px="1"/>
+          <Text ml="auto" textAlign="center">{props.tsetlist.band}</Text>
+          
+        </HStack>
+        <Text ml="2" bold>Sets</Text>
           <Stack>
           {list.map((set) => {
             if (set.setListID === props.tsetlist.id) {
               return (
-                <Box bg="warmGray.50">
+                <Box  borderColor="fuchsia.200" borderTopWidth="1" bordeBottomWidth="1">
                   <ShowSets tset={set} />
                   
                 </Box>
@@ -59,8 +63,8 @@ const ShowSetlists = (props) => {
           setPopStatus={setPopStatus}
           thisSetlist={props.tsetlist}
         />
-        <button onClick={() => setPopStatus(true)}>Edit this setlist</button>
-      </div>
+        <Button colorScheme="indigo" w="32" mx="auto"  my="2"borderRadius="8" onPress={() => setPopStatus(true)}>Edit this setlist</Button>
+      </Box>
     </div>
   );
 };
