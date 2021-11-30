@@ -22,9 +22,9 @@ const Home = (props) => {
     return (
         <div> 
             {popBand ? <PopupBands thisBand={band} popBand={popBand} setPopBand={setPopBand}/> : null}
-            <Heading size="sm" color="#8e8d8a">Bands</Heading>
+            <Heading size="md" >Bands</Heading>
             <CarouselBands setBand={setBand} setPopBand={setPopBand} popBand={popBand}></CarouselBands>
-            <Heading size="sm" color="#8e8d8a">Shows</Heading>
+            <Heading size="md" >Shows</Heading>
             <CarouselShows ></CarouselShows>
             
         </div>
@@ -33,9 +33,9 @@ const Home = (props) => {
         return(
             <div>
                 {popBand ? <PopupBands thisBand={band} popBand={popBand} setPopBand={setPopBand}/> : null}
-                <Heading size="sm" color="#8e8d8a">Bands</Heading>
+                <Heading size="md" >Bands</Heading>
                 <CarouselBands setBand={setBand} setPopBand={setPopBand} popBand={popBand}></CarouselBands>
-                <Heading size="sm" color="#8e8d8a">Shows</Heading>
+                <Heading size="md" >Shows</Heading>
                 <CarouselShows ></CarouselShows>
                 <ManageSets></ManageSets>
                 <ManageTags></ManageTags>

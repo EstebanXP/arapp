@@ -22,10 +22,18 @@ const Logeo = (props) => {
   const [registered, setIsRegistered] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newEmail, setnewEmail] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newUserName, setNewUserName] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
-
+  const handleNe = (event) => setnewEmail(event.target.value);
+  const handleNn = (event) => setNewName(event.target.value);
+  const handleNu = (event) => setNewUserName(event.target.value);
+  const handleNp = (event) => setNewPassword(event.target.value);
 
   const getDataLogIn = (e) => {
     e.preventDefault();
@@ -48,21 +56,19 @@ const Logeo = (props) => {
   const getDataSignUp = (e) => {
     const auth = getAuth();
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    
     const role = e.target.role.value;
-    const name = e.target.name.value;
-    const uname = e.target.username.value;
-    createUserWithEmailAndPassword(auth, email, password)
+    
+    createUserWithEmailAndPassword(auth, newEmail, newPassword)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         props.setUser(user);
         setDoc(doc(db, "Users", user.uid), {
-          userName: name,
-          userEmail: email,
+          userName: newName,
+          userEmail: newEmail,
           userRole: role,
-          userUsername: uname,
+          userUsername: newUserName,
         });
         /*addDoc(doc(db,'Users'),{
                 id:user.uid,
@@ -82,7 +88,7 @@ const Logeo = (props) => {
         // ..
       });
   };
-
+  
   return (
     <NativeBaseProvider>
       
@@ -151,27 +157,25 @@ const Logeo = (props) => {
             {/**AQUI EMPIEZA LA VISTA DE SIGN UP */}
             <form onSubmit={getDataSignUp}>
               
-              <Input w={"100%"} type="email" id="email" placeholder="Email" isRequired _hover = {{borderColor: '#4f46e5'}} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} />    
-              <Input isRequired w={"100%"}  type="text" id="name" placeholder="Name" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
-              <Input isRequired w={"100%"} type="text" id="username" placeholder="Username" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
-              <Input isRequired w={"100%"} type="password" id="password" placeholder="Password" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }}/><Text fontSize="2xl"></Text>
-              <FormControl>
+              <Input w={"100%"} type="email" onChange={handleNe} id="email" placeholder="Email" isRequired _hover = {{borderColor: '#4f46e5'}} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} />    
+              <Input isRequired w={"100%"} onChange={handleNn} type="text" id="name" placeholder="Name" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
+              <Input isRequired w={"100%"} onChange={handleNu} type="text" id="username" placeholder="Username" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }} /><Text fontSize="2xl"></Text>
+              <Input isRequired w={"100%"} onChange={handleNp} type="password" id="password" placeholder="Password" _hover = {{borderColor: '#4f46e5' }} _invalid=  {{borderColor: '#4f46e5' }} _focus ={{borderColor: '#4f46e5' }}/><Text fontSize="2xl"></Text>
+              
                 
-              <Select id="role"
+              <select id="role"
               minWidth="200"
               colorScheme="indigo"
               accessibilityLabel="Choose Service"
               placeholder="Choose Role"
-              mt="1"
+              className="input"
+
               >
-                <Select.Item value="Band Member" label="Band Member">Band Member</Select.Item>
-                <Select.Item value="Band Manager" label="Band Manager" >Band Manager</Select.Item>
-                <Select.Item value="Live Experience Designer" label="Live Experience Designer">Live Experience Designer</Select.Item>
-              </Select>
-              <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                  Please make a selection!
-                </FormControl.ErrorMessage>
-            </FormControl>
+                <option value="Band Member" label="Band Member">Band Member</option>
+                <option value="Band Manager" label="Band Manager" >Band Manager</option>
+                <option value="Live Experience Designer" label="Live Experience Designer">Live Experience Designer</option>
+              </select>
+              
               <br></br>
               <Button type="submit" mt="2" mb="-10" textAlign="center" bg ="indigo.600" _pressed={{ bg: '#DDD' }} _hover={{ bg: 'indigo.800' }} colorScheme="indigo">Sign up</Button>
               <button type="submit" style={{opacity : "0",  width : "100%", height : "40px", left:"0" }}>Sign in</button>
