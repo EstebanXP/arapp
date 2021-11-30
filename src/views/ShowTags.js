@@ -7,8 +7,8 @@ function ShowTags(props) {
   return (
     <div className="container">
       <div className="card-body">
-      <Pressable onPress={() => setPopStatus(true)}>
-      <Badge w="50%" colorScheme="indigo" borderRadius="5" mx="auto" mt="2">{props.tag.tagName}</Badge>
+      <Pressable w="10%" onPress={() => setPopStatus(true)}>
+      <Badge colorScheme="indigo" borderRadius="5" mt="2">{props.tag.tagName}</Badge>
       </Pressable>
         <PopupTags
           trigger={popStatus}
