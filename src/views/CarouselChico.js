@@ -28,7 +28,7 @@ const Carousel = (props) => {
     console.log("aqui hay " + length + " y show " + show)
     return (
         <div className="carousel-container-chico">
-            {length - show > 0 ?  <div className="contenedorFlechasChico">
+            {length/show > 1 ?  <div className="contenedorFlechasChico">
                 {/* You can alwas change the content of the button to other things */}
                 
                     <AiOutlineLeft size =".7em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>

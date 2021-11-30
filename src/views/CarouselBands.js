@@ -9,8 +9,10 @@ import {
 import db from "../firebase";
 import ShowBands from "./ShowBands";
 import emailjs from "emailjs-com"; //npm install emailjs-com --save
-import { Box } from 'native-base'
+import { Box, HStack, Text } from 'native-base'
 import Carousel from "./Carousel";
+import ShowSets from "./ShowSets";
+import ShowBandsCreate from "./ShowBandsCreate";
 const CarouselBands = (props) => {
   const [bands, setBands] = useState([]);
   const [searchParam, setSearchParam] = useState("");
@@ -108,16 +110,16 @@ const CarouselBands = (props) => {
   return (
     <div className="carousel-bands">
       <form>
-        <label>
-          Order by:
-          <select value={sortings} onChange={handleChange}>
+        <HStack ml="2" mb="-7" mt="0" >
+          <Text mr="2"mt="0.5">Order by:</Text>
+          <select value={sortings} onChange={handleChange}  className="input-order">
             <option value="bandName">Band Name</option>
             <option value="bandGenres">Genres</option>
           </select>
-        </label>
+        </HStack>
       </form>
       <Carousel show={3}>
-        
+      
           {bands.map((band) => {
             //if (props.userID == band.createdBy) {
             return (
@@ -128,6 +130,7 @@ const CarouselBands = (props) => {
             );
             //}            
           })}
+          
       </Carousel>
 
 

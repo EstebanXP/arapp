@@ -9,7 +9,7 @@ const Carousel = (props) => {
     let Indicator = () => {
         
         return <HStack>{Array.from(Array(30), (e, i) => {
-            if(i<length - show){
+            if(i<(length/show)){
                 return <Circle mx="1"size="2" bg= {currentIndex === (i*show) ? "indigo.500" : "indigo.200"} key={i}/>
             }
             else{
@@ -39,7 +39,7 @@ const Carousel = (props) => {
     
     return (
         <div className="carousel-container">
-            {length - show > 0 ?  <div className="contenedorFlechas">
+            {length/show > 1  ?  <div className="contenedorFlechas">
                 {/* You can alwas change the content of the button to other things */}
                 
                     <AiOutlineLeft size ="1em" style={{margin : "2"}} color="#a8a29e" onClick={prev}/>

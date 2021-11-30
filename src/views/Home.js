@@ -22,9 +22,11 @@ const Home = (props) => {
     return (
         <div> 
             {popBand ? <PopupBands thisBand={band} popBand={popBand} setPopBand={setPopBand}/> : null}
-            <Heading size="md" >Bands</Heading>
+            <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
+            <Heading size="md" ml="2" >Bands</Heading>
             <CarouselBands setBand={setBand} setPopBand={setPopBand} popBand={popBand}></CarouselBands>
-            <Heading size="md" >Shows</Heading>
+            <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
+            <Heading size="md" ml="2" >Shows</Heading>
             <CarouselShows ></CarouselShows>
             
         </div>

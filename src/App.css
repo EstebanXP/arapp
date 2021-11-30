@@ -41,7 +41,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  
+  overflow-x: hidden;
   
 }
 
@@ -136,10 +136,10 @@
 
 .contenedorFlechas{
   display: flex;
-  
-  position: absolute;
-  top : 20px;
-  right: 10px;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 8px;
+  z-index: 8;
  
 }
 .contenedorFlechasChico{
@@ -200,6 +200,21 @@ img.right-arrow:hover, img.left-arrow:hover{
   border-width: 1px;
   width: 100%;
   margin-top: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: rgb(31, 41, 55);
+}
+
+.input-order{
+  height: 26px;
+  padding: 1px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 4px;
+  border-color: rgb(229, 229, 229);
+  border-width: 1px;
+  width: 100px;
+  margin-bottom: 5px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 12px;

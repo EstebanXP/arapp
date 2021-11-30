@@ -59,7 +59,8 @@ const CarouselShows = () => {
 
     return (
         <div className="carousel-shows">
-            <Carousel show={4}>
+            <Box mb="2"/>
+            <Carousel show={2}>
             {shows.map((show) => {
                 return (
                    <Box w="100" >
