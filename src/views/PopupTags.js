@@ -97,11 +97,12 @@ const PopupTags =(props) => {
         Delete Show
             </Button>
             <AlertDialog
+                position="absolute"
+                top="40"
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
               onClose={onClose}
-              position="absolute"
-              top="40"
+            
             >
               <AlertDialog.Content>
                 <AlertDialog.CloseButton />
