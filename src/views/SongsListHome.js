@@ -177,6 +177,8 @@ const ManageSongs = (props) => {
               <ShowSongs setSong={props.setSong} setPopStatusSongs={props.setPopStatusSongs} popStatusSongs={props.popStatusSongs} song={props.song}
                 song={link}
                 title={link.title}
+                tag={link.Tags}
+                tempo={link.tempo}
                 artist={link.artist}
                 lyrics={link.lyrics}
                 chords={link.chords}

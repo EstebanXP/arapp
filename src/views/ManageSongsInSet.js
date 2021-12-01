@@ -35,26 +35,38 @@ const ManageSongs = (props) => {
 
   return (
     <div className="col-md-8">
-      <Heading>Songs in set</Heading>
-      <Button colorScheme="white" mr="2" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => props.setPopStatus(true)}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
-      <input
-        type="text"
-        name="title"
-        placeholder="Search..."
-        onChange={(event) => {
-          setSearchParam(event.target.value);
-        }}
-      ></input>
-
-      <form>
-        <label>
-          sort by:
-          <select value={sortings} onChange={handleChange}>
+      <Center borderColor="info.200" borderTopWidth="1">
+        <Heading textAlign="center" size="xs">Songs in set</Heading>
+        <Input
+          type="text"
+          name="title"
+          placeholder="Search songs..."
+          onChange={(event) => {
+            setSearchParam(event.target.value);
+          }}
+          _hover = {{
+            borderColor: '#4f46e5' 
+          }}
+          _invalid={{borderColor: '#4f46e5' }}
+          _focus ={{borderColor: '#4f46e5' }}
+          _disabled ={{borderColor: '#4f46e5' }}
+          h="6"
+          borderRadius="6"
+        />
+        <Text mx="auto">
+          Order by: 
+          <select className="input-order-songs" value={sortings} onChange={handleChange}>
             <option value="artist">Artist</option>
             <option value="title">Title</option>
           </select>
-        </label>
-      </form>
+        </Text>
+      </Center>
+      
+      
+
+      
+        
+      
 
       {lista.filter((val) => {
         if (searchParam === "") {
