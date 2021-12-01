@@ -49,7 +49,7 @@ const Home = (props) => {
                 <PopupTags trigger={popStatusTag} setPopStatus={setPopStatusTag} tag={tag}></PopupTags>
                 <PopupSongs trigger={popStatusSongs} setPopStatus={setPopStatusSongs} song={song}></PopupSongs>
 
-                <PopupSetlists trigger={popStatusSetlist} setPopStatus={setPopStatusSetlist} thisSetlist={setlist}></PopupSetlists>
+                <PopupSetlists trigger={popStatusSetlist} setPopStatus={setPopStatusSetlist} setlist={setlist}></PopupSetlists>
 
                 <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                 <Heading size="md" ml="2" >Setlists</Heading>

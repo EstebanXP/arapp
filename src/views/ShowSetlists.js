@@ -45,7 +45,7 @@ const ShowSetlists = (props) => {
           <Badge  colorScheme="indigo" borderRadius="5" ml="auto" my="auto">{props.tsetlist.tag}</Badge>
         </HStack>
         
-          <Stack>
+        <Stack>
           {list.map((set) => {
             if (set.setListID === props.tsetlist.id) {
               return (
@@ -60,12 +60,12 @@ const ShowSetlists = (props) => {
         </Stack>
         
 
-        <PopupSetlists
+        {/*<PopupSetlists
           trigger={popStatus}
           setPopStatus={setPopStatus}
           thisSetlist={props.tsetlist}
-        />
-         <Button mt="2" borderRadius="10" size="6" position="absolute" top="2" right="2" colorScheme="indigo" onPress={() => setPopStatus(true)}><BiExpandAlt color="white"/></Button>
+        />*/}
+         <Button mt="2" borderRadius="10" size="6" position="absolute" top="2" right="2" colorScheme="indigo" onPress={() => {props.setPopStatusSetlist(true); props.setSetlist(props.setlist)}}><BiExpandAlt color="white"/></Button>
         
       </Box>
     </div>
