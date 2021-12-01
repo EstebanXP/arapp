@@ -92,11 +92,15 @@ const PopupTags =(props) => {
                     <HStack>
                     <Stack space={0} alignItems="left" my="auto" w="100%">
                         <HStack mb="1%" space={2} alignItems="left">                  
-                     <button class="btn-save" type="submit"><i class="fa fa-save"></i> Save Tag</button>
-            <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)} leftIcon={<BsTrashFill color="white"/>}>
+                        <button class="btn-save" type="submit"><i class="fa fa-save"></i> Save Tag</button>
+              <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)} leftIcon={<BsTrashFill color="white"/>}>
         Delete Show
             </Button>
-            <AlertDialog
+          
+            </HStack>
+                    </Stack>
+                        </HStack>
+                          <AlertDialog
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
               onClose={onClose}
@@ -119,16 +123,13 @@ const PopupTags =(props) => {
                     >
                       Cancel
                     </Button>
-                    <Button borderRadius="10" colorScheme="danger" onPress={() => { deleteTag(props.tag.id) }}>
+                    <Button borderRadius="10" colorScheme="danger" onPress={() => { deleteTag(props.tag.id);onClose(); }} ref={cancelRef}>
                       Delete
                     </Button>
                   </Button.Group>
                 </AlertDialog.Footer>
               </AlertDialog.Content>
             </AlertDialog>
-            </HStack>
-                    </Stack>
-                        </HStack>
         </form>
       </div>
     </div>
