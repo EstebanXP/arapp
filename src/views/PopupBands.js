@@ -118,6 +118,7 @@ const PopupBands = (props) => {
                             <View style={{justifyContent: 'center'}}>
                                 <Text fontSize="sm" w="180">Band Name: </Text>
                             </View>
+                            {/* <h1>{newBandName}</h1> */}
                             <Input
                                 size="sm"
                                 defaultValue={newBandName}
