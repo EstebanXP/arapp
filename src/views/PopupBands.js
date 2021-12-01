@@ -222,7 +222,7 @@ const PopupBands = (props) => {
                         
                             return (
                             <Box w="100%">
-                                <Box mx="1"  bg="warmGray.100" borderRadius="20" mt="1" h="100%">
+                                <Box mx="1"  bg="warmGray.100" borderRadius="8" mt="1" h="100%">
                                     <Center>
                                     <br></br>
                                     <Image
@@ -280,29 +280,41 @@ const PopupBands = (props) => {
                           </Carousel>
                     </Box>
                     </HStack>
-                    <Text bold fontSize="2md">Members:</Text>
+                    <Text bold fontSize="2md" mb="2">Add Members: </Text>
                     
                         {/**Division/ */}
-                        <hr></hr>
+                        
+                        <Box className="scroll" mt="2"borderRadius="8"bg="warmGray.50" h="40" overflowY="scroll" py="5">
+                        
                         {listaBandMembers
                         .map((user) => {
                             if(user.userRole == "Band Member"){
                                 return (
-                                <p>
-                                    <Text fontSize="md" w="120">
-                                    {"Name: " + user.userName + ", Username: " + user.userUsername}{" "}
-                                    <button class="btn-add" onClick={() => addUserOnBand(user.id)}><i class="fa fa-user-plus"></i> Añadir</button>{" "}
-                                    </Text>
-                                </p>
+                                <HStack px="2"borderBottomWidth="1" borderColor="warmGray.200">
+                                    <Box>
+                                        <Text >
+                                        {user.userName}
+                                        </Text>
+                                        <Text bold>
+                                        @{user.userUsername}
+                                        </Text>
+                                    </Box>
+                                    
+                                    <Button height="6" my="auto" onPress={()=>{addUserOnBand(user.id)}} size="xs"ml="auto"borderRadius="8" colorScheme="success"><i class="fa fa-user-plus btn-add1"></i></Button>{" "}
+                                </HStack>
+                               
                                 );
                         }})}
-                        <button class="btn-save" type="submit" onClick={()=>{saveOnSubmit();setEdit(!edit);}}><i class="fa fa-save"></i> Save Band</button>
-                        <button class="btn-delete" type="submit"
-                        onClick={() => {
-                            deleteBand(props.thisBand.id);
-                        }}
-                        ><i class="fa fa-trash"></i> Delete band</button>
-                        
+                        </Box>
+                        <HStack mt="5" ml="5">
+                            <Button mr="2" width="8" colorScheme="indigo" borderRadius="8" onPress={()=>{saveOnSubmit();setEdit(!edit);}}><i class="fa fa-save btn-add1"></i></Button>
+                            <Button width="8"  colorScheme="danger" borderRadius="8"
+                            onPress={() => {
+                                deleteBand(props.thisBand.id);
+                            }}
+                            ><i class="fa fa-trash btn-add1"></i></Button>
+                        </HStack>
+                       
                 </form>
 
                 {/* <form onSubmit={saveOnSubmit}>
