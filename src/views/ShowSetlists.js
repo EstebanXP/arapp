@@ -42,7 +42,10 @@ const ShowSetlists = (props) => {
             <Text bold ml="auto" textAlign="center">{props.tsetlist.band}</Text>
             <Text mr="auto" textAlign="center">{props.tsetlist.show}</Text>
           </Box>
-          <Badge  colorScheme="indigo" borderRadius="5" ml="auto" my="auto">{props.tsetlist.tag}</Badge>
+          { props.tsetlist.tag !== null && props.tsetlist.tag !== undefined ?
+            <Badge  colorScheme="indigo" borderRadius="5" ml="auto" my="auto">{props.tsetlist.tag}</Badge> : null
+          }
+          
         </HStack>
         
         <Stack>
