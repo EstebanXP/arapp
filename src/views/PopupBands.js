@@ -120,7 +120,7 @@ const PopupBands = (props) => {
                             </View>
                             <Input
                                 size="sm"
-                                defaultValue={props.thisBand.bandName}
+                                defaultValue={newBandName}
                                 type="bandName"
                                 name="bandName"
                                 id="bandName"
@@ -146,7 +146,7 @@ const PopupBands = (props) => {
                             </View>
                             <Input
                                 size="sm"
-                                defaultValue={props.thisBand.bandLogo}
+                                defaultValue={newLogo}
                                 type="bandLogo"
                                 name="bandLogo"
                                 id="bandLogo"
@@ -170,12 +170,12 @@ const PopupBands = (props) => {
                             </View>
                             <Input
                                 size="sm"
-                                defaultValue={props.thisBand.bandDescription}
+                                defaultValue={newDescription}
                                 type="bandDescription"
                                 name="bandDescription"
                                 id="bandDescription"
                     
-                                placeholder="bandDescription"
+                                placeholder="Band Description"
                        
                                 onChange={handleNBDC}
                                 w={"100%"}
@@ -195,7 +195,7 @@ const PopupBands = (props) => {
                             </View>
                             <Input
                                 size="sm"
-                                defaultValue={props.thisBand.bandGenres}
+                                defaultValue={newMusicGenre}
                                 type="bandGenre"
                                 name="bandGenre"
                                 id="bandGenre"
@@ -369,7 +369,7 @@ const PopupBands = (props) => {
                  
             <Button borderRadius="8"colorScheme="danger" position="absolute" top="4" right="4" width="8" onPress={()=>{props.setPopBand(false)}}><FaTimes color="white"></FaTimes></Button>
             <Image borderLeftRadius="20"  source={{
-                          uri: props.thisBand.bandLogo,
+                          uri: newLogo,
                       }} 
                       fallbackSource ={{ uri : "https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"}}
                       alt="Alternate Text"
@@ -385,9 +385,9 @@ const PopupBands = (props) => {
                 
                 </Box>
                 <Stack space={0} alignItems="left" w="50%" m="auto">
-                    <Heading size="xl" textAlign="Left">{props.thisBand.bandName}</Heading>         
-                    <Text w="100%">{props.thisBand.bandDescription}</Text>
-                    <Badge  colorScheme="light" borderRadius="5" mx="auto" my="2">{props.thisBand.bandGenres}</Badge>
+                    <Heading size="xl" textAlign="Left">{newBandName}</Heading>         
+                    <Text w="100%">{newDescription}</Text>
+                    <Badge  colorScheme="light" borderRadius="5" mx="auto" my="2">{newMusicGenre}</Badge>
                     <Box>
                         
                         <Carousel show={3}>

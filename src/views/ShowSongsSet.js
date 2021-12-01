@@ -33,26 +33,6 @@ const ShowSongs = (props) => {
         <Box ml="4">
           <Text bold>{props.title}</Text>
           <Text>{props.artist}</Text>
-          <HStack my="2">
-          {props.tempo !== null && props.tempo !== "" && props.tempo !== undefined ?
-            <Badge mr="2" borderRadius="5"><Text color="trueGray.400" >{props.tempo} bpm</Text></Badge> : null
-          }
-          
-          
-          
-          {
-            (props.tag.map((element)=>{
-              if(element !== null){
-                return(
-                  <Badge  mr="2" colorScheme="indigo" borderRadius="5">{element}</Badge>
-                )
-              }
-              
-            })) 
-          }
-          
-          </HStack>
-          
           
           
         </Box>
@@ -64,7 +44,7 @@ const ShowSongs = (props) => {
           (<Box mx="4">
             <HStack>
               <Text bold>Lyrics:</Text>
-              <Button colorScheme="white" ml="auto" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => {props.setPopStatusSongs(true); props.setSong(props.song)}}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
+              
             </HStack>
             <Text>{props.lyrics}</Text>
             <Text>Acordes: {props.chords}</Text>
