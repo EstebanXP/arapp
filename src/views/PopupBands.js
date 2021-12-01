@@ -16,7 +16,7 @@ import {
 import db from "../firebase";
 import {BsTrash} from "react-icons/bs"
 import {FaTimes} from 'react-icons/fa'
-import {MdModeEditOutline} from 'react-icons/md'
+import {MdModeEditOutline, MdRemove} from 'react-icons/md'
 import { NativeBaseProvider, AlertDialog, Image, Box, View, Stack, HStack, Input, Alert,Text, Heading, Center, Link, Select, CheckIcon, FormControl, WarningOutlineIcon, Button, Badge} from "native-base";
 import Carousel from './CarouselChico'
 
@@ -237,8 +237,8 @@ const PopupBands = (props) => {
                                     <Text textAlign="center" lineHeight="3md" >{user.userName}</Text>
                                     <Text textAlign="center" bold mb="2" lineHeight="2md" >@{user.userUsername}</Text>
                                     
-                                    <Button colorScheme="danger" borderRadius="10"mb="2"  onPress={() => setIsOpen(!isOpen)}>
-                                        <BsTrash size=".8em" color="white"></BsTrash>
+                                    <Button colorScheme="danger" borderRadius="8"mb="2" size="xs"  onPress={() => setIsOpen(!isOpen)}>
+                                        <MdRemove size=".8em" color="white"/>
                                     </Button>
                                     <AlertDialog
                                         leastDestructiveRef={cancelRef}
@@ -312,7 +312,7 @@ const PopupBands = (props) => {
                             onPress={() => {
                                 deleteBand(props.thisBand.id);
                             }}
-                            ><i class="fa fa-trash btn-add1"></i></Button>
+                            ><BsTrash size="1em" color="white"/></Button>
                         </HStack>
                        
                 </form>
