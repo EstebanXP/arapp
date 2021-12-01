@@ -195,6 +195,9 @@ img.right-arrow:hover, img.left-arrow:hover{
 ::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+.scroll{
+  display: none;
+}
 
 .input{
   height: 36px;

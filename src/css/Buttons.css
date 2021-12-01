@@ -36,7 +36,11 @@
     background-color: rgba(218,62,82);
     color: white;
   }
-
+  .btn-add1{
+    color: white;
+    
+    padding: 0px;
+  }
 
 .btn-add {
     border: 1px solid rgba(59, 206, 172); /* Remove borders */
