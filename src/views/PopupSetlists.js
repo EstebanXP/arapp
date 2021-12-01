@@ -43,24 +43,23 @@ const PopupSetlists = (props) => {
                 <form onSubmit={saveOnSubmit}>
                     <div>
                         Name: 
-                        <input name="name" defaultValue={props.thisSetlist.name}></input>{" "}
+                        <input name="name" defaultValue={props.setlist.name}></input>{" "}
                         <br></br>
                         Sets:{" "}
-                        <input name="sets" defaultValue={props.thisSetlist.sets}></input>{" "}
-                        {console.log(props.thisSetlist)}
+                        <input name="sets" defaultValue={props.setlist.sets}></input>{" "}
+                        {console.log(props.setlist)}
                         <br></br>
                         Show:
-                        <input name="show" defaultValue={props.thisSetlist.show}></input>
+                        <input name="show" defaultValue={props.setlist.show}></input>
                         <br></br>
                         Band:
-                        <input name="band" defaultValue={props.thisSetlist.band}></input>
+                        <input name="band" defaultValue={props.setlist.band}></input>
                         <br></br>
                         Tag:
-                        <input name="tag" defaultValue={props.thisSetlist.tag}></input>
+                        <input name="tag" defaultValue={props.setlist.tag}></input>
                         <br></br>
                         Save: <button type="submit">Save </button>
-                        <button>HOla</button>
-                        <button onClick={() => {deleteSetlist(props.thisSetlist.id);}}>Delete Set</button>
+                        <button onClick={() => {deleteSetlist(props.setlist.id);}}>Delete Set</button>
                     </div>
                 </form>
             </div>

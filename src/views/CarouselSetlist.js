@@ -172,7 +172,9 @@ const ManageSetlists = (props) => {
               return (
                 <Box w="100" >
                   <Box   mx="2" bg="white" borderRadius="20" shadow={4} >
-                    <ShowSetlists tsetlist={setlist} />
+                    <ShowSetlists setSetlist={props.setSetlist} setPopStatusSetlist={props.setPopStatusSetlist} popStatusSetlist={props.popStatusSetlist} setlist={props.setlist}
+                      tsetlist={setlist} 
+                    />
                   </Box>
                 </Box>
               );

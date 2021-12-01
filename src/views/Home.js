@@ -13,6 +13,7 @@ import CarouselSetlist from './CarouselSetlist'
 import SongsListHome from './SongsListHome'
 import PopupTags from './PopupTags'
 import PopupSongs from './PopupSongs'
+import PopupSetlists from './PopupSetlists'
 
 const Home = (props) => {
     
@@ -25,6 +26,8 @@ const Home = (props) => {
     const [tag, setTag] = useState();    
     const [popStatusSongs, setPopStatusSongs] = useState();
     const [song, setSong] = useState();
+    const [popStatusSetlist, setPopStatusSetlist] = useState();
+    const [setlist, setSetlist] = useState();
 
     if(props.data === "Band Manager")
     return (
@@ -45,9 +48,12 @@ const Home = (props) => {
             <div>
                 <PopupTags trigger={popStatusTag} setPopStatus={setPopStatusTag} tag={tag}></PopupTags>
                 <PopupSongs trigger={popStatusSongs} setPopStatus={setPopStatusSongs} song={song}></PopupSongs>
+
+                <PopupSetlists trigger={popStatusSetlist} setPopStatus={setPopStatusSetlist} setlist={setlist}></PopupSetlists>
+
                 <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                 <Heading size="md" ml="2" >Setlists</Heading>
-                <CarouselSetlist userID={props.userID} />
+                <CarouselSetlist setSetlist={setSetlist} setPopStatusSetlist={setPopStatusSetlist} popStatusSetlist={popStatusSetlist} userID={props.userID} />
                 
                 <HStack>
                     <Box w="30%">
@@ -58,7 +64,7 @@ const Home = (props) => {
                     <Box w="70%">
                         <Box py="1"borderRadius="100" mt="2"w="12" ml="2"  bg="fuchsia.400"/>
                         <Heading size="md" ml="2" mb="4">Songs</Heading>
-                        <SongsListHome />
+                        <SongsListHome setSong={setSong} setPopStatusSongs={setPopStatusSongs} popStatusSongs={popStatusSongs}/>
                     </Box>
                 
                 </HStack>
