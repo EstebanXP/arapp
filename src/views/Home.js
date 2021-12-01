@@ -53,7 +53,7 @@ const Home = (props) => {
 
                 <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                 <Heading size="md" ml="2" >Setlists</Heading>
-                <CarouselSetlist setSetlist={setSetlist} setPopStatus={setPopStatusSetlist} thisSetlist={setlist} userID={props.userID} />
+                <CarouselSetlist setSetlist={setSetlist} setPopStatusSetlist={setPopStatusSetlist} popStatusSetlist={popStatusSetlist} userID={props.userID} />
                 
                 <HStack>
                     <Box w="30%">
