@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 
 import db from "../firebase";
-import ShowSongs from "./ShowSongs";
+import ShowSongsSet from "./ShowSongsSet";
 import {MdModeEditOutline} from 'react-icons/md'
 import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 const ManageSongs = (props) => {
@@ -34,9 +34,9 @@ const ManageSongs = (props) => {
   }, [sortings, editStatus]);
 
   return (
-    <div className="col-md-8">
-      <Center borderColor="info.200" borderTopWidth="1">
-        <Heading textAlign="center" size="xs">Songs in set</Heading>
+    <div>
+      <Center >
+        
         <Input
           type="text"
           name="title"
@@ -53,21 +53,21 @@ const ManageSongs = (props) => {
           h="6"
           borderRadius="6"
         />
-        <Text mx="auto">
+        <Text mx="auto" mt="1">
           Order by: 
           <select className="input-order-songs" value={sortings} onChange={handleChange}>
             <option value="artist">Artist</option>
             <option value="title">Title</option>
           </select>
         </Text>
-      </Center>
+      </Center> 
       
       
 
       
         
       
-
+      <Box mx="2">
       {lista.filter((val) => {
         if (searchParam === "") {
           return val;
@@ -83,18 +83,19 @@ const ManageSongs = (props) => {
       }).map((link,index) => {
           if(props.tsongs.includes(link.id)){
             return(
-              <div className="card mb-1">
-                <ShowSongs
+              
+                <ShowSongsSet
                   song={link}
                   title={link.title}
                   artist={link.artist}
                   //lyrics={link.lyrics}
                  // chords={link.chords}
-                ></ShowSongs>
-              </div>
+                ></ShowSongsSet>
+              
             )
           }
       })}
+      </Box>
     </div>
   );
 };

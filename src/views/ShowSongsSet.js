@@ -3,6 +3,7 @@ import PopupSongs from "./PopupSongs";
 import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri"
 import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 import {MdModeEditOutline} from 'react-icons/md'
+import {MdRemove} from "react-icons/md"
 const ShowSongs = (props) => {
   const [popStatus, setPopStatus] = useState(false);
   const [showSongs, setShowSongs] = useState(false)
@@ -29,29 +30,16 @@ const ShowSongs = (props) => {
   return (
     <div className="container">
       <div className="card-body">
-      <HStack my="1">
-        <Box ml="4">
+      <HStack my="1" borderTopWidth=".5" borderColor="info.100">
+        <Box >
           <Text bold>{props.title}</Text>
           <Text>{props.artist}</Text>
-          
-          
         </Box>
-        <Button borderRadius="10" size="6" ml="auto" my="auto" mr="4"colorScheme="info" onPress={() => setShowSongs(!showSongs)}>{showSongs ? <RiArrowDropUpLine color="white" /> : <RiArrowDropDownLine color="white" />}</Button>
+        <Box mx="auto"/>
+        <Button borderRadius="10" p="0" size="6" ml="auto" my="auto" colorScheme="danger"><MdRemove color="white" /></Button>
       </HStack>
       
-        
-        { showSongs ? 
-          (<Box mx="4">
-            <HStack>
-              <Text bold>Lyrics:</Text>
-              
-            </HStack>
-            <Text>{props.lyrics}</Text>
-            <Text>Acordes: {props.chords}</Text>
-            
-          </Box>
-          ): null
-        }
+       
         
         
         {/*AQUI SE MUESTRA CADA CANCION INDIVIDUALMENTE, JUNTO CON SU RESPECTIVO POPUP */}

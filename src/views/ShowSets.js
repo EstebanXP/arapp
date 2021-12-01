@@ -15,7 +15,7 @@ const ShowSets = (props) => {
     <div className="container">
       <div className="card-body">
         <HStack mx="2" py="2">
-          <Text italic >{props.tset.name}</Text>
+          <Text bold color="info.600" >{props.tset.name}</Text>
           <HStack ml="auto">
             {/*Poner el boton de editar dentro del set*/}
             
@@ -23,7 +23,7 @@ const ShowSets = (props) => {
           </HStack>
         
         </HStack>
-        
+         
         
 
         { showSongs ? 
