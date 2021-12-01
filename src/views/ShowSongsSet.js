@@ -27,6 +27,11 @@ const ShowSongs = (props) => {
       tab: song.tab,
     });
   }
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  const onClose = () => setIsOpen(false)
+
+  const cancelRef = React.useRef(null)
   return (
     <div className="container">
       <div className="card-body">
@@ -36,9 +41,37 @@ const ShowSongs = (props) => {
           <Text>{props.artist}</Text>
         </Box>
         <Box mx="auto"/>
-        <Button borderRadius="10" p="0" size="6" ml="auto" my="auto" colorScheme="danger"><MdRemove color="white" /></Button>
+        <Button borderRadius="10" p="0" size="6" ml="auto" my="auto" onPress={()=>{setIsOpen(!isOpen)}} colorScheme="danger"><MdRemove color="white" /></Button>
       </HStack>
-      
+      <AlertDialog
+        leastDestructiveRef={cancelRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <AlertDialog.Content position="absolute" top="40">
+          <AlertDialog.CloseButton />
+          <AlertDialog.Header>Remove song from setlist</AlertDialog.Header>
+          <AlertDialog.Body>
+            This will remove this song from this setlist. This action cannot be
+            reversed. 
+          </AlertDialog.Body>
+          <AlertDialog.Footer>
+            <Button.Group space={2}>
+              <Button
+                variant="unstyled"
+                colorScheme="coolGray"
+                onPress={onClose}
+                ref={cancelRef}
+              >
+                Cancel
+              </Button>
+              <Button colorScheme="danger" onPress={onClose}>
+                Remove
+              </Button>
+            </Button.Group>
+          </AlertDialog.Footer>
+        </AlertDialog.Content>
+      </AlertDialog>
        
         
         
