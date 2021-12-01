@@ -41,7 +41,7 @@ const ShowSongs = (props) => {
           (<Box mx="4">
             <HStack>
               <Text bold>Lyrics:</Text>
-              <Button colorScheme="white" ml="auto" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => setPopStatus(true)}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
+              <Button colorScheme="white" ml="auto" borderColor="indigo.600" borderWidth="1" borderRadius="10" size="6"  onPress={() => {props.setPopStatusSongs(true); props.setSong(props.song)}}><MdModeEditOutline color="rgb(79, 70, 229)"/></Button>
             </HStack>
             <Text>{props.lyrics}</Text>
             <Text>Acordes: {props.chords}</Text>
@@ -52,12 +52,13 @@ const ShowSongs = (props) => {
         
         
         {/*AQUI SE MUESTRA CADA CANCION INDIVIDUALMENTE, JUNTO CON SU RESPECTIVO POPUP */}
+        {/*
         <PopupSongs
           trigger={popStatus}
           setPopStatus={setPopStatus}
           song={props.song}
         ></PopupSongs>
-        
+        */}
       </div>
     </div>
   );

@@ -174,7 +174,7 @@ const ManageSongs = (props) => {
            
             <Box  borderColor="info.200" borderTopWidth="1" bordeBottomWidth="1" key={link.id}>
             
-              <ShowSongs
+              <ShowSongs setSong={props.setSong} setPopStatusSongs={props.setPopStatusSongs} popStatusSongs={props.popStatusSongs} song={props.song}
                 song={link}
                 title={link.title}
                 artist={link.artist}
