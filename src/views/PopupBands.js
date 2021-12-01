@@ -80,8 +80,8 @@ const PopupBands = (props) => {
     };
 
     //save changes
-    async function saveOnSubmit(e) {
-        e.preventDefault();
+    async function saveOnSubmit() {
+        // e.preventDefault();
         
         //const newName = e.target.bandName.value;
         //const newLogo = e.target.bandLogo.value;
@@ -93,7 +93,9 @@ const PopupBands = (props) => {
             bandDescription : newDescription,
             bandGenres: newMusicGenre
         });
-        props.setPopBand(false);
+
+        // props.thisBand.bandName="Hola Esteban"
+        // props.setPopBand(false);
     }
 
     async function closePopUp(a) {
@@ -294,7 +296,7 @@ const PopupBands = (props) => {
                                 </p>
                                 );
                         }})}
-                        <button class="btn-save" type="submit" onClick={()=>{setEdit(!edit)}}><i class="fa fa-save"></i> Save Band</button>
+                        <button class="btn-save" type="submit" onClick={()=>{saveOnSubmit();setEdit(!edit);}}><i class="fa fa-save"></i> Save Band</button>
                         <button class="btn-delete" type="submit"
                         onClick={() => {
                             deleteBand(props.thisBand.id);
