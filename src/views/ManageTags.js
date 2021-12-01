@@ -54,6 +54,7 @@ function ManageTags(props) {
                         
                         
                     }}
+                    
                     _hover = {{
                         borderColor: '#4f46e5' 
                       }}
@@ -64,7 +65,7 @@ function ManageTags(props) {
                       placeholder="Create a new tag"
                       
                     />
-                    <Button colorScheme="indigo" borderRightRadius="8" borderLeftRadius="0" size="6"  onPress = {createTag}><RiAddLine color="#FFF"/></Button>
+                    {newName !== "" && newName !== " " ? <Button colorScheme="indigo" borderRightRadius="8" borderLeftRadius="0" size="6"  onPress = {createTag}><RiAddLine color="#FFF"/></Button>: <Button colorScheme="indigo" opacity=".2" borderRightRadius="8" borderLeftRadius="0" size="6" ><RiAddLine color="#FFF"/></Button> }
                     </HStack>
                     
                         <Box display="flex" flexDirection="row" flexWrap="wrap" mb="2">

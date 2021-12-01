@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/Popup.css";
-
+import {Box, Heading, Text, Badge, Button, Center, AlertDialog, Stack, HStack, Input} from "native-base"
 import {
     doc,
     updateDoc,
@@ -39,27 +39,30 @@ const PopupSetlists = (props) => {
         <div className="popup">
             <div className="popup-inner">
                 <button className="close-btn" onClick={()=>props.setPopStatus(false)}>Close</button>
-                <h3>Edit</h3>
+                <Heading>Edit</Heading>
                 <form onSubmit={saveOnSubmit}>
                     <div>
-                        Name: 
-                        <input name="name" defaultValue={props.setlist.name}></input>{" "}
-                        <br></br>
+                        <HStack w="100%">
+                        <Text>Name: </Text>
+                        <input className="input-order-songs" alignItems="right" placeholder="Name:" name="name" defaultValue={props.setlist.name}></input>{" "}
+                        </HStack>
+                       
+                        
                         Sets:{" "}
-                        <input name="sets" defaultValue={props.setlist.sets}></input>{" "}
+                        <input className="input-order-songs" placeholder="Sets:" name="sets" defaultValue={props.setlist.sets}></input>{" "}
                         {console.log(props.setlist)}
                         <br></br>
                         Show:
-                        <input name="show" defaultValue={props.setlist.show}></input>
+                        <input className="input-order-songs" placeholder="Show:"name="show" defaultValue={props.setlist.show}></input>
                         <br></br>
                         Band:
-                        <input name="band" defaultValue={props.setlist.band}></input>
+                        <input className="input-order-songs" placeholder="Band:" name="band" defaultValue={props.setlist.band}></input>
                         <br></br>
                         Tag:
-                        <input name="tag" defaultValue={props.setlist.tag}></input>
+                        <input className="input-order-songs" placeholder="Tag:" name="tag" defaultValue={props.setlist.tag}></input>
                         <br></br>
-                        Save: <button type="submit">Save </button>
-                        <button onClick={() => {deleteSetlist(props.setlist.id);}}>Delete Set</button>
+                        <button class="btn-save" type="submit"><i class="fa fa-save"></i> </button>
+                        <button class="btn-delete"onClick={() => {deleteSetlist(props.setlist.id);}}><i class="fa fa-trash"></i></button>
                     </div>
                 </form>
             </div>

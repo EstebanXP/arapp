@@ -79,12 +79,12 @@ const PopupTags =(props) => {
                   
                    
                     </HStack>
-                        <button class="btn-save" type="submit" onClick={()=>{saveOnSubmit()}}><i class="fa fa-save"></i> Save Band</button>
+                        <button class="btn-save" type="submit" onClick={()=>{saveOnSubmit()}}><i class="fa fa-save"></i></button>
                         <button class="btn-delete" type="submit"
                         onClick={() => {
                             deleteTag(props.thisTag.id);
                         }}
-                        ><i class="fa fa-trash"></i> Delete band</button>
+                        ><i class="fa fa-trash"></i></button>
           <p>Nuevo titulo: </p>
           <input defaultValue={props.tag.tagName} name="TagTitle"></input>
           <br></br>
@@ -98,7 +98,7 @@ const PopupTags =(props) => {
               isOpen={isOpen}
               onClose={onClose}
             >
-              <AlertDialog.Content>
+              <AlertDialog.Content position="absolute" top="40">
                 <AlertDialog.CloseButton />
                 <AlertDialog.Header>Delete Show</AlertDialog.Header>
                 <AlertDialog.Body>
