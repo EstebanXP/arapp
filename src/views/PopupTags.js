@@ -96,15 +96,19 @@ const PopupTags =(props) => {
               <Button colorScheme="danger" borderRadius="10" onPress={() => setIsOpen(!isOpen)} leftIcon={<BsTrashFill color="white"/>}>
         Delete Show
             </Button>
-            <AlertDialog
-                position="absolute"
-                top="40"
+           
+            </HStack>
+                    </Stack>
+                        </HStack>
+                        <AlertDialog
+               
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
               onClose={onClose}
             
             >
-              <AlertDialog.Content>
+              <AlertDialog.Content  position="absolute"
+                top="40">
                 <AlertDialog.CloseButton />
                 <AlertDialog.Header>Delete Show</AlertDialog.Header>
                 <AlertDialog.Body>
@@ -129,9 +133,6 @@ const PopupTags =(props) => {
                 </AlertDialog.Footer>
               </AlertDialog.Content>
             </AlertDialog>
-            </HStack>
-                    </Stack>
-                        </HStack>
                           
         </form>
       </div>
