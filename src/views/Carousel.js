@@ -49,7 +49,19 @@ const Carousel = (props) => {
                 {/* You can alwas change the content of the button to other things */}
                 
                     <AiOutlineRight size ="1em" style={{margin : "2"}} color="#a8a29e" onClick={next}/>
-            </div> : null} 
+            </div> : 
+            <div className="contenedorFlechas">
+            {/* You can alwas change the content of the button to other things */}
+            
+                <AiOutlineLeft size ="1em" style={{margin : "2"}} color="rgba(0,0,0,0)" onClick={prev}/>
+            
+            
+                
+            {/* You can alwas change the content of the button to other things */}
+            
+                <AiOutlineRight size ="1em" style={{margin : "2"}} color="rgba(0,0,0,0)" onClick={next}/>
+                </div>
+            } 
            
             <div className="carousel-content-wrapper">
                 <div
