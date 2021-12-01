@@ -119,11 +119,12 @@ const CarouselBands = (props) => {
         </HStack>
       </form>
       <Carousel show={3}>
-      
+
+
+          
           {bands.map((band) => {
             //if (props.userID == band.createdBy) {
             return (
-              
               
                 <ShowBands tband={band} setBand={props.setBand} setPopBand={props.setPopBand} popBand={props.popBand}/>
               
