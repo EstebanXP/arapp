@@ -58,7 +58,7 @@ const Home = (props) => {
                     <Box w="70%">
                         <Box py="1"borderRadius="100" mt="2"w="12" ml="2"  bg="fuchsia.400"/>
                         <Heading size="md" ml="2" mb="4">Songs</Heading>
-                        <SongsListHome />
+                        <SongsListHome setSong={setSong} setPopStatusSongs={setPopStatusSongs} popStatusSongs={popStatusSongs}/>
                     </Box>
                 
                 </HStack>
