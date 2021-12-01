@@ -12,6 +12,8 @@ import ManageTags from './ManageTags'
 import CarouselSetlist from './CarouselSetlist'
 import SongsListHome from './SongsListHome'
 import PopupTags from './PopupTags'
+import PopupSongs from './PopupSongs'
+
 const Home = (props) => {
     
     useEffect(()=>{
@@ -19,8 +21,11 @@ const Home = (props) => {
     })
     const [popBand, setPopBand] = useState(false);
     const [band, setBand] = useState();
-    const [tag, setTag] = useState();
     const [popStatusTag, setPopStatusTag] = useState();
+    const [tag, setTag] = useState();    
+    const [popStatusSongs, setPopStatusSongs] = useState();
+    const [song, setSong] = useState();
+
     if(props.data === "Band Manager")
     return (
         <div>
@@ -39,6 +44,7 @@ const Home = (props) => {
         return(
             <div>
                 <PopupTags trigger={popStatusTag} setPopStatus={setPopStatusTag} tag={tag}></PopupTags>
+                <PopupSongs trigger={popStatusSongs} setPopStatus={setPopStatusSongs} song={song}></PopupSongs>
                 <Box py="1"borderRadius="100" mt="2"w="12" ml="2" bg="fuchsia.400"/>
                 <Heading size="md" ml="2" >Setlists</Heading>
                 <CarouselSetlist userID={props.userID} />
