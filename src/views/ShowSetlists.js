@@ -65,7 +65,7 @@ const ShowSetlists = (props) => {
           setPopStatus={setPopStatus}
           thisSetlist={props.tsetlist}
         />*/}
-         <Button mt="2" borderRadius="10" size="6" position="absolute" top="2" right="2" colorScheme="indigo" onPress={() => {props.setPopStatusSetlist(true); props.setSetlist(props.setlist)}}><BiExpandAlt color="white"/></Button>
+         <Button mt="2" borderRadius="10" size="6" position="absolute" top="2" right="2" colorScheme="indigo" onPress={() => {props.setPopStatusSetlist(true); props.setSetlist(props.tsetlist)}}><BiExpandAlt color="white"/></Button>
         
       </Box>
     </div>
